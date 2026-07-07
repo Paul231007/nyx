@@ -14,4 +14,3 @@
 .long FLAGS
 .long CHECKSUM
 
-
