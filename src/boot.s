@@ -8,4 +8,3 @@
 .set MAGIC,    0x1BADB002        /* the magic number identifying the header */
 .set CHECKSUM, -(MAGIC + FLAGS)  /* checksum so (MAGIC+FLAGS+CHECKSUM)==0 */
 
-
