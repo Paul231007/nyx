@@ -8,3 +8,5 @@ SECTIONS
     . = 1M;
     kernel_start = .;
 
+    .multiboot : ALIGN(4) { *(.multiboot) }
+
