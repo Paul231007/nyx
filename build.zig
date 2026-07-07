@@ -13,3 +13,6 @@ pub fn build(b: *std.Build) void {
         .cpu_features_add = std.Target.x86.featureSet(&.{.soft_float}),
     });
 
+    const optimize = b.standardOptimizeOption(.{ .preferred_optimize_mode = .Debug });
+
+
