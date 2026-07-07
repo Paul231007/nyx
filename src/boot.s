@@ -14,3 +14,10 @@
 .long FLAGS
 .long CHECKSUM
 
+/* 16 KiB boot stack */
+.section .bss
+.align 16
+stack_bottom:
+.skip 16384
+stack_top:
+
