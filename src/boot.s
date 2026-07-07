@@ -21,3 +21,15 @@ stack_bottom:
 .skip 16384
 stack_top:
 
+.section .text
+.global _start
+.type _start, @function
+_start:
+    mov $stack_top, %esp     /* set up the stack */
+    push %ebx                /* arg2: multiboot info pointer */
+    push %eax                /* arg1: multiboot magic */
+    call kmain               /* into Zig */
+    cli
+1:  hlt
+    jmp 1b
+.size _start, . - _start
