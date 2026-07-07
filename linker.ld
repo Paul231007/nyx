@@ -3,3 +3,8 @@
    within the first 8 KiB of the image. */
 ENTRY(_start)
 
+SECTIONS
+{
+    . = 1M;
+    kernel_start = .;
+
