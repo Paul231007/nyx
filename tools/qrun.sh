@@ -9,3 +9,9 @@ KERNEL="${1:-zig-out/bin/kernel.elf}"
 INPUT="${2:-}"
 TIMEOUT="${3:-10}"
 
+QEMU=(qemu-system-i386 -kernel "$KERNEL"
+      -serial stdio -display none -no-reboot
+      -device isa-debug-exit,iobase=0xf4,iosize=0x04
+      -m 64)
+
+
