@@ -14,4 +14,3 @@ QEMU=(qemu-system-i386 -kernel "$KERNEL"
       -device isa-debug-exit,iobase=0xf4,iosize=0x04
       -m 64)
 
-
