@@ -9,4 +9,3 @@ KERNEL="${1:-zig-out/bin/kernel.elf}"
 INPUT="${2:-}"
 TIMEOUT="${3:-10}"
 
-
