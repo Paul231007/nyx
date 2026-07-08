@@ -39,3 +39,7 @@ hello nyx
 
 Requires `zig` (0.15.2) and `qemu-system-i386`.
 
+```sh
+zig build            # builds zig-out/bin/kernel.elf (a multiboot1 ELF)
+zig build run        # boots it in QEMU with the serial console on stdio
+```
