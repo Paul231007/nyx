@@ -15,3 +15,17 @@ pub fn build(b: *std.Build) void {
 
     const optimize = b.standardOptimizeOption(.{ .preferred_optimize_mode = .Debug });
 
+    const kernel = b.addExecutable(.{
+        .name = "kernel.elf",
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/main.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
+    });
+    kernel.addAssemblyFile(b.path("src/boot.s"));
+    kernel.setLinkerScript(b.path("linker.ld"));
+    kernel.want_lto = false;
+    b.installArtifact(kernel);
+
+
