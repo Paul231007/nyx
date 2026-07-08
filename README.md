@@ -46,4 +46,3 @@ zig build run        # boots it in QEMU with the serial console on stdio
 
 QEMU boots the kernel directly via `-kernel` (multiboot1) — no GRUB or ISO needed.
 
-
