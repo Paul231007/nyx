@@ -62,4 +62,3 @@ dd if=/dev/zero of=nyx.img bs=512 count=65536  # 32 MiB
 
 ### Headless testing
 
-
