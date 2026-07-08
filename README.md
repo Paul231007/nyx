@@ -48,4 +48,3 @@ QEMU boots the kernel directly via `-kernel` (multiboot1) — no GRUB or ISO nee
 
 ### Disk image
 
-
