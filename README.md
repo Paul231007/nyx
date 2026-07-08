@@ -56,4 +56,3 @@ The ATA driver (M12) and block cache require an IDE disk. The `build.zig` passes
 
 Create a blank image before the first run if it does not exist:
 
-
