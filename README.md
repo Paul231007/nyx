@@ -35,3 +35,6 @@ nyx> cat /hello.txt
 hello nyx
 ```
 
+## Build & run
+
+
