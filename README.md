@@ -6,4 +6,3 @@ brings the machine up through the classic kernel-bring-up sequence all the way t
 **interactive shell** with a real filesystem, disk driver, syscall layer, and self-test
 harness.
 
-
