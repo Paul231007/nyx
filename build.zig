@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
     kernel.want_lto = false;
     b.installArtifact(kernel);
 
-    // `zig build run` ...
+    // `zig build run` — boot it in QEMU with a serial console.
     const run = b.addSystemCommand(&.{"qemu-system-i386"});
     run.addArg("-kernel");
     run.addArtifactArg(kernel);
