@@ -62,3 +62,6 @@ dd if=/dev/zero of=nyx.img bs=512 count=65536  # 32 MiB
 
 ### Headless testing
 
+`tools/qrun.sh` boots the kernel with no display, captures the serial output, and
+times out so a hang or triple-fault can never wedge the harness. The shell reads
+from both the PS/2 keyboard and COM1, so it is fully driveable headlessly:
