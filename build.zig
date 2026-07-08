@@ -15,4 +15,3 @@ pub fn build(b: *std.Build) void {
 
     const optimize = b.standardOptimizeOption(.{ .preferred_optimize_mode = .Debug });
 
-
