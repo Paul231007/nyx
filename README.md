@@ -35,4 +35,3 @@ nyx> cat /hello.txt
 hello nyx
 ```
 
-
