@@ -56,3 +56,8 @@ The ATA driver (M12) and block cache require an IDE disk. The `build.zig` passes
 
 Create a blank image before the first run if it does not exist:
 
+```sh
+dd if=/dev/zero of=nyx.img bs=512 count=65536  # 32 MiB
+```
+
+
