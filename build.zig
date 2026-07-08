@@ -28,3 +28,17 @@ pub fn build(b: *std.Build) void {
     kernel.want_lto = false;
     b.installArtifact(kernel);
 
+    // `zig build run` ...
+    const run = b.addSystemCommand(&.{"qemu-system-i386"});
+    run.addArg("-kernel");
+    run.addArtifactArg(kernel);
+    run.addArgs(&.{
+        "-serial",  "stdio",
+        "-display", "none",
+        "-no-reboot",
+        "-device",  "isa-debug-exit,iobase=0xf4,iosize=0x04",
+        "-m",       "64",
+        "-drive",   "file=/tmp/nyx-disk.img,format=raw,if=ide",
+    });
+    b.step("run", "Boot the kernel in QEMU (serial on stdio)").dependOn(&run.step);
+}
