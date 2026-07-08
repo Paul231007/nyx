@@ -50,4 +50,3 @@ QEMU boots the kernel directly via `-kernel` (multiboot1) — no GRUB or ISO nee
 
 The ATA driver (M12) and block cache require an IDE disk. The `build.zig` passes:
 
-
