@@ -176,3 +176,5 @@ tools/
   qrun.sh        headless QEMU boot + serial capture harness
 ```
 
+## Architecture overview
+
