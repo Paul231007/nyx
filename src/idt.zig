@@ -11,4 +11,3 @@ const IdtEntry = packed struct {
     offset_hi: u16, // bits 16..31 of the handler address
 };
 
-
