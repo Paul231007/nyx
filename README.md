@@ -74,3 +74,22 @@ bash tools/qrun.sh zig-out/bin/kernel.elf "help\nuptime\necho hi\n" 12
 
 Each milestone is validated inline in `kmain` before the next one begins:
 
+| Stage | Subsystem |
+|-------|-----------|
+| **M0** | Multiboot1 boot, 16 KiB stack, VGA text console (`0xB8000`) + COM1 serial, unified console |
+| **M2** | Flat **GDT**, 256-entry **IDT**, all 32 CPU exception handlers (register dump + recover/halt) |
+| **M3** | **8259 PIC** remap, hardware IRQ dispatch, **PIT** timer at 100 Hz, tick counter |
+| **M4** | **PS/2 keyboard** (IRQ1, scancode set 1 → ASCII) + serial input, shared ring buffer + line reader |
+| **M5** | **Physical memory manager** — parses the multiboot memory map, 4 KiB frame bitmap allocator |
+| **M6** | **Paging** — page directory + tables, identity-maps 64 MiB RAM, enables `CR0.PG`, page-fault handler |
+| **M7** | **Kernel heap** — first-fit free-list allocator exposed as a `std.mem.Allocator` |
+| **M8** | **Scheduler** — kernel threads with 16 KiB stacks, cooperative round-robin + timer preemption |
+| **M9** | **Interactive shell** — 16 built-in commands, reads from keyboard + serial |
+| **M10** | **libk** — freestanding string/numeric helpers (`streq`, `parseUint`, `parseHex`, `memcpy`, `HexDump`) |
+| **M11** | **CMOS RTC** (date/time) + **PCI** bus enumeration (config mechanism #1) |
+| **M12** | **ATA PIO** disk driver — IDENTIFY, 28-bit LBA read/write, write-through **block cache** |
+| **M13** | **VFS** layer — fd table (16 slots), vtable-dispatched `open`/`read`/`write`/`seek`/`readdir`/`close` |
+| **M14** | **RamFS** + **tar initrd** — in-memory filesystem (64 entries), ustar unpacker, `@embedFile` initrd |
+| **M15** | **int 0x80 syscalls** — `write`, `read`, `open`, `close`, `getpid`, `uptime` |
+| **M16** | **Kernel self-test harness** — 6 named cases covering libk, PMM, heap, VFS, ATA, and syscalls |
+
