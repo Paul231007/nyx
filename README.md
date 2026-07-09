@@ -117,3 +117,5 @@ kmain (main.zig)
   └─ M9  shell.run()  ← never returns
 ```
 
+## Shell commands
+
