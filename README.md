@@ -140,3 +140,39 @@ test              run the M16 kernel self-test harness
 
 ## Source layout
 
+```
+src/
+  boot.s         multiboot1 header + _start (sets up the stack, calls kmain)
+  linker.ld      loads the kernel at 1 MiB, .multiboot first
+  main.zig       kmain: milestone sequence M0–M16, then shell
+  io.zig         port-mapped I/O (in/out byte/word/dword)
+  serial.zig     COM1 driver (TX + RX, headless console at 38400 baud)
+  vga.zig        80x25 VGA text console with scrolling
+  console.zig    fan-out to VGA + serial together
+  gdt.zig        flat segment descriptors
+  idt.zig        interrupt descriptor table (256 entries)
+  interrupts.zig ISR/IRQ stubs (asm) + dispatch to Zig handlers
+  pic.zig        8259 PIC remap, mask/unmask, EOI
+  timer.zig      PIT channel-0, 100 Hz, tick counter
+  keyboard.zig   PS/2 scancode set 1 → ASCII (US-QWERTY, shift aware)
+  input.zig      keyboard + serial ring buffer + readLine
+  pmm.zig        physical frame allocator (bitmap over multiboot mmap)
+  paging.zig     page directory/tables, identity map, map(), translate()
+  heap.zig       kernel heap (first-fit free-list, std.mem.Allocator)
+  blockcache.zig write-through 16-slot block cache over ATA
+  sched.zig      cooperative + preemptive round-robin scheduler
+  libk.zig       freestanding string/numeric helpers, HexDump
+  rtc.zig        CMOS RTC reader (BCD → binary)
+  pci.zig        PCI config mechanism #1 bus enumeration
+  ata.zig        ATA PIO primary master, 28-bit LBA read/write/identify
+  vfs.zig        VFS fd table + FileSystem vtable
+  ramfs.zig      in-memory filesystem (64-entry fixed array)
+  tar.zig        ustar initrd unpacker
+  syscall.zig    int 0x80 dispatch + invoke helper
+  ktest.zig      kernel self-test harness (6 named cases)
+  shell.zig      interactive command shell (M9, never returns)
+  initrd.tar     embedded initrd (hello.txt + motd)
+tools/
+  qrun.sh        headless QEMU boot + serial capture harness
+```
+
