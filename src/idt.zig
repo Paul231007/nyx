@@ -19,3 +19,4 @@ const Idtr = packed struct {
 
 var idt: [256]IdtEntry = undefined;
 var idtr: Idtr = undefined;
+
