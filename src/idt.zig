@@ -20,13 +20,3 @@ const Idtr = packed struct {
 var idt: [256]IdtEntry = undefined;
 var idtr: Idtr = undefined;
 
-pub fn setGate(n: u8, handler: u32, type_attr: u8) void {
-    idt[n] = .{
-        .offset_lo = @truncate(handler & 0xFFFF),
-        .selector = 0x08,
-        .zero = 0,
-        .type_attr = type_attr,
-        .offset_hi = @truncate((handler >> 16) & 0xFFFF),
-    };
-}
-
