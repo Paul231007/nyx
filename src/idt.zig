@@ -17,3 +17,5 @@ const Idtr = packed struct {
     base: u32,
 };
 
+var idt: [256]IdtEntry = undefined;
+var idtr: Idtr = undefined;
