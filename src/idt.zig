@@ -2,4 +2,3 @@
 //! Gates are filled in by callers (e.g. the exception layer) via `setGate`,
 //! then committed to the CPU with `load`.
 
-
