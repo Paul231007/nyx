@@ -11,4 +11,9 @@ const IdtEntry = packed struct {
     offset_hi: u16, // bits 16..31 of the handler address
 };
 
-/// The operand for `lidt`. const Idtr = acked struct { limit: u16, base: u32, };
+/// The operand for `lidt`.
+const Idtr = packed struct {
+    limit: u16,
+    base: u32,
+};
+
