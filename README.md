@@ -72,3 +72,5 @@ bash tools/qrun.sh zig-out/bin/kernel.elf "help\nuptime\necho hi\n" 12
 
 ## Bring-up milestones (M0–M16)
 
+Each milestone is validated inline in `kmain` before the next one begins:
+
