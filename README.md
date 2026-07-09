@@ -66,3 +66,8 @@ dd if=/dev/zero of=nyx.img bs=512 count=65536  # 32 MiB
 times out so a hang or triple-fault can never wedge the harness. The shell reads
 from both the PS/2 keyboard and COM1, so it is fully driveable headlessly:
 
+```sh
+bash tools/qrun.sh zig-out/bin/kernel.elf "help\nuptime\necho hi\n" 12
+```
+
+
