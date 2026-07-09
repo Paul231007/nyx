@@ -178,3 +178,5 @@ tools/
 
 ## Architecture overview
 
+See [`docs/architecture.md`](docs/architecture.md) for the full layered design and
+boot sequence narrative. Subsystem deep-dives live in `docs/subsystems/`.
