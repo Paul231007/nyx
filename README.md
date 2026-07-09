@@ -95,3 +95,25 @@ Each milestone is validated inline in `kmain` before the next one begins:
 
 ## Boot flow
 
+```
+boot.s (_start)
+  └─ sets up the 16 KiB stack, passes multiboot magic+info to kmain
+kmain (main.zig)
+  ├─ M0  console.init() — VGA + serial
+  ├─ M2  gdt.init(), interrupts.init()
+  ├─ M3  pic.init(), timer.init(100), sti
+  ├─ M4  pic.clearMask(1)  — keyboard IRQ1 enabled
+  ├─ M5  pmm.init(mb_info)
+  ├─ M6  paging.init()
+  ├─ M7  heap.init(), blockcache.init()
+  ├─ M8  sched: cooperative then preemptive demo tasks
+  ├─ M10 libk self-test
+  ├─ M11 rtc.read(), pci.enumerate()
+  ├─ M12 ata.identify(), read/write round-trip
+  ├─ M13 vfs.mount(stub_fs), fd open/write/read/close
+  ├─ M14 ramfs.init(), tar.unpackInto(initrd)
+  ├─ M15 syscall.invoke(.write / .uptime)
+  ├─ M16 ktest.runAll()
+  └─ M9  shell.run()  ← never returns
+```
+
