@@ -93,3 +93,5 @@ Each milestone is validated inline in `kmain` before the next one begins:
 | **M15** | **int 0x80 syscalls** — `write`, `read`, `open`, `close`, `getpid`, `uptime` |
 | **M16** | **Kernel self-test harness** — 6 named cases covering libk, PMM, heap, VFS, ATA, and syscalls |
 
+## Boot flow
+
