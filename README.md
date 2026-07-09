@@ -119,3 +119,22 @@ kmain (main.zig)
 
 ## Shell commands
 
+```
+help              list all commands
+echo <args>       print arguments to the console
+mem               physical frame + heap statistics
+uptime            timer ticks and seconds since boot
+ps                scheduler task counts
+clear             clear the VGA screen (and send ANSI ESC[2J on serial)
+reboot            reset the machine via the 8042 CPU reset line
+date              current date and time from the CMOS RTC
+lspci             list PCI devices (bus:slot.func vendor:device class)
+diskinfo          ATA drive sector count and model string
+ls [path]         list directory contents (default /)
+cat <path>        print file contents via the VFS
+write <path> <s>  write a string into a RamFS file (creates if absent)
+mkdir <path>      create a directory entry in RamFS
+rm <path>         remove a file or directory from RamFS
+test              run the M16 kernel self-test harness
+```
+
