@@ -15,3 +15,10 @@ const GdtEntry = packed struct {
     base_hi: u8,
 };
 
+/// The operand for `lgdt`: 16-bit limit + 32-bit linear base.
+const Gdtr = packed struct {
+    limit: u16,
+    base: u32,
+};
+
+
