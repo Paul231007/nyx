@@ -15,4 +15,3 @@ const GdtEntry = packed struct {
     base_hi: u8,
 };
 
-
