@@ -21,3 +21,7 @@ const Gdtr = packed struct {
     base: u32,
 };
 
+var gdt: [3]GdtEntry = undefined;
+var gdtr: Gdtr = undefined;
+
+
