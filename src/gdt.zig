@@ -3,4 +3,3 @@
 //! After loading we reload the segment registers so the new descriptors take
 //! effect (CS via a far jump, the rest via plain moves).
 
-
