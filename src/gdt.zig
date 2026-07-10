@@ -21,4 +21,3 @@ const Gdtr = packed struct {
     base: u32,
 };
 
-
