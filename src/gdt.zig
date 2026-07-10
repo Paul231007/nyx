@@ -46,3 +46,18 @@ pub fn init() void {
         .base = @intFromPtr(&gdt),
     };
 
+    asm volatile (
+        \\lgdt (%[ptr])
+        \\mov $0x10, %%ax
+        \\mov %%ax, %%ds
+        \\mov %%ax, %%es
+        \\mov %%ax, %%fs
+        \\mov %%ax, %%gs
+        \\mov %%ax, %%ss
+        \\ljmp $0x08, $1f
+        \\1:
+        :
+        : [ptr] "r" (&gdtr),
+        : .{ .ax = true, .memory = true }
+    );
+}
