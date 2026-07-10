@@ -24,3 +24,16 @@ const Gdtr = packed struct {
 var gdt: [3]GdtEntry = undefined;
 var gdtr: Gdtr = undefined;
 
+fn makeEntry(base: u32, limit: u32, access: u8, flags: u4) GdtEntry {
+    return .{
+        .limit_lo = @truncate(limit & 0xFFFF),
+        .base_lo = @truncate(base & 0xFFFF),
+        .base_mid = @truncate((base >> 16) & 0xFF),
+        .access = access,
+        .limit_hi = @truncate((limit >> 16) & 0xF),
+        .flags = flags,
+        .base_hi = @truncate((base >> 24) & 0xFF),
+    };
+}
+
+
