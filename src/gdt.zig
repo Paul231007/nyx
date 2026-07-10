@@ -36,4 +36,3 @@ fn makeEntry(base: u32, limit: u32, access: u8, flags: u4) GdtEntry {
     };
 }
 
-
