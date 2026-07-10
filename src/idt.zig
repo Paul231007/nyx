@@ -30,3 +30,14 @@ pub fn setGate(n: u8, handler: u32, type_attr: u8) void {
     };
 }
 
+pub fn load() void {
+    idtr = .{
+        .limit = @sizeOf(@TypeOf(idt)) - 1,
+        .base = @intFromPtr(&idt),
+    };
+    asm volatile ("lidt (%[ptr])"
+        :
+        : [ptr] "r" (&idtr),
+        : .{ .memory = true }
+    );
+}
