@@ -24,4 +24,3 @@ const Gdtr = packed struct {
 var gdt: [3]GdtEntry = undefined;
 var gdtr: Gdtr = undefined;
 
-
