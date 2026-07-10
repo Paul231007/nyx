@@ -36,3 +36,9 @@ fn makeEntry(base: u32, limit: u32, access: u8, flags: u4) GdtEntry {
     };
 }
 
+pub fn init() void {
+    gdt[0] = makeEntry(0, 0, 0, 0); // null descriptor
+    gdt[1] = makeEntry(0, 0xFFFFF, 0x9A, 0xC); // kernel code: present, ring0, exec+read
+    gdt[2] = makeEntry(0, 0xFFFFF, 0x92, 0xC); // kernel data: present, ring0, read+write
+
+
