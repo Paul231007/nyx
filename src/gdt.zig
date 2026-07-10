@@ -41,4 +41,3 @@ pub fn init() void {
     gdt[1] = makeEntry(0, 0xFFFFF, 0x9A, 0xC); // kernel code: present, ring0, exec+read
     gdt[2] = makeEntry(0, 0xFFFFF, 0x92, 0xC); // kernel data: present, ring0, read+write
 
-
