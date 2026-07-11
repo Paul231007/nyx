@@ -73,3 +73,11 @@ fn hang() noreturn {
     while (true) asm volatile ("hlt");
 }
 
+/// Syscall handler: reads nr/args from the saved frame, dispatches, writes
+/// the return value back into frame.eax so `popa` restores it into eax on iret.
+export fn syscallHandler(frame: *Frame) callconv(.c) void {
+    const ret = syscall.dispatch(frame.eax, frame.ebx, frame.ecx, frame.edx);
+    frame.eax = @truncate(ret);
+}
+
+
