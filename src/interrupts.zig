@@ -16,3 +16,24 @@ const keyboard = @import("keyboard.zig");
 const sched = @import("sched.zig");
 const syscall = @import("syscall.zig");
 
+/// Register/trap frame handed to `isrHandler`. Field order matches the push
+/// order documented above (and in the M2 spec) exactly.
+pub const Frame = extern struct {
+    ds: u32,
+    edi: u32,
+    esi: u32,
+    ebp: u32,
+    esp_dummy: u32,
+    ebx: u32,
+    edx: u32,
+    ecx: u32,
+    eax: u32,
+    int_no: u32,
+    err_code: u32,
+    eip: u32,
+    cs: u32,
+    eflags: u32,
+    useresp: u32,
+    ss: u32,
+};
+
