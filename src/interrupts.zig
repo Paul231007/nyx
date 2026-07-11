@@ -37,3 +37,26 @@ pub const Frame = extern struct {
     ss: u32,
 };
 
+const exception_names = [_][]const u8{
+    "Divide Error", // 0
+    "Debug", // 1
+    "Non-Maskable Interrupt", // 2
+    "Breakpoint", // 3
+    "Overflow", // 4
+    "Bound Range Exceeded", // 5
+    "Invalid Opcode", // 6
+    "Device Not Available", // 7
+    "Double Fault", // 8
+    "Coprocessor Segment Overrun", // 9
+    "Invalid TSS", // 10
+    "Segment Not Present", // 11
+    "Stack-Segment Fault", // 12
+    "General Protection", // 13
+    "Page Fault", // 14
+    "Reserved", // 15
+    "x87 FPU Error", // 16
+    "Alignment Check", // 17
+    "Machine Check", // 18
+    "SIMD FP Exception", // 19
+};
+
