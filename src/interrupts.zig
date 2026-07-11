@@ -80,3 +80,10 @@ export fn syscallHandler(frame: *Frame) callconv(.c) void {
     frame.eax = @truncate(ret);
 }
 
+export fn isrHandler(frame: *Frame) callconv(.c) void {
+    var buf: [96]u8 = undefined;
+    console.write(std.fmt.bufPrint(&buf, "EXCEPTION {d} ({s}) eip=0x{X} err=0x{X}\n", .{
+        frame.int_no, nameOf(frame.int_no), frame.eip, frame.err_code,
+    }) catch "");
+
+
