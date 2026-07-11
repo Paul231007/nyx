@@ -60,4 +60,3 @@ const exception_names = [_][]const u8{
     "SIMD FP Exception", // 19
 };
 
-
