@@ -64,3 +64,13 @@ fn nameOf(n: u32) []const u8 {
     return if (n < exception_names.len) exception_names[n] else "Reserved";
 }
 
+/// Local copies so we don't need to reach back into main.zig.
+const ExitCode = enum(u8) { success = 0x10, failure = 0x11 };
+fn exitQemu(code: ExitCode) void {
+    io.outb(0xf4, @intFromEnum(code));
+}
+fn hang() noreturn {
+    while (true) asm volatile ("hlt");
+}
+
+
