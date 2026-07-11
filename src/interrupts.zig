@@ -80,4 +80,3 @@ export fn syscallHandler(frame: *Frame) callconv(.c) void {
     frame.eax = @truncate(ret);
 }
 
-
