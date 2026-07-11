@@ -60,3 +60,6 @@ const exception_names = [_][]const u8{
     "SIMD FP Exception", // 19
 };
 
+fn nameOf(n: u32) []const u8 {
+    return if (n < exception_names.len) exception_names[n] else "Reserved";
+}
