@@ -156,3 +156,22 @@ pub fn init() void {
     setGate(30, &isr30);
     setGate(31, &isr31);
 
+    // Hardware IRQ gates: vectors 32..47 (PIC remapped to 0x20..0x2F).
+    setGate(32, &irq0);
+    setGate(33, &irq1);
+    setGate(34, &irq2);
+    setGate(35, &irq3);
+    setGate(36, &irq4);
+    setGate(37, &irq5);
+    setGate(38, &irq6);
+    setGate(39, &irq7);
+    setGate(40, &irq8);
+    setGate(41, &irq9);
+    setGate(42, &irq10);
+    setGate(43, &irq11);
+    setGate(44, &irq12);
+    setGate(45, &irq13);
+    setGate(46, &irq14);
+    setGate(47, &irq15);
+
+
