@@ -122,3 +122,38 @@ export fn irqHandler(frame: *Frame) callconv(.c) void {
     if (irq == 0) sched.onTick();
 }
 
+pub fn init() void {
+    setGate(0, &isr0);
+    setGate(1, &isr1);
+    setGate(2, &isr2);
+    setGate(3, &isr3);
+    setGate(4, &isr4);
+    setGate(5, &isr5);
+    setGate(6, &isr6);
+    setGate(7, &isr7);
+    setGate(8, &isr8);
+    setGate(9, &isr9);
+    setGate(10, &isr10);
+    setGate(11, &isr11);
+    setGate(12, &isr12);
+    setGate(13, &isr13);
+    setGate(14, &isr14);
+    setGate(15, &isr15);
+    setGate(16, &isr16);
+    setGate(17, &isr17);
+    setGate(18, &isr18);
+    setGate(19, &isr19);
+    setGate(20, &isr20);
+    setGate(21, &isr21);
+    setGate(22, &isr22);
+    setGate(23, &isr23);
+    setGate(24, &isr24);
+    setGate(25, &isr25);
+    setGate(26, &isr26);
+    setGate(27, &isr27);
+    setGate(28, &isr28);
+    setGate(29, &isr29);
+    setGate(30, &isr30);
+    setGate(31, &isr31);
+
+
