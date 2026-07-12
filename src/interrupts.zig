@@ -88,3 +88,22 @@ export fn isrHandler(frame: *Frame) callconv(.c) void {
 
     if (frame.int_no == 3) return; // breakpoint: recoverable, return via iret
 
+    if (frame.int_no == 14) {
+        const cr2 = asm volatile ("mov %%cr2, %[v]"
+            : [v] "=r" (-> usize),
+        );
+        const ec = frame.err_code;
+        console.write(std.fmt.bufPrint(&buf, "PAGE FAULT at 0x{X} eip=0x{X} err=0x{X} [{s}{s}{s}]\n", .{
+            cr2,
+            frame.eip,
+            ec,
+            if ((ec & 0x1) != 0) "P" else "-", // present vs non-present
+            if ((ec & 0x2) != 0) "W" else "R", // write vs read
+            if ((ec & 0x4) != 0) "U" else "K", // user vs kernel
+        }) catch "");
+        console.write("nyx: FATAL page fault, halting\n");
+        exitQemu(.failure);
+        hang();
+    }
+
+
