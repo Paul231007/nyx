@@ -86,4 +86,3 @@ export fn isrHandler(frame: *Frame) callconv(.c) void {
         frame.int_no, nameOf(frame.int_no), frame.eip, frame.err_code,
     }) catch "");
 
-
