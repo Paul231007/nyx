@@ -106,3 +106,10 @@ export fn isrHandler(frame: *Frame) callconv(.c) void {
         hang();
     }
 
+    // Anything else is fatal for now.
+    console.write("nyx: FATAL exception, halting\n");
+    exitQemu(.failure);
+    hang();
+}
+
+
