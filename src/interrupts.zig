@@ -86,3 +86,6 @@ export fn isrHandler(frame: *Frame) callconv(.c) void {
         frame.int_no, nameOf(frame.int_no), frame.eip, frame.err_code,
     }) catch "");
 
+    if (frame.int_no == 3) return; // breakpoint: recoverable, return via iret
+
+
