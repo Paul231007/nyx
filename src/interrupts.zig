@@ -156,4 +156,3 @@ pub fn init() void {
     setGate(30, &isr30);
     setGate(31, &isr31);
 
-
