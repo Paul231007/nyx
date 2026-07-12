@@ -112,3 +112,14 @@ export fn isrHandler(frame: *Frame) callconv(.c) void {
     hang();
 }
 
+export fn irqHandler(frame: *Frame) callconv(.c) void {
+    const irq: u8 = @intCast(frame.int_no - 32);
+    if (irq == 0) timer.tick() else if (irq == 1) keyboard.handleIrq();
+    // Always acknowledge, or the PIC stops delivering further IRQs.
+    pic.sendEOI(irq);
+    // Preemptive scheduling: after EOI, let the scheduler round-robin on the
+    // timer tick (no-op unless preemption has been explicitly enabled).
+    if (irq == 0) sched.onTick();
+}
+
+
