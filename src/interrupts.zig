@@ -180,4 +180,3 @@ pub fn init() void {
     idt.load();
 }
 
-
