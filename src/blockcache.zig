@@ -9,3 +9,10 @@ const ata = @import("ata.zig");
 
 const NUM_SLOTS: usize = 16;
 
+const Slot = struct {
+    lba:   u32,
+    valid: bool,
+    data:  *[ata.SECTOR]u8,
+};
+
+
