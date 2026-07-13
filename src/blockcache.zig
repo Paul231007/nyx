@@ -4,3 +4,7 @@
 //! sector. Write-through means every write goes immediately to disk so the
 //! cache and disk are always consistent; flush() is a no-op.
 
+const std = @import("std");
+const ata = @import("ata.zig");
+
+
