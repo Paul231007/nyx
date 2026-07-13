@@ -2,3 +2,7 @@
 
 const io = @import("io.zig");
 
+const PIT_FREQ: u32 = 1193182;
+const CHANNEL0: u16 = 0x40;
+const COMMAND: u16 = 0x43;
+
