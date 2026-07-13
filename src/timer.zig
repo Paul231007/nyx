@@ -18,3 +18,8 @@ pub fn init(frequency: u32) void {
     io.outb(CHANNEL0, @intCast((divisor >> 8) & 0xFF));
 }
 
+/// Called from the IRQ0 handler on every timer tick.
+pub fn tick() void {
+    ticks_count +%= 1;
+}
+
