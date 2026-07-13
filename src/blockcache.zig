@@ -15,4 +15,3 @@ const Slot = struct {
     data:  *[ata.SECTOR]u8,
 };
 
-
