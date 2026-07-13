@@ -15,3 +15,6 @@ const Slot = struct {
     data:  *[ata.SECTOR]u8,
 };
 
+var slots: [NUM_SLOTS]Slot = undefined;
+var bc_alloc: std.mem.Allocator = undefined;
+
