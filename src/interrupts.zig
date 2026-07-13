@@ -174,3 +174,7 @@ pub fn init() void {
     setGate(46, &irq14);
     setGate(47, &irq15);
 
+    // int 0x80 syscall gate (DPL 0 — everything runs in ring 0).
+    setGate(0x80, &isr128);
+
+
