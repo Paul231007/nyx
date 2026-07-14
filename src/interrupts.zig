@@ -220,3 +220,21 @@ extern fn isr31() void;
 
 extern fn isr128() void;
 
+extern fn irq0() void;
+extern fn irq1() void;
+extern fn irq2() void;
+extern fn irq3() void;
+extern fn irq4() void;
+extern fn irq5() void;
+extern fn irq6() void;
+extern fn irq7() void;
+extern fn irq8() void;
+extern fn irq9() void;
+extern fn irq10() void;
+extern fn irq11() void;
+extern fn irq12() void;
+extern fn irq13() void;
+extern fn irq14() void;
+extern fn irq15() void;
+
+
