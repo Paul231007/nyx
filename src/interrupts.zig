@@ -184,3 +184,38 @@ inline fn setGate(n: u8, handler: *const anyopaque) void {
     idt.setGate(n, @intCast(@intFromPtr(handler)), 0x8E);
 }
 
+// The external stub symbols defined in the assembly block below.
+extern fn isr0() void;
+extern fn isr1() void;
+extern fn isr2() void;
+extern fn isr3() void;
+extern fn isr4() void;
+extern fn isr5() void;
+extern fn isr6() void;
+extern fn isr7() void;
+extern fn isr8() void;
+extern fn isr9() void;
+extern fn isr10() void;
+extern fn isr11() void;
+extern fn isr12() void;
+extern fn isr13() void;
+extern fn isr14() void;
+extern fn isr15() void;
+extern fn isr16() void;
+extern fn isr17() void;
+extern fn isr18() void;
+extern fn isr19() void;
+extern fn isr20() void;
+extern fn isr21() void;
+extern fn isr22() void;
+extern fn isr23() void;
+extern fn isr24() void;
+extern fn isr25() void;
+extern fn isr26() void;
+extern fn isr27() void;
+extern fn isr28() void;
+extern fn isr29() void;
+extern fn isr30() void;
+extern fn isr31() void;
+
+
