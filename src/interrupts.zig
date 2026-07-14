@@ -184,3 +184,4 @@ inline fn setGate(n: u8, handler: *const anyopaque) void {
     idt.setGate(n, @intCast(@intFromPtr(handler)), 0x8E);
 }
 
+
