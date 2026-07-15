@@ -18,3 +18,14 @@ const Slot = struct {
 var slots: [NUM_SLOTS]Slot = undefined;
 var bc_alloc: std.mem.Allocator = undefined;
 
+/// Allocate backing buffers from `alloc`. Must be called after heap.init().
+pub fn init(alloc: std.mem.Allocator) void {
+    bc_alloc = alloc;
+    for (&slots) |*sl| {
+        const raw = alloc.alloc(u8, ata.SECTOR) catch unreachable;
+        sl.data  = raw[0..ata.SECTOR];
+        sl.valid = false;
+        sl.lba   = 0;
+    }
+}
+
