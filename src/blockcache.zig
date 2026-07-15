@@ -29,3 +29,15 @@ pub fn init(alloc: std.mem.Allocator) void {
     }
 }
 
+/// Return a pointer to the cached sector for `lba`, loading from disk on miss.
+pub fn read(lba: u32) *[ata.SECTOR]u8 {
+    const idx = lba % NUM_SLOTS;
+    const sl = &slots[idx];
+    if (sl.valid and sl.lba == lba) return sl.data;
+    // cache miss — load from disk
+    _ = ata.readSectors(lba, 1, sl.data);
+    sl.lba   = lba;
+    sl.valid = true;
+    return sl.data;
+}
+
