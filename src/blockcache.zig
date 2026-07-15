@@ -51,3 +51,5 @@ pub fn write(lba: u32, data: *const [ata.SECTOR]u8) void {
     sl.valid = true;
 }
 
+/// No-op: write-through guarantees disk is always up to date.
+pub fn flush() void {}
