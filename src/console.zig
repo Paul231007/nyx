@@ -15,3 +15,7 @@ pub fn putc(c: u8) void {
     vga.putc(c);
 }
 
+pub fn write(s: []const u8) void {
+    serial.write(s);
+    vga.write(s);
+}
