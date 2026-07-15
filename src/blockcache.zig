@@ -41,3 +41,13 @@ pub fn read(lba: u32) *[ata.SECTOR]u8 {
     return sl.data;
 }
 
+/// Write `data` to disk immediately (write-through) and update the cache slot.
+pub fn write(lba: u32, data: *const [ata.SECTOR]u8) void {
+    _ = ata.writeSectors(lba, 1, data);
+    const idx = lba % NUM_SLOTS;
+    const sl = &slots[idx];
+    @memcpy(sl.data, data);
+    sl.lba   = lba;
+    sl.valid = true;
+}
+
