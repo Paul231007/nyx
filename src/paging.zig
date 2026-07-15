@@ -3,4 +3,3 @@
 //! init() the kernel runs in virtual memory (identity-mapped, so addresses are
 //! unchanged). `map()` installs a single 4 KiB page (used later by the heap).
 
-
