@@ -20,3 +20,7 @@ pub fn init() void {
     io.outb(COM1 + 4, 0x0B); // IRQs enabled, RTS/DSR set
 }
 
+fn txEmpty() bool {
+    return (io.inb(COM1 + 5) & 0x20) != 0;
+}
+
