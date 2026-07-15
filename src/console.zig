@@ -10,3 +10,8 @@ pub fn init() void {
     vga.clear();
 }
 
+pub fn putc(c: u8) void {
+    serial.putc(c);
+    vga.putc(c);
+}
+
