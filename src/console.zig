@@ -5,3 +5,8 @@
 const serial = @import("serial.zig");
 const vga = @import("vga.zig");
 
+pub fn init() void {
+    serial.init();
+    vga.clear();
+}
+
