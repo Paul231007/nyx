@@ -24,3 +24,8 @@ fn txEmpty() bool {
     return (io.inb(COM1 + 5) & 0x20) != 0;
 }
 
+pub fn putc(c: u8) void {
+    while (!txEmpty()) {}
+    io.outb(COM1, c);
+}
+
