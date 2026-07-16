@@ -15,4 +15,3 @@ pub inline fn inb(port: u16) u8 {
     );
 }
 
-
