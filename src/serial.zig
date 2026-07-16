@@ -40,3 +40,8 @@ fn rxReady() bool {
     return (io.inb(COM1 + 5) & 0x01) != 0;
 }
 
+/// Non-blocking read of one byte from the serial line, or null if none waiting.
+pub fn getcNonblock() ?u8 {
+    if (rxReady()) return io.inb(COM1);
+    return null;
+}
