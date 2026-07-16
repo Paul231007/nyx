@@ -4,4 +4,3 @@ const WIDTH: usize = 80;
 const HEIGHT: usize = 25;
 const COLOR: u8 = 0x0F; // bright white on black
 
-
