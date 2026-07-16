@@ -7,3 +7,4 @@ pub inline fn outb(port: u16, value: u8) void {
           [port] "{dx}" (port),
     );
 }
+
