@@ -23,3 +23,10 @@ pub inline fn outw(port: u16, value: u16) void {
     );
 }
 
+pub inline fn inw(port: u16) u16 {
+    return asm volatile ("inw %[port], %[result]"
+        : [result] "={ax}" (-> u16),
+        : [port] "{dx}" (port),
+    );
+}
+
