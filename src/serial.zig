@@ -29,3 +29,10 @@ pub fn putc(c: u8) void {
     io.outb(COM1, c);
 }
 
+pub fn write(s: []const u8) void {
+    for (s) |c| {
+        if (c == '\n') putc('\r');
+        putc(c);
+    }
+}
+
