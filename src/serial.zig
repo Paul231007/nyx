@@ -36,3 +36,7 @@ pub fn write(s: []const u8) void {
     }
 }
 
+fn rxReady() bool {
+    return (io.inb(COM1 + 5) & 0x01) != 0;
+}
+
