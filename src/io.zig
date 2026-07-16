@@ -45,3 +45,7 @@ pub inline fn inl(port: u16) u32 {
     );
 }
 
+/// A short delay by writing to an unused port (0x80) — used between PIC writes.
+pub inline fn ioWait() void {
+    outb(0x80, 0);
+}
