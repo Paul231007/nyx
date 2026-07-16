@@ -38,3 +38,10 @@ pub inline fn outl(port: u16, value: u32) void {
     );
 }
 
+pub inline fn inl(port: u16) u32 {
+    return asm volatile ("inl %[port], %[result]"
+        : [result] "={eax}" (-> u32),
+        : [port] "{dx}" (port),
+    );
+}
+
