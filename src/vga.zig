@@ -13,3 +13,9 @@ fn cell(c: u8) u16 {
     return (@as(u16, COLOR) << 8) | c;
 }
 
+pub fn clear() void {
+    var i: usize = 0;
+    while (i < WIDTH * HEIGHT) : (i += 1) buffer[i] = cell(' ');
+    row = 0;
+    col = 0;
+}
