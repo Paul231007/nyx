@@ -10,3 +10,21 @@ const rtc = @import("rtc.zig");
 
 // ---- month and day name tables ------------------------------------------------
 
+/// Full English month names, 1-indexed (index 0 is unused).
+pub const MONTH_NAME = [_][]const u8{
+    "???",       // 0 — unused sentinel
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+};
+
+
