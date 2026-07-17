@@ -10,4 +10,3 @@ const rtc = @import("rtc.zig");
 
 // ---- month and day name tables ------------------------------------------------
 
-
