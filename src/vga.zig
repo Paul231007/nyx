@@ -20,3 +20,15 @@ pub fn clear() void {
     col = 0;
 }
 
+fn scroll() void {
+    var y: usize = 1;
+    while (y < HEIGHT) : (y += 1) {
+        var x: usize = 0;
+        while (x < WIDTH) : (x += 1) {
+            buffer[(y - 1) * WIDTH + x] = buffer[y * WIDTH + x];
+        }
+    }
+    var x: usize = 0;
+    while (x < WIDTH) : (x += 1) buffer[(HEIGHT - 1) * WIDTH + x] = cell(' ');
+}
+
