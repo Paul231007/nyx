@@ -27,3 +27,6 @@ pub fn ticks() u64 {
     return ticks_count;
 }
 
+pub fn hz() u32 {
+    return configured_hz;
+}
