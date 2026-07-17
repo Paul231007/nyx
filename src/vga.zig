@@ -9,3 +9,8 @@ const buffer: [*]volatile u16 = @ptrFromInt(0xB8000);
 var row: usize = 0;
 var col: usize = 0;
 
+fn cell(c: u8) u16 {
+    return (@as(u16, COLOR) << 8) | c;
+}
+
+
