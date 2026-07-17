@@ -19,3 +19,4 @@ pub fn clear() void {
     row = 0;
     col = 0;
 }
+
