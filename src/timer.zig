@@ -23,3 +23,7 @@ pub fn tick() void {
     ticks_count +%= 1;
 }
 
+pub fn ticks() u64 {
+    return ticks_count;
+}
+
