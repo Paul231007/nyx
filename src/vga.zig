@@ -13,4 +13,3 @@ fn cell(c: u8) u16 {
     return (@as(u16, COLOR) << 8) | c;
 }
 
-
