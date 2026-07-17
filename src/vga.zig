@@ -60,3 +60,6 @@ pub fn putc(c: u8) void {
     }
 }
 
+pub fn write(s: []const u8) void {
+    for (s) |c| putc(c);
+}
