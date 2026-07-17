@@ -32,3 +32,31 @@ fn scroll() void {
     while (x < WIDTH) : (x += 1) buffer[(HEIGHT - 1) * WIDTH + x] = cell(' ');
 }
 
+pub fn putc(c: u8) void {
+    switch (c) {
+        '\n' => {
+            col = 0;
+            row += 1;
+        },
+        '\r' => col = 0,
+        8 => { // backspace
+            if (col > 0) {
+                col -= 1;
+                buffer[row * WIDTH + col] = cell(' ');
+            }
+        },
+        else => {
+            buffer[row * WIDTH + col] = cell(c);
+            col += 1;
+            if (col >= WIDTH) {
+                col = 0;
+                row += 1;
+            }
+        },
+    }
+    if (row >= HEIGHT) {
+        scroll();
+        row = HEIGHT - 1;
+    }
+}
+
