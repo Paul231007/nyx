@@ -69,3 +69,17 @@ pub fn daysInMonth(year: u16, month: u8) u8 {
     return DAYS_IN_MONTH[month];
 }
 
+/// Compute the day of the week for the given date using Tomohiko Sakamoto's
+/// algorithm.  Returns 0 = Sunday … 6 = Saturday.
+pub fn weekday(year: u16, month: u8, day: u8) u8 {
+    // Sakamoto's table: offsets for months in a standard year.
+    const t = [_]i32{ 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+    var y: i32 = @as(i32, year);
+    const m: i32 = @as(i32, month);
+    const d: i32 = @as(i32, day);
+    if (m < 3) y -= 1;
+    const sum: i32 = y + @divFloor(y, 4) - @divFloor(y, 100) + @divFloor(y, 400) + t[@intCast(m - 1)] + d;
+    return @truncate(@as(u32, @intCast(@mod(sum, @as(i32, 7)))));
+}
+
+
