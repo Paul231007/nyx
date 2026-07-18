@@ -82,4 +82,3 @@ pub fn weekday(year: u16, month: u8, day: u8) u8 {
     return @truncate(@as(u32, @intCast(@mod(sum, @as(i32, 7)))));
 }
 
-
