@@ -69,4 +69,3 @@ pub fn daysInMonth(year: u16, month: u8) u8 {
     return DAYS_IN_MONTH[month];
 }
 
-
