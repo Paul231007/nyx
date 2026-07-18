@@ -39,3 +39,15 @@ const DAYS_IN_MONTH = [_]u8{
     0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
 };
 
+/// Full English weekday names, 0 = Sunday.
+pub const DAY_NAME = [_][]const u8{
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+};
+
+
