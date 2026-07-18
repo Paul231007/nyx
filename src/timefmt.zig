@@ -62,3 +62,11 @@ pub fn isLeapYear(year: u16) bool {
     return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0);
 }
 
+/// Return the number of days in `month` of `year` (1-indexed month).
+pub fn daysInMonth(year: u16, month: u8) u8 {
+    if (month < 1 or month > 12) return 0;
+    if (month == 2 and isLeapYear(year)) return 29;
+    return DAYS_IN_MONTH[month];
+}
+
+
