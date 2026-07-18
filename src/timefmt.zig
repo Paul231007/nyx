@@ -50,4 +50,3 @@ pub const DAY_NAME = [_][]const u8{
     "Saturday",
 };
 
-
