@@ -20,3 +20,9 @@ pub fn init() void {
     io.outb(SLAVE_CMD, 0x11);
     io.ioWait();
 
+    // ICW2: vector base offsets.
+    io.outb(MASTER_DATA, 0x20);
+    io.ioWait();
+    io.outb(SLAVE_DATA, 0x28);
+    io.ioWait();
+
