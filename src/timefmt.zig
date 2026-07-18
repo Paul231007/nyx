@@ -50,3 +50,9 @@ pub const DAY_NAME = [_][]const u8{
     "Saturday",
 };
 
+/// Abbreviated weekday names (3 letters), 0 = Sunday.
+pub const DAY_ABBR = [_][]const u8{
+    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
+};
+
+
