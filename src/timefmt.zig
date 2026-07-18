@@ -57,3 +57,9 @@ pub const DAY_ABBR = [_][]const u8{
 
 // ---- calendar helpers --------------------------------------------------------
 
+/// Return true when `year` is a Gregorian leap year.
+pub fn isLeapYear(year: u16) bool {
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0);
+}
+
+
