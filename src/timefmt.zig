@@ -34,3 +34,9 @@ pub const MONTH_ABBR = [_][]const u8{
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 };
 
+/// Days in each month for a common year, 1-indexed.
+const DAYS_IN_MONTH = [_]u8{
+    0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
+};
+
+
