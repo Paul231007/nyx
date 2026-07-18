@@ -9,3 +9,5 @@ const MASTER_DATA: u16 = 0x21;
 const SLAVE_CMD: u16 = 0xA0;
 const SLAVE_DATA: u16 = 0xA1;
 
+const EOI: u8 = 0x20;
+
