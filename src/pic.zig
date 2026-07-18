@@ -11,3 +11,12 @@ const SLAVE_DATA: u16 = 0xA1;
 
 const EOI: u8 = 0x20;
 
+/// Remap the PIC vector bases to 0x20 (master) / 0x28 (slave) and mask all
+/// lines except the timer (IRQ0).
+pub fn init() void {
+    // ICW1: start init sequence, expect ICW4.
+    io.outb(MASTER_CMD, 0x11);
+    io.ioWait();
+    io.outb(SLAVE_CMD, 0x11);
+    io.ioWait();
+
