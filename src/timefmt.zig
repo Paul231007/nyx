@@ -82,7 +82,7 @@ pub fn weekday(year: u16, month: u8, day: u8) u8 {
     return @truncate(@as(u32, @intCast(@mod(sum, @as(i32, 7)))));
 }
 
-// / Return the ...
+/// Return the day-of-year (1 = Jan 1) for the given date.
 pub fn dayOfYear(year: u16, month: u8, day: u8) u16 {
     var doy: u16 = 0;
     var m: u8 = 1;
