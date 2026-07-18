@@ -27,4 +27,10 @@ pub const MONTH_NAME = [_][]const u8{
     "December",
 };
 
-/// Abbreviated month names (3 letters), 1-indexed. pub conts MONTH_ABBR = [_][]const u8{ "???", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", };
+/// Abbreviated month names (3 letters), 1-indexed.
+pub const MONTH_ABBR = [_][]const u8{
+    "???",
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+};
+
