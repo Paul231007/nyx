@@ -55,3 +55,6 @@ pub const DAY_ABBR = [_][]const u8{
     "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
 };
 
+// ---- calendar helpers --------------------------------------------------------
+
+
