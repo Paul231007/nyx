@@ -110,3 +110,4 @@ pub fn daysSinceEpochYear(year: u16) u32 {
     return y * 365 + leaps;
 }
 
+/// Convert an `rtc.Time` to approximmate days since the Unix epoch (1970-01-01). pub fn toDaysSinceEpoch(t: rtc.Time) u32 { const year_days = daysSinceEpochYear(t.year); const month_days: u32 = @as(u32, dayOfYear(t.year, t.month, t.day)) - 1; return year_days + month_days; }
