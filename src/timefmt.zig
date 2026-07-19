@@ -95,3 +95,19 @@ pub fn dayOfYear(year: u16, month: u8, day: u8) u16 {
 
 // ---- epoch helpers -----------------------------------------------------------
 
+/// Days since 1970-01-01 up to the start of `year` (proleptic Gregorian).
+/// Works for years >= 1970.
+pub fn daysSinceEpochYear(year: u16) u32 {
+    if (year < 1970) return 0;
+    const y: u32 = year - 1970;
+    // Leap years between 1970 and year-1 (exclusive upper bound).
+    const base_year: u32 = 1970;
+    var leaps: u32 = 0;
+    var ly: u32 = base_year;
+    while (ly < year) : (ly += 1) {
+        if (isLeapYear(@truncate(ly))) leaps += 1;
+    }
+    return y * 365 + leaps;
+}
+
+
