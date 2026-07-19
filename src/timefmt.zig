@@ -117,3 +117,11 @@ pub fn toDaysSinceEpoch(t: rtc.Time) u32 {
     return year_days + month_days;
 }
 
+/// Convert an `rtc.Time` to approximate seconds since the Unix epoch.
+pub fn toUnixSeconds(t: rtc.Time) u64 {
+    const days: u64 = toDaysSinceEpoch(t);
+    const secs_today: u64 = @as(u64, t.hour) * 3600 + @as(u64, t.min) * 60 + t.sec;
+    return days * 86400 + secs_today;
+}
+
+
