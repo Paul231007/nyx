@@ -110,4 +110,3 @@ pub fn daysSinceEpochYear(year: u16) u32 {
     return y * 365 + leaps;
 }
 
-
