@@ -126,4 +126,3 @@ pub fn toUnixSeconds(t: rtc.Time) u64 {
 
 // ---- formatting functions ---------------------------------------------------
 
-
