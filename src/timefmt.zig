@@ -124,3 +124,6 @@ pub fn toUnixSeconds(t: rtc.Time) u64 {
     return days * 86400 + secs_today;
 }
 
+// ---- formatting functions ---------------------------------------------------
+
+
