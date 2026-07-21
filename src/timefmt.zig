@@ -135,4 +135,3 @@ pub fn fmtTime(buf: []u8, t: rtc.Time) []const u8 {
     return s;
 }
 
-
