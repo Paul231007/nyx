@@ -157,3 +157,12 @@ pub fn fmtFull(buf: []u8, t: rtc.Time) []const u8 {
     return s;
 }
 
+/// Format `t` as an ISO 8601 combined date-time string "YYYY-MM-DDTHH:MM:SS".
+/// `buf` must be >= 19 bytes.  Returns the written slice.
+pub fn fmtIso(buf: []u8, t: rtc.Time) []const u8 {
+    const s = std.fmt.bufPrint(buf, "{d:0>4}-{d:0>2}-{d:0>2}T{d:0>2}:{d:0>2}:{d:0>2}", .{
+        t.year, t.month, t.day, t.hour, t.min, t.sec,
+    }) catch return buf[0..0];
+    return s;
+}
+
