@@ -10,4 +10,3 @@ pub fn memcpy(dst: []u8, src: []const u8) void {
     @memcpy(dst[0..n], src[0..n]);
 }
 
-
