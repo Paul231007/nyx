@@ -9,4 +9,3 @@ const PAGE_SIZE: usize = 4096;
 const ENTRIES: usize = 1024; // entries per directory / table
 const PAGE_4MIB: usize = ENTRIES * PAGE_SIZE; // 4 MiB covered by one page table
 
-
