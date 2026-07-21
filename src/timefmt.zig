@@ -144,3 +144,4 @@ pub fn fmtDate(buf: []u8, t: rtc.Time) []const u8 {
     return s;
 }
 
+/// Format `t` as a `date`-style string: /// "Www Mmm DD HH:MM:SS YYYY" (e.g. "Mon Jun 09 12:34:56 2026") /// `buf` must be >= 25 bytes. Returns the written slice. pub fn fmtFull(buf: []u8, t: rtc.Time) []const u8 { const wd = weekday(t.year, t.month, t.day); const mo = if (t.month >= 1 and t.month <= 12) MONTH_ABBR[t.month] else "???"; const da = if (wd < 7) DAY_ABBR[wd] else "???"; const s = std.fmt.bufPrint(buf, "{s} {s} {d:0>2} {d:0>2}:{d:0>2}:{d:0>2} {d:0>4}", .{ da, mo, t.day, t.hour, t.min, t.sec, t.year, }) catch return buf[0..0]; return s; }
