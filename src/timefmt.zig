@@ -175,3 +175,11 @@ pub fn fmtWeekday(buf: []u8, t: rtc.Time) []const u8 {
     return s;
 }
 
+/// Write the full month name for `t` into `buf`.
+/// `buf` must be >= 9 bytes.  Returns the written slice.
+pub fn fmtMonthName(buf: []u8, t: rtc.Time) []const u8 {
+    const mo = if (t.month >= 1 and t.month <= 12) MONTH_NAME[t.month] else "Unknown";
+    const s = std.fmt.bufPrint(buf, "{s}", .{mo}) catch return buf[0..0];
+    return s;
+}
+
