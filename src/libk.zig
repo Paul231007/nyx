@@ -4,3 +4,9 @@
 
 const std = @import("std");
 
+/// Copy min(dst.len, src.len) bytes from `src` into `dst`.
+pub fn memcpy(dst: []u8, src: []const u8) void {
+    const n = @min(dst.len, src.len);
+    @memcpy(dst[0..n], src[0..n]);
+}
+
