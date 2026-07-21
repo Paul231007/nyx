@@ -166,3 +166,12 @@ pub fn fmtIso(buf: []u8, t: rtc.Time) []const u8 {
     return s;
 }
 
+/// Write the full weekday name for `t` into `buf`.
+/// `buf` must be >= 9 bytes (longest = "Wednesday").  Returns the written slice.
+pub fn fmtWeekday(buf: []u8, t: rtc.Time) []const u8 {
+    const wd = weekday(t.year, t.month, t.day);
+    const wname = if (wd < 7) DAY_NAME[wd] else "Unknown";
+    const s = std.fmt.bufPrint(buf, "{s}", .{wname}) catch return buf[0..0];
+    return s;
+}
+
