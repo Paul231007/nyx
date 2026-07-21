@@ -183,3 +183,19 @@ pub fn fmtMonthName(buf: []u8, t: rtc.Time) []const u8 {
     return s;
 }
 
+/// Format the day number with an English ordinal suffix (1st, 2nd, 3rd, 4th…).
+/// `buf` must be >= 6 bytes.  Returns the written slice.
+pub fn fmtDayOrdinal(buf: []u8, day: u8) []const u8 {
+    const suffix: []const u8 = switch (day) {
+        11, 12, 13 => "th",    // teens always get "th"
+        else => switch (day % 10) {
+            1 => "st",
+            2 => "nd",
+            3 => "rd",
+            else => "th",
+        },
+    };
+    const s = std.fmt.bufPrint(buf, "{d}{s}", .{ day, suffix }) catch return buf[0..0];
+    return s;
+}
+
