@@ -135,3 +135,13 @@ pub fn fmtTime(buf: []u8, t: rtc.Time) []const u8 {
     return s;
 }
 
+/// Format the date portion of `t` as "YYYY-MM-DD" into `buf`.
+/// Returns the written slice.  `buf` must be >= 10 bytes.
+pub fn fmtDate(buf: []u8, t: rtc.Time) []const u8 {
+    const s = std.fmt.bufPrint(buf, "{d:0>4}-{d:0>2}-{d:0>2}", .{
+        t.year, t.month, t.day,
+    }) catch return buf[0..0];
+    return s;
+}
+
+
