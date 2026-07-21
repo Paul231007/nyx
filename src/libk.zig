@@ -10,3 +10,8 @@ pub fn memcpy(dst: []u8, src: []const u8) void {
     @memcpy(dst[0..n], src[0..n]);
 }
 
+/// Fill every byte of `dst` with `val`.
+pub fn memset(dst: []u8, val: u8) void {
+    @memset(dst, val);
+}
+
