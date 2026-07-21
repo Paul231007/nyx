@@ -126,3 +126,13 @@ pub fn toUnixSeconds(t: rtc.Time) u64 {
 
 // ---- formatting functions ---------------------------------------------------
 
+/// Format the time portion of `t` as "HH:MM:SS" into `buf`.
+/// Returns the written slice.  `buf` must be >= 8 bytes.
+pub fn fmtTime(buf: []u8, t: rtc.Time) []const u8 {
+    const s = std.fmt.bufPrint(buf, "{d:0>2}:{d:0>2}:{d:0>2}", .{
+        t.hour, t.min, t.sec,
+    }) catch return buf[0..0];
+    return s;
+}
+
+
