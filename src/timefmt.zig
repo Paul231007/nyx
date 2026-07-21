@@ -199,3 +199,10 @@ pub fn fmtDayOrdinal(buf: []u8, day: u8) []const u8 {
     return s;
 }
 
+/// Compute the approximate number of days between two `rtc.Time` values.
+/// Returns 0 when `to` is earlier than `from`.
+pub fn daysDelta(from: rtc.Time, to: rtc.Time) u32 {
+    const fd = toDaysSinceEpoch(from);
+    const td = toDaysSinceEpoch(to);
+    return if (td >= fd) td - fd else 0;
+}
