@@ -15,3 +15,10 @@ pub fn memset(dst: []u8, val: u8) void {
     @memset(dst, val);
 }
 
+/// Return true when `a` and `b` are byte-for-byte identical.
+pub fn streq(a: []const u8, b: []const u8) bool {
+    if (a.len != b.len) return false;
+    return std.mem.eql(u8, a, b);
+}
+
+
