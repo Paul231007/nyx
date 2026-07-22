@@ -87,3 +87,4 @@ pub fn indexOf(haystack: []const u8, needle: u8) ?usize {
     }
     return null;
 }
+
