@@ -94,4 +94,3 @@ pub fn toUpper(c: u8) u8 {
     return if (c >= 'a' and c <= 'z') c - ('a' - 'A') else c;
 }
 
-
