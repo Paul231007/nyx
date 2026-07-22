@@ -94,3 +94,10 @@ pub fn toUpper(c: u8) u8 {
     return if (c >= 'a' and c <= 'z') c - ('a' - 'A') else c;
 }
 
+/// Convert `c` to lowercase if it is an uppercase ASCII letter; otherwise
+/// return `c` unchanged.
+pub fn toLower(c: u8) u8 {
+    return if (c >= 'A' and c <= 'Z') c + ('a' - 'A') else c;
+}
+
+
