@@ -106,4 +106,3 @@ pub fn startsWith(s: []const u8, prefix: []const u8) bool {
     return std.mem.eql(u8, s[0..prefix.len], prefix);
 }
 
-
