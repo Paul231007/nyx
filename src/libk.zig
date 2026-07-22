@@ -28,4 +28,3 @@ pub fn strlen(s: [*:0]const u8) usize {
     return i;
 }
 
-
