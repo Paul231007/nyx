@@ -88,3 +88,10 @@ pub fn indexOf(haystack: []const u8, needle: u8) ?usize {
     return null;
 }
 
+/// Convert `c` to uppercase if it is a lowercase ASCII letter; otherwise
+/// return `c` unchanged.
+pub fn toUpper(c: u8) u8 {
+    return if (c >= 'a' and c <= 'z') c - ('a' - 'A') else c;
+}
+
+
