@@ -21,3 +21,11 @@ pub fn streq(a: []const u8, b: []const u8) bool {
     return std.mem.eql(u8, a, b);
 }
 
+/// Return the length of the null-terminated C string `s` (sentinel not counted).
+pub fn strlen(s: [*:0]const u8) usize {
+    var i: usize = 0;
+    while (s[i] != 0) : (i += 1) {}
+    return i;
+}
+
+
