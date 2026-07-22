@@ -100,3 +100,10 @@ pub fn toLower(c: u8) u8 {
     return if (c >= 'A' and c <= 'Z') c + ('a' - 'A') else c;
 }
 
+/// Return true when `s` begins with `prefix`.
+pub fn startsWith(s: []const u8, prefix: []const u8) bool {
+    if (prefix.len > s.len) return false;
+    return std.mem.eql(u8, s[0..prefix.len], prefix);
+}
+
+
