@@ -106,3 +106,30 @@ pub fn startsWith(s: []const u8, prefix: []const u8) bool {
     return std.mem.eql(u8, s[0..prefix.len], prefix);
 }
 
+/// Format `v` as a decimal string into `buf`.  Returns the written slice.
+/// If `buf` is too small the result is silently truncated.  Callers should
+/// provide at least 20 bytes (the length of the largest u64 in decimal).
+pub fn formatDec(buf: []u8, v: u64) []const u8 {
+    if (buf.len == 0) return buf[0..0];
+    if (v == 0) {
+        buf[0] = '0';
+        return buf[0..1];
+    }
+    // Build digits in reverse order into a temporary stack array.
+    var tmp: [20]u8 = undefined;
+    var pos: usize = 0;
+    var val: u64 = v;
+    while (val > 0) : (val /= 10) {
+        tmp[pos] = '0' + @as(u8, @truncate(val % 10));
+        pos += 1;
+    }
+    // Copy reversed into `buf`.
+    const n = @min(pos, buf.len);
+    var di: usize = 0;
+    while (di < n) : (di += 1) {
+        buf[di] = tmp[pos - 1 - di];
+    }
+    return buf[0..n];
+}
+
+
