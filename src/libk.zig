@@ -64,3 +64,19 @@ pub fn parseHex(s: []const u8) ?u64 {
     return parseUint(rest, 16);
 }
 
+/// Compare up to `n` bytes of `a` and `b`.  Returns <0, 0, or >0 following
+/// the same convention as C's `strncmp`.  Bytes past the end of a shorter
+/// slice are treated as 0 (as if null-terminated).
+pub fn strncmp(a: []const u8, b: []const u8, n: usize) i32 {
+    var ii: usize = 0;
+    while (ii < n) : (ii += 1) {
+        const ca: u8 = if (ii < a.len) a[ii] else 0;
+        const cb: u8 = if (ii < b.len) b[ii] else 0;
+        if (ca < cb) return -1;
+        if (ca > cb) return 1;
+        if (ca == 0) return 0; // both reached a null — equal
+    }
+    return 0;
+}
+
+
