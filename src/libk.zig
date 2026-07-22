@@ -53,4 +53,3 @@ pub fn parseUint(s: []const u8, base: u8) ?u64 {
     return result;
 }
 
-
