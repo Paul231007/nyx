@@ -79,3 +79,11 @@ pub fn strncmp(a: []const u8, b: []const u8, n: usize) i32 {
     return 0;
 }
 
+/// Return the index of the first occurrence of `needle` in `haystack`, or
+/// null if it is not present.
+pub fn indexOf(haystack: []const u8, needle: u8) ?usize {
+    for (haystack, 0..) |c, i| {
+        if (c == needle) return i;
+    }
+    return null;
+}
