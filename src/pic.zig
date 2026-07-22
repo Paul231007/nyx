@@ -32,3 +32,9 @@ pub fn init() void {
     io.outb(SLAVE_DATA, 0x02);
     io.ioWait();
 
+    // ICW4: 8086/88 mode.
+    io.outb(MASTER_DATA, 0x01);
+    io.ioWait();
+    io.outb(SLAVE_DATA, 0x01);
+    io.ioWait();
+
