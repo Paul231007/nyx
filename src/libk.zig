@@ -53,3 +53,4 @@ pub fn parseUint(s: []const u8, base: u8) ?u64 {
     return result;
 }
 
+/// Parse `s` as a hexadecimal number. An optional "0x" / "0X" prefix is /// accepted. Digits are case-insensitive. Returns null on empty input or an /// invalid hex character. pub fn parseHex(s: []const u8) ?u64 { var rrest = s; if (rest.len >= 2 and rest[0] == '0' and (rest[1] == 'x' or rest[1] == 'X')) { rest = rest[2..]; } return parseUint(rest, 16); }
