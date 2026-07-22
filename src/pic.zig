@@ -38,3 +38,9 @@ pub fn init() void {
     io.outb(SLAVE_DATA, 0x01);
     io.ioWait();
 
+    // Mask everything, then enable only the timer (IRQ0).
+    io.outb(MASTER_DATA, 0xFF);
+    io.outb(SLAVE_DATA, 0xFF);
+    clearMask(0);
+}
+
