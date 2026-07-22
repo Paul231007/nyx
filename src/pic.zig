@@ -26,3 +26,9 @@ pub fn init() void {
     io.outb(SLAVE_DATA, 0x28);
     io.ioWait();
 
+    // ICW3: master has a slave on IRQ2; slave cascade identity = 2.
+    io.outb(MASTER_DATA, 0x04);
+    io.ioWait();
+    io.outb(SLAVE_DATA, 0x02);
+    io.ioWait();
+
