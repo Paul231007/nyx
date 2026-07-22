@@ -100,4 +100,3 @@ pub fn toLower(c: u8) u8 {
     return if (c >= 'A' and c <= 'Z') c + ('a' - 'A') else c;
 }
 
-
