@@ -44,3 +44,10 @@ pub fn init() void {
     clearMask(0);
 }
 
+pub fn setMask(irq: u8) void {
+    const port: u16 = if (irq < 8) MASTER_DATA else SLAVE_DATA;
+    const bit: u3 = @intCast(if (irq < 8) irq else irq - 8);
+    const value = io.inb(port) | (@as(u8, 1) << bit);
+    io.outb(port, value);
+}
+
