@@ -132,3 +132,28 @@ pub fn formatDec(buf: []u8, v: u64) []const u8 {
     return buf[0..n];
 }
 
+/// Format `v` as a lowercase hexadecimal string (no "0x" prefix) into `buf`.
+/// Returns the written slice.  Provide at least 16 bytes for a full u64.
+pub fn formatHex(buf: []u8, v: u64) []const u8 {
+    if (buf.len == 0) return buf[0..0];
+    if (v == 0) {
+        buf[0] = '0';
+        return buf[0..1];
+    }
+    const digits = "0123456789abcdef";
+    var tmp: [16]u8 = undefined;
+    var pos: usize = 0;
+    var val: u64 = v;
+    while (val > 0) : (val >>= 4) {
+        tmp[pos] = digits[@as(usize, @truncate(val & 0xF))];
+        pos += 1;
+    }
+    const n = @min(pos, buf.len);
+    var di: usize = 0;
+    while (di < n) : (di += 1) {
+        buf[di] = tmp[pos - 1 - di];
+    }
+    return buf[0..n];
+}
+
+
