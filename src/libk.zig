@@ -165,4 +165,3 @@ pub const HexDump = struct {
         var offset: usize = 0;
         var line_buf: [80]u8 = undefined;
 
-
