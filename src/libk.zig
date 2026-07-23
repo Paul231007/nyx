@@ -165,3 +165,9 @@ pub const HexDump = struct {
         var offset: usize = 0;
         var line_buf: [80]u8 = undefined;
 
+        while (offset < len) {
+            const row_len = @min(16, len - offset);
+            const row = mem[offset .. offset + row_len];
+            var pos: usize = 0;
+
+
