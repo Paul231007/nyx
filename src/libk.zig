@@ -202,3 +202,12 @@ pub const HexDump = struct {
                 pos += 1;
             }
 
+            // ASCII column: printable chars verbatim, others as '.'
+            for (row) |b| {
+                if (pos < line_buf.len) {
+                    line_buf[pos] = if (b >= 0x20 and b < 0x7F) b else '.';
+                    pos += 1;
+                }
+            }
+
+
