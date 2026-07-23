@@ -13,3 +13,9 @@ const PAGE_4MIB: usize = ENTRIES * PAGE_SIZE; // 4 MiB covered by one page table
 // image, stack, pmm bitmap, the page tables themselves, and VGA at 0xB8000.
 const MAP_LIMIT: usize = 0x4000000; // 64 MiB → 16 page tables
 
+// PDE/PTE flag bits.
+const PRESENT: u32 = 0x1;
+const RW: u32 = 0x2;
+const USER: u32 = 0x4;
+
+
