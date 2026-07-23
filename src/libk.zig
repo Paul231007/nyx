@@ -174,4 +174,3 @@ pub const HexDump = struct {
             const hdr = std.fmt.bufPrint(&line_buf, "{X:0>8}  ", .{offset}) catch break;
             pos = hdr.len;
 
-
