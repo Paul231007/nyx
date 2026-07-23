@@ -170,4 +170,3 @@ pub const HexDump = struct {
             const row = mem[offset .. offset + row_len];
             var pos: usize = 0;
 
-
