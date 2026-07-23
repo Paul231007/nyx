@@ -170,3 +170,8 @@ pub const HexDump = struct {
             const row = mem[offset .. offset + row_len];
             var pos: usize = 0;
 
+            // "XXXXXXXX  " — 8-digit zero-padded hex offset
+            const hdr = std.fmt.bufPrint(&line_buf, "{X:0>8}  ", .{offset}) catch break;
+            pos = hdr.len;
+
+
