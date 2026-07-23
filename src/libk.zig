@@ -156,4 +156,3 @@ pub fn formatHex(buf: []u8, v: u64) []const u8 {
     return buf[0..n];
 }
 
-
