@@ -196,3 +196,10 @@ pub const HexDump = struct {
                 }
             }
 
+            // Separator before ASCII
+            if (pos < line_buf.len) {
+                line_buf[pos] = ' ';
+                pos += 1;
+            }
+
+
