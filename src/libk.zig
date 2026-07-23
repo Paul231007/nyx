@@ -174,3 +174,26 @@ pub const HexDump = struct {
             const hdr = std.fmt.bufPrint(&line_buf, "{X:0>8}  ", .{offset}) catch break;
             pos = hdr.len;
 
+            // Hex bytes, two columns of eight with an extra space in the middle
+            var col: usize = 0;
+            while (col < 16) : (col += 1) {
+                if (col < row_len) {
+                    const hw = std.fmt.bufPrint(line_buf[pos..], "{X:0>2} ", .{row[col]}) catch break;
+                    pos += hw.len;
+                } else {
+                    // Pad missing columns
+                    if (pos + 3 <= line_buf.len) {
+                        line_buf[pos] = ' ';
+                        line_buf[pos + 1] = ' ';
+                        line_buf[pos + 2] = ' ';
+                        pos += 3;
+                    }
+                }
+                // Extra space after the eighth byte
+                if (col == 7 and pos < line_buf.len) {
+                    line_buf[pos] = ' ';
+                    pos += 1;
+                }
+            }
+
+
