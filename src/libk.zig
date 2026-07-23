@@ -156,3 +156,13 @@ pub fn formatHex(buf: []u8, v: u64) []const u8 {
     return buf[0..n];
 }
 
+/// Canonical hex dumper: prints 16-byte rows as "OFFSET  hex bytes  ascii".
+pub const HexDump = struct {
+    /// Dump `len` bytes starting at virtual address `addr`.
+    /// Each formatted line is passed to `out` as a byte slice.
+    pub fn dump(addr: usize, len: usize, out: *const fn ([]const u8) void) void {
+        const mem: [*]const u8 = @ptrFromInt(addr);
+        var offset: usize = 0;
+        var line_buf: [80]u8 = undefined;
+
+
