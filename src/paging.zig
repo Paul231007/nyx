@@ -65,3 +65,16 @@ pub fn map(virt: usize, phys: usize, flags: u32) void {
     const pde_idx = virt >> 22;
     const pte_idx = (virt >> 12) & 0x3FF;
 
+    var pde = pd[pde_idx];
+    if ((pde & PRESENT) == 0) {
+        // Allocate a fresh page table, zero it, install it.
+        const pt_phys = pmm.allocFrame().?;
+        const pt: [*]volatile u32 = @ptrFromInt(pt_phys);
+        var k: usize = 0;
+        while (k < ENTRIES) : (k += 1) pt[k] = 0;
+        var pde_flags: u32 = PRESENT | RW;
+        if ((flags & USER) != 0) pde_flags |= USER;
+        pde = @as(u32, @intCast(pt_phys)) | pde_flags;
+        pd[pde_idx] = pde;
+    }
+
