@@ -82,3 +82,10 @@ pub fn map(virt: usize, phys: usize, flags: u32) void {
     const pt: [*]volatile u32 = @ptrFromInt(@as(usize, pt_phys));
     pt[pte_idx] = (@as(u32, @intCast(phys)) & 0xFFFFF000) | PRESENT | flags;
 
+    // Invalidate the TLB entry for this page.
+    asm volatile ("invlpg (%[v])"
+        :
+        : [v] "r" (virt),
+        : .{ .memory = true });
+}
+
