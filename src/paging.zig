@@ -25,3 +25,11 @@ inline fn dirPtr() [*]volatile u32 {
     return @ptrFromInt(page_directory);
 }
 
+pub fn init() void {
+    // (a) Allocate + zero the page directory.
+    page_directory = pmm.allocFrame().?;
+    const pd = dirPtr();
+    var i: usize = 0;
+    while (i < ENTRIES) : (i += 1) pd[i] = 0;
+
+
