@@ -32,3 +32,18 @@ pub fn init() void {
     var i: usize = 0;
     while (i < ENTRIES) : (i += 1) pd[i] = 0;
 
+    // (b) Identity-map [0, MAP_LIMIT) with present+rw pages.
+    var virt: usize = 0;
+    while (virt < MAP_LIMIT) : (virt += PAGE_4MIB) {
+        // One page table covers 4 MiB.
+        const pt_phys = pmm.allocFrame().?;
+        const pt: [*]volatile u32 = @ptrFromInt(pt_phys);
+        var j: usize = 0;
+        while (j < ENTRIES) : (j += 1) {
+            const phys = virt + j * PAGE_SIZE;
+            pt[j] = @as(u32, @intCast(phys)) | PRESENT | RW;
+        }
+        const pde_idx = virt >> 22;
+        pd[pde_idx] = @as(u32, @intCast(pt_phys)) | PRESENT | RW;
+    }
+
