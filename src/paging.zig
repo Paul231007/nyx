@@ -78,3 +78,7 @@ pub fn map(virt: usize, phys: usize, flags: u32) void {
         pd[pde_idx] = pde;
     }
 
+    const pt_phys = pde & 0xFFFFF000;
+    const pt: [*]volatile u32 = @ptrFromInt(@as(usize, pt_phys));
+    pt[pte_idx] = (@as(u32, @intCast(phys)) & 0xFFFFF000) | PRESENT | flags;
+
