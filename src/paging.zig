@@ -59,3 +59,9 @@ pub fn init() void {
         ::: .{ .eax = true, .memory = true });
 }
 
+/// Map a single 4 KiB page: virt → phys with the given flags (present + rw etc).
+pub fn map(virt: usize, phys: usize, flags: u32) void {
+    const pd = dirPtr();
+    const pde_idx = virt >> 22;
+    const pte_idx = (virt >> 12) & 0x3FF;
+
