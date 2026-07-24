@@ -215,3 +215,9 @@ pub const HexDump = struct {
                 pos += 1;
             }
 
+            out(line_buf[0..pos]);
+            offset += row_len;
+        }
+    }
+};
+
