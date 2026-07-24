@@ -210,3 +210,9 @@ pub const HexDump = struct {
                 }
             }
 
+            if (pos < line_buf.len) {
+                line_buf[pos] = '\n';
+                pos += 1;
+            }
+
+
