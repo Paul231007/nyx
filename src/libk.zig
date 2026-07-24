@@ -220,4 +220,3 @@ pub const HexDump = struct {
         }
     }
 };
-
