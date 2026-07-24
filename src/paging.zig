@@ -18,3 +18,7 @@ const PRESENT: u32 = 0x1;
 const RW: u32 = 0x2;
 const USER: u32 = 0x4;
 
+// Physical address of the page directory (CR3 value).
+var page_directory: usize = 0;
+
+
