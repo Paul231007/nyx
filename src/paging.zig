@@ -47,3 +47,15 @@ pub fn init() void {
         pd[pde_idx] = @as(u32, @intCast(pt_phys)) | PRESENT | RW;
     }
 
+    // (c) Load CR3, then flip CR0.PG.
+    asm volatile ("mov %[pd], %%cr3"
+        :
+        : [pd] "r" (page_directory),
+        : .{ .memory = true });
+    asm volatile (
+        \\mov %%cr0, %%eax
+        \\or  $0x80000000, %%eax
+        \\mov %%eax, %%cr0
+        ::: .{ .eax = true, .memory = true });
+}
+
