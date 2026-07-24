@@ -10,4 +10,3 @@
 //! A `ChunkHdr` is stored at the very start of each backing allocation so that
 //! `deinit` can walk the chain and release every chunk.
 
-
