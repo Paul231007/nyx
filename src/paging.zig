@@ -89,3 +89,13 @@ pub fn map(virt: usize, phys: usize, flags: u32) void {
         : .{ .memory = true });
 }
 
+/// Walk the tables for `virt`; return the mapped physical frame base or null.
+pub fn translate(virt: usize) ?usize {
+    const pd = dirPtr();
+    const pde = pd[virt >> 22];
+    if ((pde & PRESENT) == 0) return null;
+    const pt: [*]volatile u32 = @ptrFromInt(@as(usize, pde & 0xFFFFF000));
+    const pte = pt[(virt >> 12) & 0x3FF];
+    if ((pte & PRESENT) == 0) return null;
+    return @as(usize, pte & 0xFFFFF000) | (virt & 0xFFF);
+}
