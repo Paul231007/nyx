@@ -215,4 +215,3 @@ pub const HexDump = struct {
                 pos += 1;
             }
 
-
