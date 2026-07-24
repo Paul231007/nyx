@@ -25,4 +25,3 @@ inline fn dirPtr() [*]volatile u32 {
     return @ptrFromInt(page_directory);
 }
 
-
