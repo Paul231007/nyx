@@ -37,4 +37,3 @@ pub const Slab = struct {
     /// Total slots ever made available (grows with each `grow` call).
     capacity: usize,
 
-
