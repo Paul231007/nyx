@@ -105,3 +105,13 @@ pub const Slab = struct {
         return ptr;
     }
 
+    /// Return a previously `alloc`ed slot to the free list.  O(1).
+    /// The caller must not access `p` after this call.
+    pub fn free(self: *Slab, p: [*]u8) void {
+        const link: *?[*]u8 = @ptrCast(@alignCast(p));
+        link.* = self.free_list;
+        self.free_list = p;
+        self.live -= 1;
+    }
+
+
