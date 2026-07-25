@@ -76,4 +76,3 @@ pub const Slab = struct {
         hdr.total_bytes = total;
         self.chunk_list = raw;
 
-
