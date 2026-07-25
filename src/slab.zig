@@ -79,4 +79,3 @@ pub const Slab = struct {
         // Align the start of the object region to `obj_align`.
         const objs_base = std.mem.alignForward(usize, @intFromPtr(raw) + hdr_bytes, self.obj_align);
 
-
