@@ -12,3 +12,11 @@
 
 const std = @import("std");
 
+/// Header embedded at the start of every backing chunk so we can walk them on
+/// deinit.  The chunk is allocated with extra headroom so the objects that
+/// follow the header can be aligned to `obj_align`.
+const ChunkHdr = struct {
+    next_chunk: ?[*]u8, // intrusive linked list of all live chunks
+    total_bytes: usize, // full allocation size (for freeing)
+};
+
