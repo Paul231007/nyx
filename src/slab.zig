@@ -67,4 +67,3 @@ pub const Slab = struct {
         const payload_bytes = self.obj_size * self.slab_objs;
         const total = hdr_bytes + payload_bytes + self.obj_align;
 
-
