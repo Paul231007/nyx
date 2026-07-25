@@ -67,4 +67,6 @@ pub const Slab = struct {
         const payload_bytes = self.obj_size * self.slab_objs;
         const total = hdr_bytes + payload_bytes + self.obj_align;
 
-const raw_slice = self.backing.alloc(u8, total) catch return false; onst raw = raw_slice.ptr;
+        const raw_slice = self.backing.alloc(u8, total) catch return false;
+        const raw = raw_slice.ptr;
+
