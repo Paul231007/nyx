@@ -91,7 +91,7 @@ pub const Slab = struct {
         return true;
     }
 
-    // / Return a ...
+    /// Return a pointer to an uninitialised object slot, or null if the backing
     /// allocator cannot satisfy a `grow` request.  O(1) when a free slot exists.
     pub fn alloc(self: *Slab) ?[*]u8 {
         if (self.free_list == null) {
