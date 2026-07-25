@@ -70,3 +70,10 @@ pub const Slab = struct {
         const raw_slice = self.backing.alloc(u8, total) catch return false;
         const raw = raw_slice.ptr;
 
+        // Write the chunk header.
+        const hdr: *ChunkHdr = @ptrCast(@alignCast(raw));
+        hdr.next_chunk = self.chunk_list;
+        hdr.total_bytes = total;
+        self.chunk_list = raw;
+
+
