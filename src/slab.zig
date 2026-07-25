@@ -55,3 +55,16 @@ pub const Slab = struct {
         };
     }
 
+    /// Allocate a fresh backing chunk and thread all its slots into the free
+    /// list.  Returns `false` if the backing allocator is exhausted.
+    fn grow(self: *Slab) bool {
+        // Header lives at the front of the raw allocation.  Pad it up to
+        // `obj_align` so the first object that follows is properly aligned.
+        const hdr_bytes = std.mem.alignForward(usize, @sizeOf(ChunkHdr), self.obj_align);
+        // Over-allocate by `obj_align` so we can round up the base address of
+        // the object region even if the backing allocator returns an address
+        // that is only @alignOf(usize)-aligned (4 bytes on i386).
+        const payload_bytes = self.obj_size * self.slab_objs;
+        const total = hdr_bytes + payload_bytes + self.obj_align;
+
+
