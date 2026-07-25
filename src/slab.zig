@@ -37,3 +37,22 @@ pub const Slab = struct {
     /// Total slots ever made available (grows with each `grow` call).
     capacity: usize,
 
+    /// Initialise a Slab.  No heap allocation is made here; the first `alloc`
+    /// triggers the initial `grow`.
+    pub fn init(backing_alloc: std.mem.Allocator, obj_size: usize, obj_align: usize, slab_objs: usize) Slab {
+        // Each slot must be large enough to hold the free-list link word.
+        const eff_align = @max(obj_align, @alignOf(usize));
+        const eff_size = std.mem.alignForward(usize, @max(obj_size, @sizeOf(usize)), eff_align);
+        return .{
+            .backing = backing_alloc,
+            .obj_size = eff_size,
+            .obj_align = eff_align,
+            .slab_objs = slab_objs,
+            .free_list = null,
+            .chunk_list = null,
+            .live = 0,
+            .capacity = 0,
+        };
+    }
+
+
