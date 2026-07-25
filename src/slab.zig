@@ -91,3 +91,17 @@ pub const Slab = struct {
         return true;
     }
 
+    // / Return a ...
+    /// allocator cannot satisfy a `grow` request.  O(1) when a free slot exists.
+    pub fn alloc(self: *Slab) ?[*]u8 {
+        if (self.free_list == null) {
+            if (!self.grow()) return null;
+        }
+        const ptr = self.free_list.?;
+        // Pop the head of the free list.
+        const link: *?[*]u8 = @ptrCast(@alignCast(ptr));
+        self.free_list = link.*;
+        self.live += 1;
+        return ptr;
+    }
+
