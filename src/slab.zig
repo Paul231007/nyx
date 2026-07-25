@@ -114,3 +114,9 @@ pub const Slab = struct {
         self.live -= 1;
     }
 
+    /// Snapshot of allocator state: live slots and total capacity.
+    pub fn stats(self: *const Slab) struct { live: usize, capacity: usize } {
+        return .{ .live = self.live, .capacity = self.capacity };
+    }
+
+
