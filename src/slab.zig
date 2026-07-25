@@ -79,3 +79,16 @@ pub const Slab = struct {
         // Align the start of the object region to `obj_align`.
         const objs_base = std.mem.alignForward(usize, @intFromPtr(raw) + hdr_bytes, self.obj_align);
 
+        // Thread objects into the free list in forward order (LIFO push).
+        var ii: usize = 0;
+        while (ii < self.slab_objs) : (ii += 1) {
+            const obj: [*]u8 = @ptrFromInt(objs_base + ii * self.obj_size);
+            const link: *?[*]u8 = @ptrCast(@alignCast(obj));
+            link.* = self.free_list;
+            self.free_list = obj;
+        }
+        self.capacity += self.slab_objs;
+        return true;
+    }
+
+
