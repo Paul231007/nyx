@@ -20,3 +20,21 @@ const ChunkHdr = struct {
     total_bytes: usize, // full allocation size (for freeing)
 };
 
+pub const Slab = struct {
+    backing: std.mem.Allocator,
+    /// Requested object size (may be rounded up internally).
+    obj_size: usize,
+    /// Required alignment for every returned object pointer (bytes).
+    obj_align: usize,
+    /// Number of object slots per backing chunk.
+    slab_objs: usize,
+    /// Head of the free-slot list (null ⟹ no free slot yet).
+    free_list: ?[*]u8,
+    /// Head of the backing-chunk chain (for deinit).
+    chunk_list: ?[*]u8,
+    /// Number of slots currently handed to callers.
+    live: usize,
+    /// Total slots ever made available (grows with each `grow` call).
+    capacity: usize,
+
+
