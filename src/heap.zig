@@ -55,3 +55,11 @@ inline fn payloadStart(b: *Block) usize {
     return @intFromPtr(b) + @sizeOf(Block);
 }
 
+/// First-fit allocation honoring `alignment` (in bytes). Returns the user
+/// pointer or null. Splits the tail of the chosen block into a new free block
+/// when the leftover is large enough.
+fn heapAlloc(len: usize, alignment: usize) ?[*]u8 {
+    if (!initialized) return null;
+    const a = if (alignment == 0) 1 else alignment;
+
+
