@@ -55,4 +55,3 @@ inline fn payloadStart(b: *Block) usize {
     return @intFromPtr(b) + @sizeOf(Block);
 }
 
-
