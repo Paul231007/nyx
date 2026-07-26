@@ -12,4 +12,3 @@
 //! back-pointer to the owning block in the `usize` slot immediately before it,
 //! so `free(ptr)` can recover the header regardless of the alignment padding.
 
-
