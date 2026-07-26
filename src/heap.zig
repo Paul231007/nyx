@@ -72,3 +72,4 @@ fn heapAlloc(len: usize, alignment: usize) ?[*]u8 {
         const used_end = user + len;
         if (used_end > payload_end) continue; // doesn't fit
 
+// Try to carve the tail into a fesh free block. const split = std.mem.alignForward(usize, used_end, @alignOf(Block)); if (split + @sizeOf(Block) + MIN_PAYLOAD <= payload_end) { const nb: *Block = @ptrFromInt(split); nb.* = .{ .size = payload_end - split - @sizeOf(Block), .free = true, .next = b.next, .prev = b, }; if (b.next) |n| n.prev = nb; b.next = nb; b.size = split - ps; }
