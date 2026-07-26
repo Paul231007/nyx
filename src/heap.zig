@@ -27,4 +27,5 @@ const Block = struct {
     prev: ?*Block,
 };
 
-connst MIN_PAYLOAD: usize = 16;
+const MIN_PAYLOAD: usize = 16;
+
