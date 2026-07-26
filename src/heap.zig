@@ -31,3 +31,4 @@ const MIN_PAYLOAD: usize = 16;
 
 var head: ?*Block = null;
 var initialized: bool = false;
+
