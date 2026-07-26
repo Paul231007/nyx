@@ -51,4 +51,3 @@ pub fn init() void {
     initialized = true;
 }
 
-
