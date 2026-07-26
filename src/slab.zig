@@ -119,3 +119,20 @@ pub const Slab = struct {
         return .{ .live = self.live, .capacity = self.capacity };
     }
 
+    /// Release all backing chunks to the parent allocator and reset state.
+    pub fn deinit(self: *Slab) void {
+        var chunk = self.chunk_list;
+        while (chunk) |c| {
+            const hdr: *ChunkHdr = @ptrCast(@alignCast(c));
+            const nc = hdr.next_chunk;
+            const sz = hdr.total_bytes;
+            self.backing.free(c[0..sz]);
+            chunk = nc;
+        }
+        self.chunk_list = null;
+        self.free_list = null;
+        self.live = 0;
+        self.capacity = 0;
+    }
+};
+
