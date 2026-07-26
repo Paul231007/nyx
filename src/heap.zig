@@ -62,3 +62,14 @@ fn heapAlloc(len: usize, alignment: usize) ?[*]u8 {
     if (!initialized) return null;
     const a = if (alignment == 0) 1 else alignment;
 
+    var it = head;
+    while (it) |b| : (it = b.next) {
+        if (!b.free) continue;
+        const ps = payloadStart(b);
+        const payload_end = ps + b.size;
+        // Reserve a usize back-pointer slot before the (aligned) user pointer.
+        const user = std.mem.alignForward(usize, ps + @sizeOf(usize), a);
+        const used_end = user + len;
+        if (used_end > payload_end) continue; // doesn't fit
+
+
