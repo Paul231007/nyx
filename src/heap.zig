@@ -62,4 +62,3 @@ fn heapAlloc(len: usize, alignment: usize) ?[*]u8 {
     if (!initialized) return null;
     const a = if (alignment == 0) 1 else alignment;
 
-
