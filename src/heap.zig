@@ -40,3 +40,15 @@ pub fn init() void {
         paging.map(virt, f, 0x3); // present + rw
     }
 
+    const b: *Block = @ptrFromInt(HEAP_BASE);
+    b.* = .{
+        .size = HEAP_SIZE - @sizeOf(Block),
+        .free = true,
+        .next = null,
+        .prev = null,
+    };
+    head = b;
+    initialized = true;
+}
+
+
