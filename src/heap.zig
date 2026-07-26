@@ -39,3 +39,4 @@ pub fn init() void {
         const f = pmm.allocFrame().?;
         paging.map(virt, f, 0x3); // present + rw
     }
+
