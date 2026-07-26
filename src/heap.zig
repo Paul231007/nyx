@@ -16,3 +16,8 @@ const std = @import("std");
 const pmm = @import("pmm.zig");
 const paging = @import("paging.zig");
 
+pub const HEAP_BASE: usize = 0xD0000000;
+pub const HEAP_SIZE: usize = 4 * 1024 * 1024; // 4 MiB = 1024 frames
+const PAGE_SIZE: usize = 4096;
+
+
