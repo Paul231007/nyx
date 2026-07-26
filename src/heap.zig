@@ -32,3 +32,10 @@ const MIN_PAYLOAD: usize = 16;
 var head: ?*Block = null;
 var initialized: bool = false;
 
+/// Map the whole heap window and seed it with one big free block.
+pub fn init() void {
+    var virt: usize = HEAP_BASE;
+    while (virt < HEAP_BASE + HEAP_SIZE) : (virt += PAGE_SIZE) {
+        const f = pmm.allocFrame().?;
+        paging.map(virt, f, 0x3); // present + rw
+    }
