@@ -96,3 +96,10 @@ fn heapAlloc(len: usize, alignment: usize) ?[*]u8 {
     return null;
 }
 
+fn heapFree(ptr: [*]u8) void {
+    const user = @intFromPtr(ptr);
+    const backptr: *usize = @ptrFromInt(user - @sizeOf(usize));
+    const b: *Block = @ptrFromInt(backptr.*);
+    b.free = true;
+
+
