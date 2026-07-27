@@ -150,3 +150,9 @@ fn resizeImpl(_: *anyopaque, memory: []u8, _: std.mem.Alignment, new_len: usize,
     return new_len <= memory.len;
 }
 
+fn remapImpl(_: *anyopaque, memory: []u8, _: std.mem.Alignment, new_len: usize, _: usize) ?[*]u8 {
+    // Signal "can't remap in place" for growth so the caller does alloc+copy+free.
+    if (new_len <= memory.len) return memory.ptr;
+    return null;
+}
+
