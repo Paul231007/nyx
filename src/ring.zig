@@ -41,3 +41,9 @@ pub fn Ring(comptime N: usize) type {
             return b;
         }
 
+        /// Number of bytes currently stored.
+        pub fn len(self: *const @This()) usize {
+            return self.count;
+        }
+
+
