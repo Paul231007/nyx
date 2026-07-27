@@ -32,4 +32,3 @@ pub fn Ring(comptime N: usize) type {
             return true;
         }
 
-
