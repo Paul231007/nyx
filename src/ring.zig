@@ -23,3 +23,13 @@ pub fn Ring(comptime N: usize) type {
         /// Number of bytes currently in the buffer.
         count: usize = 0,
 
+        /// Push `b` onto the tail.  Returns `false` if the buffer is full.
+        pub fn push(self: *@This(), b: u8) bool {
+            if (self.count == N) return false;
+            self.buf[self.tail] = b;
+            self.tail = (self.tail + 1) % N;
+            self.count += 1;
+            return true;
+        }
+
+
