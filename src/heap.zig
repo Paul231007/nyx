@@ -156,3 +156,6 @@ fn remapImpl(_: *anyopaque, memory: []u8, _: std.mem.Alignment, new_len: usize, 
     return null;
 }
 
+fn freeImpl(_: *anyopaque, memory: []u8, _: std.mem.Alignment, _: usize) void {
+    heapFree(memory.ptr);
+}
