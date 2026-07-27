@@ -145,3 +145,8 @@ fn allocImpl(_: *anyopaque, len: usize, alignment: std.mem.Alignment, _: usize) 
     return heapAlloc(len, alignment.toByteUnits());
 }
 
+fn resizeImpl(_: *anyopaque, memory: []u8, _: std.mem.Alignment, new_len: usize, _: usize) bool {
+    // Shrink-in-place is always safe; growth falls back to alloc+copy via remap.
+    return new_len <= memory.len;
+}
+
