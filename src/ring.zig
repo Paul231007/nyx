@@ -32,3 +32,13 @@ pub fn Ring(comptime N: usize) type {
             return true;
         }
 
+        /// Pop a byte from the head, or return null if the buffer is empty.
+        pub fn pop(self: *@This()) ?u8 {
+            if (self.count == 0) return null;
+            const b = self.buf[self.head];
+            self.head = (self.head + 1) % N;
+            self.count -= 1;
+            return b;
+        }
+
+
