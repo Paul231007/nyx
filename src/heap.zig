@@ -121,3 +121,11 @@ fn heapFree(ptr: [*]u8) void {
     }
 }
 
+// ---- thin C-ish wrappers ----
+pub fn kmalloc(n: usize) ?[*]u8 {
+    return heapAlloc(n, @alignOf(usize));
+}
+pub fn kfree(ptr: [*]u8) void {
+    heapFree(ptr);
+}
+
