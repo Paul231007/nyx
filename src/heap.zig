@@ -96,4 +96,3 @@ fn heapAlloc(len: usize, alignment: usize) ?[*]u8 {
     return null;
 }
 
-
