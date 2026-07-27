@@ -129,3 +129,8 @@ pub fn kfree(ptr: [*]u8) void {
     heapFree(ptr);
 }
 
+// ---- std.mem.Allocator interface ----
+pub fn allocator() std.mem.Allocator {
+    return .{ .ptr = undefined, .vtable = &vtable };
+}
+
