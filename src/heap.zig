@@ -141,3 +141,7 @@ const vtable = std.mem.Allocator.VTable{
     .free = freeImpl,
 };
 
+fn allocImpl(_: *anyopaque, len: usize, alignment: std.mem.Alignment, _: usize) ?[*]u8 {
+    return heapAlloc(len, alignment.toByteUnits());
+}
+
