@@ -134,3 +134,10 @@ pub fn allocator() std.mem.Allocator {
     return .{ .ptr = undefined, .vtable = &vtable };
 }
 
+const vtable = std.mem.Allocator.VTable{
+    .alloc = allocImpl,
+    .resize = resizeImpl,
+    .remap = remapImpl,
+    .free = freeImpl,
+};
+
