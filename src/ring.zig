@@ -23,4 +23,3 @@ pub fn Ring(comptime N: usize) type {
         /// Number of bytes currently in the buffer.
         count: usize = 0,
 
-
