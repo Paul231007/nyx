@@ -102,3 +102,22 @@ fn heapFree(ptr: [*]u8) void {
     const b: *Block = @ptrFromInt(backptr.*);
     b.free = true;
 
+    // Coalesce with the next block (always physically adjacent — the heap tiles
+    // the window with no gaps).
+    if (b.next) |n| {
+        if (n.free) {
+            b.size += @sizeOf(Block) + n.size;
+            b.next = n.next;
+            if (n.next) |nn| nn.prev = b;
+        }
+    }
+    // Coalesce with the previous block.
+    if (b.prev) |p| {
+        if (p.free) {
+            p.size += @sizeOf(Block) + b.size;
+            p.next = b.next;
+            if (b.next) |nn| nn.prev = p;
+        }
+    }
+}
+
