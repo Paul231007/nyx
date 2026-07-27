@@ -87,3 +87,13 @@ fn heapAlloc(len: usize, alignment: usize) ?[*]u8 {
             b.size = split - ps;
         }
 
+        b.free = false;
+        // Stash the owning header just before the user pointer.
+        const backptr: *usize = @ptrFromInt(user - @sizeOf(usize));
+        backptr.* = @intFromPtr(b);
+        return @ptrFromInt(user);
+    }
+    return null;
+}
+
+
