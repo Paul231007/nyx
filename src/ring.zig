@@ -46,3 +46,9 @@ pub fn Ring(comptime N: usize) type {
             return self.count;
         }
 
+        /// True when no bytes are stored.
+        pub fn isEmpty(self: *const @This()) bool {
+            return self.count == 0;
+        }
+
+
