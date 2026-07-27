@@ -102,4 +102,3 @@ fn heapFree(ptr: [*]u8) void {
     const b: *Block = @ptrFromInt(backptr.*);
     b.free = true;
 
-
