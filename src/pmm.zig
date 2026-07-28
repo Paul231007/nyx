@@ -17,4 +17,3 @@ var total_frames: usize = 0; // usable frames discovered from the mmap
 var used_frames: usize = 0; // currently used (incl. reserved kernel/etc.)
 var highest_frame: usize = 0; // highest frame index touched (for bounds)
 
-
