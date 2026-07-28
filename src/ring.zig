@@ -56,3 +56,11 @@ pub fn Ring(comptime N: usize) type {
             return self.count == N;
         }
 
+        /// Discard all contents and reset head/tail to 0.
+        pub fn clear(self: *@This()) void {
+            self.head = 0;
+            self.tail = 0;
+            self.count = 0;
+        }
+    };
+}
