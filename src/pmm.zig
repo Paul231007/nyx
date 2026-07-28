@@ -13,4 +13,3 @@ const BITMAP_BYTES: usize = MAX_FRAMES / 8; // 131072
 
 var bitmap: [BITMAP_BYTES]u8 = undefined;
 
-
