@@ -43,3 +43,10 @@ fn markUsed(idx: usize) void {
     }
 }
 
+fn markFree(idx: usize) void {
+    if (idx >= MAX_FRAMES) return;
+    if (bitGet(idx)) {
+        bitClear(idx);
+        if (used_frames > 0) used_frames -= 1;
+    }
+}
