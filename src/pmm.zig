@@ -25,3 +25,14 @@ const Entry = extern struct {
     type: u32,
 };
 
+inline fn bitSet(idx: usize) void {
+    bitmap[idx >> 3] |= (@as(u8, 1) << @intCast(idx & 7));
+}
+inline fn bitClear(idx: usize) void {
+    bitmap[idx >> 3] &= ~(@as(u8, 1) << @intCast(idx & 7));
+}
+inline fn bitGet(idx: usize) bool {
+    return (bitmap[idx >> 3] & (@as(u8, 1) << @intCast(idx & 7))) != 0;
+}
+
+
