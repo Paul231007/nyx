@@ -3,3 +3,6 @@
 
 const std = @import("std");
 
+pub const FRAME_SIZE: usize = 4096;
+
+
