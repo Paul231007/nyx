@@ -51,4 +51,8 @@ pub fn Ring(comptime N: usize) type {
             return self.count == 0;
         }
 
-/// True when the buffer cannot accept another byte. pub fn isFull(self: *const @This()) bool { return self.count == N; }
+        /// True when the buffer cannot accept another byte.
+        pub fn isFull(self: *const @This()) bool {
+            return self.count == N;
+        }
+
