@@ -35,3 +35,10 @@ inline fn bitGet(idx: usize) bool {
     return (bitmap[idx >> 3] & (@as(u8, 1) << @intCast(idx & 7))) != 0;
 }
 
+fn markUsed(idx: usize) void {
+    if (idx >= MAX_FRAMES) return;
+    if (!bitGet(idx)) {
+        bitSet(idx);
+        used_frames += 1;
+    }
+}
