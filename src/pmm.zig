@@ -51,3 +51,11 @@ fn markFree(idx: usize) void {
     }
 }
 
+/// Mark every frame overlapping [base, base+len) as used.
+fn reserveRange(base: usize, len: usize) void {
+    if (len == 0) return;
+    const first = base / FRAME_SIZE;
+    const last = (base + len - 1) / FRAME_SIZE; // inclusive
+    var i = first;
+    while (i <= last and i < MAX_FRAMES) : (i += 1) markUsed(i);
+}
