@@ -11,3 +11,6 @@ pub const FRAME_SIZE: usize = 4096;
 const MAX_FRAMES: usize = 1 << 20; // 1,048,576
 const BITMAP_BYTES: usize = MAX_FRAMES / 8; // 131072
 
+var bitmap: [BITMAP_BYTES]u8 = undefined;
+
+
