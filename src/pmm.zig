@@ -42,4 +42,3 @@ fn markUsed(idx: usize) void {
         used_frames += 1;
     }
 }
-
