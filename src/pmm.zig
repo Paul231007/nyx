@@ -25,4 +25,3 @@ const Entry = extern struct {
     type: u32,
 };
 
-
