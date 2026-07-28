@@ -60,3 +60,11 @@ fn reserveRange(base: usize, len: usize) void {
     while (i <= last and i < MAX_FRAMES) : (i += 1) markUsed(i);
 }
 
+pub fn init(mb_info: u32) void {
+    // (a) Everything used initially.
+    @memset(bitmap[0..], 0xFF);
+    total_frames = 0;
+    used_frames = MAX_FRAMES; // all bits set
+    highest_frame = 0;
+
+
