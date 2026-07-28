@@ -50,3 +50,4 @@ fn markFree(idx: usize) void {
         if (used_frames > 0) used_frames -= 1;
     }
 }
+
