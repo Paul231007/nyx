@@ -13,3 +13,8 @@ const BITMAP_BYTES: usize = MAX_FRAMES / 8; // 131072
 
 var bitmap: [BITMAP_BYTES]u8 = undefined;
 
+var total_frames: usize = 0; // usable frames discovered from the mmap
+var used_frames: usize = 0; // currently used (incl. reserved kernel/etc.)
+var highest_frame: usize = 0; // highest frame index touched (for bounds)
+
+
