@@ -17,3 +17,12 @@ var total_frames: usize = 0; // usable frames discovered from the mmap
 var used_frames: usize = 0; // currently used (incl. reserved kernel/etc.)
 var highest_frame: usize = 0; // highest frame index touched (for bounds)
 
+// Multiboot mmap entry. `size` does NOT count itself: stride is size + 4.
+const Entry = extern struct {
+    size: u32,
+    base_addr: u64,
+    length: u64,
+    type: u32,
+};
+
+
