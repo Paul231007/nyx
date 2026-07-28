@@ -10,3 +10,4 @@ pub const FRAME_SIZE: usize = 4096;
 // sets everything USED first, so the initial zeroing is irrelevant.
 const MAX_FRAMES: usize = 1 << 20; // 1,048,576
 const BITMAP_BYTES: usize = MAX_FRAMES / 8; // 131072
+
