@@ -59,3 +59,4 @@ fn reserveRange(base: usize, len: usize) void {
     var i = first;
     while (i <= last and i < MAX_FRAMES) : (i += 1) markUsed(i);
 }
+
