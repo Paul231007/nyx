@@ -35,4 +35,3 @@ inline fn bitGet(idx: usize) bool {
     return (bitmap[idx >> 3] & (@as(u8, 1) << @intCast(idx & 7))) != 0;
 }
 
-
