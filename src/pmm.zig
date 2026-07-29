@@ -84,3 +84,25 @@ pub fn init(mb_info: u32) void {
             const length = readU64(p + 12);
             const etype = readU32(p + 20);
 
+            if (etype == 1) {
+                // Clamp to the 32-bit addressable range.
+                const base_u: usize = if (base > 0xFFFF_FFFF) 0xFFFF_FFFF else @intCast(base);
+                const len_u: usize = if (length > 0xFFFF_FFFF) 0xFFFF_FFFF else @intCast(length);
+                // Frame-walk this region, marking free + counting usable frames.
+                const first = (base_u + FRAME_SIZE - 1) / FRAME_SIZE; // round up start
+                const last_addr = base_u +% len_u;
+                if (last_addr > base_u) {
+                    const last = last_addr / FRAME_SIZE; // exclusive
+                    var i = first;
+                    while (i < last and i < MAX_FRAMES) : (i += 1) {
+                        if (bitGet(i)) {
+                            bitClear(i);
+                            if (used_frames > 0) used_frames -= 1;
+                            total_frames += 1;
+                            if (i > highest_frame) highest_frame = i;
+                        }
+                    }
+                }
+            }
+
+
