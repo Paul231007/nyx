@@ -74,4 +74,3 @@ pub fn init(mb_info: u32) void {
         const mmap_length = readU32(mb_info + 44);
         const mmap_addr = readU32(mb_info + 48);
 
-
