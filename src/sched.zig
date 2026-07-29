@@ -11,3 +11,6 @@
 //! ring so the scheduler can round-robin back into kmain when every spawned task
 //! has finished.
 
+const std = @import("std");
+const heap = @import("heap.zig");
+
