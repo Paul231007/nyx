@@ -67,3 +67,5 @@ pub fn init(mb_info: u32) void {
     used_frames = MAX_FRAMES; // all bits set
     highest_frame = 0;
 
+    const flags = readU32(mb_info + 0);
+    const mmap_present = (flags & 0x40) != 0;
