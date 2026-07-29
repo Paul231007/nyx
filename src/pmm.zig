@@ -74,3 +74,14 @@ pub fn init(mb_info: u32) void {
         const mmap_length = readU32(mb_info + 44);
         const mmap_addr = readU32(mb_info + 48);
 
+        // (b) Free every available-RAM region.
+        var p: usize = mmap_addr;
+        const end: usize = mmap_addr + mmap_length;
+        while (p < end) {
+            const e: *const Entry = @ptrFromInt(p);
+            const esize = readU32(p + 0);
+            const base = readU64(p + 4);
+            const length = readU64(p + 12);
+            const etype = readU32(p + 20);
+
+
