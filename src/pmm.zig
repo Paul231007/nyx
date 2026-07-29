@@ -70,3 +70,8 @@ pub fn init(mb_info: u32) void {
     const flags = readU32(mb_info + 0);
     const mmap_present = (flags & 0x40) != 0;
 
+    if (mmap_present) {
+        const mmap_length = readU32(mb_info + 44);
+        const mmap_addr = readU32(mb_info + 48);
+
+
