@@ -84,4 +84,3 @@ pub fn init(mb_info: u32) void {
             const length = readU64(p + 12);
             const etype = readU32(p + 20);
 
-
