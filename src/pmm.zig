@@ -67,4 +67,3 @@ pub fn init(mb_info: u32) void {
     used_frames = MAX_FRAMES; // all bits set
     highest_frame = 0;
 
-
