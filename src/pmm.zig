@@ -105,3 +105,10 @@ pub fn init(mb_info: u32) void {
                 }
             }
 
+            // Stride: entry size field + the 4 bytes of the size field itself.
+            _ = e;
+            p += esize + 4;
+            if (esize == 0) break; // guard against a malformed zero-size entry
+        }
+
+
