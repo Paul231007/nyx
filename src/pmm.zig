@@ -120,3 +120,10 @@ pub fn init(mb_info: u32) void {
         const k_end = @intFromPtr(&kernel_end);
         reserveAndCount(k_start, k_end - k_start);
 
+        // Multiboot info struct (assume a generous 4 KiB cover).
+        reserveAndCount(mb_info, FRAME_SIZE);
+        // The mmap buffer itself.
+        reserveAndCount(mmap_addr, mmap_length);
+    }
+}
+
