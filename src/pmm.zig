@@ -115,3 +115,8 @@ pub fn init(mb_info: u32) void {
         // First 1 MiB (BIOS/IVT/VGA/low memory).
         reserveAndCount(0, 0x100000);
 
+        // Kernel image.
+        const k_start = @intFromPtr(&kernel_start);
+        const k_end = @intFromPtr(&kernel_end);
+        reserveAndCount(k_start, k_end - k_start);
+
