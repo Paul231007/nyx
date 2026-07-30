@@ -14,3 +14,13 @@
 const std = @import("std");
 const heap = @import("heap.zig");
 
+pub const Task = struct {
+    esp: u32,
+    stack: []u8,
+    id: u32,
+    done: bool,
+    next: ?*Task,
+    fn_ptr: *const fn () void,
+};
+
+
