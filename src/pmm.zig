@@ -147,3 +147,17 @@ fn reserveAndCount(base: usize, len: usize) void {
 extern const kernel_start: u8;
 extern const kernel_end: u8;
 
+pub fn allocFrame() ?usize {
+    var i: usize = 0;
+    // Only scan up to the highest usable frame we saw.
+    const limit = highest_frame + 1;
+    while (i < limit) : (i += 1) {
+        if (!bitGet(i)) {
+            bitSet(i);
+            used_frames += 1;
+            return i * FRAME_SIZE;
+        }
+    }
+    return null;
+}
+
