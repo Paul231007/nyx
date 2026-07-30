@@ -127,3 +127,20 @@ pub fn init(mb_info: u32) void {
     }
 }
 
+/// Reserve a range, decrementing total_frames for each usable frame we steal
+/// back so `free = total - used` stays consistent.
+fn reserveAndCount(base: usize, len: usize) void {
+    if (len == 0) return;
+    const first = base / FRAME_SIZE;
+    const last = (base + len - 1) / FRAME_SIZE; // inclusive
+    var i = first;
+    while (i <= last and i < MAX_FRAMES) : (i += 1) {
+        if (!bitGet(i)) {
+            // It was free & counted as usable; now reserved.
+            bitSet(i);
+            used_frames += 1;
+            if (total_frames > 0) total_frames -= 1;
+        }
+    }
+}
+
