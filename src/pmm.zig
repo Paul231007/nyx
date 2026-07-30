@@ -144,3 +144,6 @@ fn reserveAndCount(base: usize, len: usize) void {
     }
 }
 
+extern const kernel_start: u8;
+extern const kernel_end: u8;
+
