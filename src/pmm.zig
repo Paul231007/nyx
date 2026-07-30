@@ -169,3 +169,5 @@ pub fn freeFrame(addr: usize) void {
     if (used_frames > 0) used_frames -= 1;
 }
 
+pub const Stats = struct { total: usize, used: usize, free: usize };
+
