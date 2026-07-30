@@ -161,3 +161,11 @@ pub fn allocFrame() ?usize {
     return null;
 }
 
+pub fn freeFrame(addr: usize) void {
+    const idx = addr / FRAME_SIZE;
+    if (idx >= MAX_FRAMES) return; // out of range
+    if (!bitGet(idx)) return; // double-free guard: already free
+    bitClear(idx);
+    if (used_frames > 0) used_frames -= 1;
+}
+
