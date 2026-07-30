@@ -111,3 +111,7 @@ pub fn init(mb_info: u32) void {
             if (esize == 0) break; // guard against a malformed zero-size entry
         }
 
+        // (c) Re-reserve regions the kernel must not hand out.
+        // First 1 MiB (BIOS/IVT/VGA/low memory).
+        reserveAndCount(0, 0x100000);
+
