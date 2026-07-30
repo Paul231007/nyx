@@ -23,3 +23,4 @@ pub const Task = struct {
     fn_ptr: *const fn () void,
 };
 
+const STACK_SIZE: usize = 16 * 1024;
