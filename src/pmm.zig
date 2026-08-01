@@ -171,3 +171,10 @@ pub fn freeFrame(addr: usize) void {
 
 pub const Stats = struct { total: usize, used: usize, free: usize };
 
+pub fn stats() Stats {
+    // `used` counted here is only meaningful relative to usable frames.
+    // free = usable frames currently unallocated.
+    const used_of_total = total_frames - freeUsable();
+    return .{ .total = total_frames, .used = used_of_total, .free = freeUsable() };
+}
+
