@@ -12,3 +12,12 @@ var buf: [256]u8 = undefined;
 var head: usize = 0; // producer index (IRQ side)
 var tail: usize = 0; // consumer index (reader side)
 
+/// Push a byte into the ring. Drops the byte if the buffer is full.
+pub fn push(c: u8) void {
+    const next = (head + 1) % buf.len;
+    if (next == tail) return; // full: drop
+    buf[head] = c; // write slot first
+    head = next; // then publish
+}
+
+
