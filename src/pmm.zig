@@ -189,3 +189,12 @@ fn freeUsable() usize {
     return count;
 }
 
+// ---- unaligned little-endian readers over identity-mapped physical memory ----
+fn readU32(addr: usize) u32 {
+    const p: [*]const u8 = @ptrFromInt(addr);
+    return std.mem.readInt(u32, p[0..4], .little);
+}
+fn readU64(addr: usize) u64 {
+    const p: [*]const u8 = @ptrFromInt(addr);
+    return std.mem.readInt(u64, p[0..8], .little);
+}
