@@ -20,3 +20,12 @@ pub fn push(c: u8) void {
     head = next; // then publish
 }
 
+/// Pop a byte, or null if empty.
+pub fn pop() ?u8 {
+    if (tail == head) return null;
+    const c = buf[tail];
+    tail = (tail + 1) % buf.len;
+    return c;
+}
+
+
