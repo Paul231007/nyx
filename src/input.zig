@@ -5,4 +5,3 @@
 //! Single core: the IRQ writes the slot before advancing `head`, so a reader
 //! that only touches `tail` sees a consistent buffer without locking.
 
-
