@@ -40,3 +40,9 @@ const SC_PGDN: u8 = 0x51;
 const SC_INS: u8 = 0x52;
 const SC_DEL: u8 = 0x53;
 
+var shift: bool = false;
+var caps: bool = false;
+var ctrl: bool = false;
+var alt: bool = false;
+var expect_extended: bool = false;
+
