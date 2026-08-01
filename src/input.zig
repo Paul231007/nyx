@@ -8,3 +8,8 @@
 const console = @import("console.zig");
 const serial = @import("serial.zig");
 
+var buf: [256]u8 = undefined;
+var head: usize = 0; // producer index (IRQ side)
+var tail: usize = 0; // consumer index (reader side)
+
+
