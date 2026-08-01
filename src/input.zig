@@ -28,4 +28,3 @@ pub fn pop() ?u8 {
     return c;
 }
 
-
