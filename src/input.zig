@@ -41,4 +41,3 @@ pub fn getchar() u8 {
     }
 }
 
-
