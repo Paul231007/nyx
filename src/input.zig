@@ -20,4 +20,3 @@ pub fn push(c: u8) void {
     head = next; // then publish
 }
 
-
