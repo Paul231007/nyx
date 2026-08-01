@@ -41,3 +41,29 @@ pub fn getchar() u8 {
     }
 }
 
+/// Read a line into `dst`, echoing each char to the console. Handles backspace
+/// (erases last char + emits "\b \b"). Stops on '\n' (also echoed). Returns the
+/// number of bytes stored (never overflows `dst`).
+pub fn readLine(dst: []u8) usize {
+    var len: usize = 0;
+    while (true) {
+        const c = getchar();
+        if (c == '\n') {
+            console.putc('\n');
+            return len;
+        }
+        if (c == 0x08 or c == 0x7F) { // backspace / DEL
+            if (len > 0) {
+                len -= 1;
+                console.write("\x08 \x08");
+            }
+            continue;
+        }
+        if (len < dst.len) {
+            dst[len] = c;
+            len += 1;
+            console.putc(c);
+        }
+    }
+}
+
