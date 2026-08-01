@@ -58,3 +58,8 @@ pub fn clearMask(irq: u8) void {
     io.outb(port, value);
 }
 
+/// Acknowledge the interrupt. For slave IRQs the slave PIC must be told too.
+pub fn sendEOI(irq: u8) void {
+    if (irq >= 8) io.outb(SLAVE_CMD, EOI);
+    io.outb(MASTER_CMD, EOI);
+}
