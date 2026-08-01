@@ -178,3 +178,14 @@ pub fn stats() Stats {
     return .{ .total = total_frames, .used = used_of_total, .free = freeUsable() };
 }
 
+/// Count of currently-free frames within the usable window.
+fn freeUsable() usize {
+    var count: usize = 0;
+    var i: usize = 0;
+    const limit = highest_frame + 1;
+    while (i < limit) : (i += 1) {
+        if (!bitGet(i)) count += 1;
+    }
+    return count;
+}
+
