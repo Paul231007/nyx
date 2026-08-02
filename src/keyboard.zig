@@ -81,3 +81,12 @@ const map_shift = [_]u8{
 pub fn handleIrq() void {
     const sc = io.inb(DATA_PORT);
 
+    if (sc == SC_EXTENDED) {
+        expect_extended = true;
+        return;
+    }
+    if (expect_extended) {
+        // Skip the byte following an 0xE0 prefix.
+        expect_extended = false;
+        return;
+    }
