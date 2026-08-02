@@ -78,3 +78,7 @@ const map_shift = [_]u8{
     0, // 0x58
 };
 
+pub fn handleIrq() void {
+    const sc = io.inb(DATA_PORT);
+
+
