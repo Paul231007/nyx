@@ -106,4 +106,3 @@ pub fn handleIrq() void {
     if (sc == SC_LALT) { alt = true; return; }
     if (sc == SC_CAPSLOCK) { caps = !caps; return; } // toggle on press
 
-
