@@ -100,4 +100,3 @@ pub fn handleIrq() void {
         return;
     }
 
-
