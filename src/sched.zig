@@ -30,3 +30,8 @@ var current: ?*Task = null;
 var next_id: u32 = 0;
 var preempt: bool = false;
 
+/// x86 cdecl callee-saved context switch. After `push ebp/ebx/esi/edi` (16 bytes)
+/// plus the return address (4 bytes), arg1 sits at 20(%esp), arg2 at 24(%esp).
+extern fn switchContext(old_esp_ptr: *u32, new_esp: u32) void;
+
+
