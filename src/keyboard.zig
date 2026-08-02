@@ -168,4 +168,3 @@ pub fn name(sc: u8) []const u8 {
 /// Return true when the Ctrl modifier is currently held.
 pub fn isCtrl() bool { return ctrl; }
 
-
