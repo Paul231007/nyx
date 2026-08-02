@@ -25,3 +25,9 @@ pub const Task = struct {
 
 const STACK_SIZE: usize = 16 * 1024;
 
+var bootstrap: *Task = undefined;
+var current: ?*Task = null;
+var next_id: u32 = 0;
+var preempt: bool = false;
+
+
