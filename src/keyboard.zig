@@ -112,3 +112,22 @@ pub fn handleIrq() void {
     }
 }
 
+/// Translate a raw make scancode to an ASCII character.
+/// `s` = shift held, `c` = CapsLock active.
+/// Returns 0 for non-printable or unknown scancodes.
+pub fn translate(sc: u8, s: bool, c: bool) u8 {
+    if (sc >= map.len) return 0;
+    const base = map[sc];
+    const shifted = map_shift[sc];
+    // For letter keys: CapsLock flips the case; shift can further invert it.
+    // For non-letter keys: CapsLock has no effect; only shift applies.
+    const is_letter = (base >= 'a' and base <= 'z');
+    if (is_letter) {
+        // caps XOR shift determines the final case
+        const upper_wanted = c != s; // XOR
+        return if (upper_wanted) shifted else base;
+    }
+    return if (s) shifted else base;
+}
+
+
