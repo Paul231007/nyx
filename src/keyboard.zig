@@ -130,4 +130,3 @@ pub fn translate(sc: u8, s: bool, c: bool) u8 {
     return if (s) shifted else base;
 }
 
-
