@@ -130,3 +130,39 @@ pub fn translate(sc: u8, s: bool, c: bool) u8 {
     return if (s) shifted else base;
 }
 
+/// Return a printable name for special (non-ASCII-producing) scancodes.
+/// For ordinary printable scancodes, returns "".
+pub fn name(sc: u8) []const u8 {
+    return switch (sc) {
+        SC_F1      => "F1",
+        SC_F2      => "F2",
+        SC_F3      => "F3",
+        SC_F4      => "F4",
+        SC_F5      => "F5",
+        SC_F6      => "F6",
+        SC_F7      => "F7",
+        SC_F8      => "F8",
+        SC_F9      => "F9",
+        SC_F10     => "F10",
+        SC_F11     => "F11",
+        SC_F12     => "F12",
+        SC_HOME    => "Home",
+        SC_UP      => "Up",
+        SC_PGUP    => "PgUp",
+        SC_LEFT    => "Left",
+        SC_RIGHT   => "Right",
+        SC_END     => "End",
+        SC_DOWN    => "Down",
+        SC_PGDN    => "PgDn",
+        SC_INS     => "Ins",
+        SC_DEL     => "Del",
+        SC_LSHIFT  => "LShift",
+        SC_RSHIFT  => "RShift",
+        SC_LCTRL   => "LCtrl",
+        SC_LALT    => "LAlt",
+        SC_CAPSLOCK => "CapsLock",
+        else       => "",
+    };
+}
+
+
