@@ -34,3 +34,4 @@ var preempt: bool = false;
 /// plus the return address (4 bytes), arg1 sits at 20(%esp), arg2 at 24(%esp).
 extern fn switchContext(old_esp_ptr: *u32, new_esp: u32) void;
 
+comptime { asm ( \\.global switchContext \\switchContext: \\ push %ebp \\ push %ebx \\ push %esi \\ puh %edi \\ mov 20(%esp), %eax \\ mov %esp, (%eax) \\ mov 24(%esp), %esp \\ pop %edi \\ pop %esi \\ pop %ebx \\ pop %ebp \\ ret ); }
