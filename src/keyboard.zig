@@ -111,3 +111,4 @@ pub fn handleIrq() void {
         if (ch != 0) input.push(ch);
     }
 }
+
