@@ -165,4 +165,3 @@ pub fn name(sc: u8) []const u8 {
     };
 }
 
-
