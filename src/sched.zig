@@ -53,3 +53,17 @@ comptime {
     );
 }
 
+/// First thing a freshly spawned task runs (entered via switchContext's `ret`).
+/// `current` already points at this task. Run the entry fn, then mark done and
+/// yield forever so we never return off the end of the stack.
+fn taskTrampoline() callconv(.c) void {
+    // New tasks must run with interrupts enabled so timer preemption (if on)
+    // can fire; cooperative-only tasks are unaffected by an extra sti.
+    asm volatile ("sti");
+    const t = current.?;
+    t.fn_ptr();
+    t.done = true;
+    while (true) yield();
+}
+
+
