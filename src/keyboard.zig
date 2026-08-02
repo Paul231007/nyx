@@ -106,3 +106,8 @@ pub fn handleIrq() void {
     if (sc == SC_LALT) { alt = true; return; }
     if (sc == SC_CAPSLOCK) { caps = !caps; return; } // toggle on press
 
+    if (sc < map.len) {
+        const ch = translate(sc, shift, caps);
+        if (ch != 0) input.push(ch);
+    }
+}
