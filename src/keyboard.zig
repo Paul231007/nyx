@@ -78,4 +78,3 @@ const map_shift = [_]u8{
     0, // 0x58
 };
 
-
