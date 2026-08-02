@@ -100,3 +100,10 @@ pub fn handleIrq() void {
         return;
     }
 
+    // Make code — update modifiers.
+    if (sc == SC_LSHIFT or sc == SC_RSHIFT) { shift = true; return; }
+    if (sc == SC_LCTRL) { ctrl = true; return; }
+    if (sc == SC_LALT) { alt = true; return; }
+    if (sc == SC_CAPSLOCK) { caps = !caps; return; } // toggle on press
+
+
