@@ -91,3 +91,13 @@ pub fn handleIrq() void {
         return;
     }
 
+    if (sc & 0x80 != 0) {
+        // Break code — update modifier state on release.
+        const make = sc & 0x7F;
+        if (make == SC_LSHIFT or make == SC_RSHIFT) shift = false;
+        if (make == SC_LCTRL) ctrl = false;
+        if (make == SC_LALT) alt = false;
+        return;
+    }
+
+
