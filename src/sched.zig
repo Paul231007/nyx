@@ -34,4 +34,3 @@ var preempt: bool = false;
 /// plus the return address (4 bytes), arg1 sits at 20(%esp), arg2 at 24(%esp).
 extern fn switchContext(old_esp_ptr: *u32, new_esp: u32) void;
 
-
