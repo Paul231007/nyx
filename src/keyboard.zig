@@ -173,4 +173,3 @@ pub fn isAlt() bool { return alt; }
 
 /// Return true when CapsLock is active.
 pub fn isCaps() bool { return caps; }
-
