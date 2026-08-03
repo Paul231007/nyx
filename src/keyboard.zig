@@ -171,3 +171,6 @@ pub fn isCtrl() bool { return ctrl; }
 /// Return true when the Alt modifier is currently held.
 pub fn isAlt() bool { return alt; }
 
+/// Return true when CapsLock is active.
+pub fn isCaps() bool { return caps; }
+
