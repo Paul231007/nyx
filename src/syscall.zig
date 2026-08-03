@@ -7,3 +7,12 @@ const console = @import("console.zig");
 const timer = @import("timer.zig");
 const vfs = @import("vfs.zig");
 
+pub const Nr = enum(u32) {
+    write = 1,
+    read = 2,
+    open = 3,
+    close = 4,
+    getpid = 5,
+    uptime = 6,
+};
+
