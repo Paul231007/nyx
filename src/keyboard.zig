@@ -171,4 +171,3 @@ pub fn isCtrl() bool { return ctrl; }
 /// Return true when the Alt modifier is currently held.
 pub fn isAlt() bool { return alt; }
 
-
