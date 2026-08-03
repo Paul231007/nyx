@@ -16,4 +16,3 @@ pub const Nr = enum(u32) {
     uptime = 6,
 };
 
-
