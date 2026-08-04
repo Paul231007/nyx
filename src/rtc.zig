@@ -37,3 +37,6 @@ pub fn read() Time {
     const raw_month = cmosRead(0x08);
     const raw_year = cmosRead(0x09);
 
+    const regb = cmosRead(0x0B);
+    const is_bcd = (regb & 0x04) == 0;
+
