@@ -45,4 +45,14 @@ pub fn dispatch(nr: u32, a: usize, b: usize, c: usize) usize {
     };
 }
 
-/// User-side: upt nr→eax, a→ebx, b→ecx, c→edx, fire int 0x80, return eax. pub fn invoke(nr: Nr, a: usize, b: usize, c: usize) usize { return asm volatile ("int $0x80" : [ret] "={eax}" (-> usize), : [nr] "{eax}" (@intFromEnum(nr)), [aa] "{ebx}" (a), [bb] "{ecx}" (b), [cc] "{edx}" (c), : .{ .memory = true } ); }
+/// User-side: put nr→eax, a→ebx, b→ecx, c→edx, fire int 0x80, return eax.
+pub fn invoke(nr: Nr, a: usize, b: usize, c: usize) usize {
+    return asm volatile ("int $0x80"
+        : [ret] "={eax}" (-> usize),
+        : [nr] "{eax}" (@intFromEnum(nr)),
+          [aa] "{ebx}" (a),
+          [bb] "{ecx}" (b),
+          [cc] "{edx}" (c),
+        : .{ .memory = true }
+    );
+}
