@@ -40,3 +40,21 @@ pub fn read() Time {
     const regb = cmosRead(0x0B);
     const is_bcd = (regb & 0x04) == 0;
 
+    var t: Time = undefined;
+    if (is_bcd) {
+        t.sec = fromBcd(raw_sec);
+        t.min = fromBcd(raw_min);
+        t.hour = fromBcd(raw_hour);
+        t.day = fromBcd(raw_day);
+        t.month = fromBcd(raw_month);
+        t.year = @as(u16, fromBcd(raw_year)) + 2000;
+    } else {
+        t.sec = raw_sec;
+        t.min = raw_min;
+        t.hour = raw_hour;
+        t.day = raw_day;
+        t.month = raw_month;
+        t.year = @as(u16, raw_year) + 2000;
+    }
+    return t;
+}
