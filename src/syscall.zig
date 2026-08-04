@@ -45,4 +45,3 @@ pub fn dispatch(nr: u32, a: usize, b: usize, c: usize) usize {
     };
 }
 
-
