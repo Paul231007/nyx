@@ -18,3 +18,9 @@ inline fn cmosRead(reg: u8) u8 {
     return io.inb(0x71);
 }
 
+/// Convert a BCD byte to binary.
+inline fn fromBcd(v: u8) u8 {
+    return (v >> 4) * 10 + (v & 0x0F);
+}
+
+
