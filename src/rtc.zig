@@ -2,4 +2,13 @@
 
 const io = @import("io.zig");
 
-/// Calendar date and time as read ffrom the CMOS RTC. pub const Time = struct { year: u16, month: u8, day: u8, hour: u8, min: u8, sec: u8, };
+/// Calendar date and time as read from the CMOS RTC.
+pub const Time = struct {
+    year: u16,
+    month: u8,
+    day: u8,
+    hour: u8,
+    min: u8,
+    sec: u8,
+};
+
