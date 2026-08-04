@@ -12,3 +12,10 @@ pub const Time = struct {
     sec: u8,
 };
 
+/// Read a single CMOS register.
+inline fn cmosRead(reg: u8) u8 {
+    io.outb(0x70, reg);
+    return io.inb(0x71);
+}
+
+
