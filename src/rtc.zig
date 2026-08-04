@@ -23,3 +23,10 @@ inline fn fromBcd(v: u8) u8 {
     return (v >> 4) * 10 + (v & 0x0F);
 }
 
+/// Read the current time from the CMOS RTC.
+/// Waits for any in-progress update to complete before sampling.
+pub fn read() Time {
+    // Wait for the Update-In-Progress flag (status register A, bit 7) to clear.
+    var guard: u32 = 0;
+    while ((cmosRead(0x0A) & 0x80) != 0 and guard < 1_000_000) : (guard += 1) {}
+
