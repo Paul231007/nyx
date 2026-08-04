@@ -30,3 +30,10 @@ pub fn read() Time {
     var guard: u32 = 0;
     while ((cmosRead(0x0A) & 0x80) != 0 and guard < 1_000_000) : (guard += 1) {}
 
+    const raw_sec = cmosRead(0x00);
+    const raw_min = cmosRead(0x02);
+    const raw_hour = cmosRead(0x04);
+    const raw_day = cmosRead(0x07);
+    const raw_month = cmosRead(0x08);
+    const raw_year = cmosRead(0x09);
+
