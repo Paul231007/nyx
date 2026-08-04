@@ -18,4 +18,3 @@ inline fn cmosRead(reg: u8) u8 {
     return io.inb(0x71);
 }
 
-
