@@ -33,3 +33,19 @@ pub fn vendor() VendorString {
     return result;
 }
 
+/// Return the highest CPUID leaf supported by this CPU (EAX from leaf 0).
+pub fn maxLeaf() u32 {
+    var eax_out: u32 = undefined;
+    var ebx_out: u32 = undefined;
+    var ecx_out: u32 = undefined;
+    var edx_out: u32 = undefined;
+    asm volatile ("cpuid"
+        : [eax] "={eax}" (eax_out),
+          [ebx] "={ebx}" (ebx_out),
+          [ecx] "={ecx}" (ecx_out),
+          [edx] "={edx}" (edx_out)
+        : [leaf] "{eax}" (@as(u32, 0)),
+    );
+    return eax_out;
+}
+
