@@ -69,4 +69,3 @@ pub fn hasFeature(bit: u5) bool {
 pub fn brandStub() []const u8 {
     return "x86 CPU";
 }
-
