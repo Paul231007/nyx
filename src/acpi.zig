@@ -9,3 +9,12 @@ pub const Rsdp = struct {
     rsdt_addr: u32,
 };
 
+fn checkSignature(ptr: [*]const u8) bool {
+    const sig = "RSD PTR ";
+    var ii: usize = 0;
+    while (ii < 8) : (ii += 1) {
+        if (ptr[ii] != sig[ii]) return false;
+    }
+    return true;
+}
+
