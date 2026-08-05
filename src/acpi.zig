@@ -18,3 +18,12 @@ fn checkSignature(ptr: [*]const u8) bool {
     return true;
 }
 
+fn checksum20(ptr: [*]const u8) bool {
+    var sum: u8 = 0;
+    var ii: usize = 0;
+    while (ii < 20) : (ii += 1) {
+        sum +%= ptr[ii];
+    }
+    return sum == 0;
+}
+
