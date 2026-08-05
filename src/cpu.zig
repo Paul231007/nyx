@@ -33,4 +33,3 @@ pub fn vendor() VendorString {
     return result;
 }
 
-
