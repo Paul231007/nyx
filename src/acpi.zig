@@ -27,3 +27,23 @@ fn checksum20(ptr: [*]const u8) bool {
     return sum == 0;
 }
 
+fn parseRsdp(ptr: [*]const u8) Rsdp {
+    var oem: [6]u8 = undefined;
+    var ii: usize = 0;
+    while (ii < 6) : (ii += 1) {
+        oem[ii] = ptr[9 + ii];
+    }
+    const revision = ptr[15];
+    const rsdt_addr: u32 =
+        @as(u32, ptr[16]) |
+        (@as(u32, ptr[17]) << 8) |
+        (@as(u32, ptr[18]) << 16) |
+        (@as(u32, ptr[19]) << 24);
+    return Rsdp{
+        .found     = true,
+        .oem       = oem,
+        .revision  = revision,
+        .rsdt_addr = rsdt_addr,
+    };
+}
+
