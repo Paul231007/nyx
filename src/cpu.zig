@@ -49,3 +49,21 @@ pub fn maxLeaf() u32 {
     return eax_out;
 }
 
+/// Check a feature bit from CPUID leaf 1 EDX (e.g. bit 0 = FPU, bit 25 = SSE).
+pub fn hasFeature(bit: u5) bool {
+    // Use a single scratch variable for the three registers we don't need;
+    // each output simply overwrites it in sequence, and the final value of
+    // `edx_out` is the one we inspect.
+    var scratch: u32 = undefined;
+    var edx_out: u32 = undefined;
+    asm volatile ("cpuid"
+        : [eax] "={eax}" (scratch),
+          [ebx] "={ebx}" (scratch),
+          [ecx] "={ecx}" (scratch),
+          [edx] "={edx}" (edx_out)
+        : [leaf] "{eax}" (@as(u32, 1)),
+    );
+    return (edx_out >> @as(u5, bit)) & 1 == 1;
+}
+
+
