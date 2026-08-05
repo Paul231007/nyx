@@ -9,4 +9,3 @@ pub const Rsdp = struct {
     rsdt_addr: u32,
 };
 
-
