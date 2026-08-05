@@ -3,4 +3,3 @@
 
 pub const VendorString = [12]u8;
 
-
