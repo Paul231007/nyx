@@ -66,3 +66,7 @@ pub fn hasFeature(bit: u5) bool {
     return (edx_out >> @as(u5, bit)) & 1 == 1;
 }
 
+pub fn brandStub() []const u8 {
+    return "x86 CPU";
+}
+
