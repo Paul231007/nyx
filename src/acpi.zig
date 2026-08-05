@@ -27,3 +27,4 @@ fn checksum20(ptr: [*]const u8) bool {
     return sum == 0;
 }
 
+
