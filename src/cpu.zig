@@ -66,4 +66,3 @@ pub fn hasFeature(bit: u5) bool {
     return (edx_out >> @as(u5, bit)) & 1 == 1;
 }
 
-
