@@ -18,4 +18,3 @@ fn checkSignature(ptr: [*]const u8) bool {
     return true;
 }
 
-
