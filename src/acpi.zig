@@ -47,4 +47,3 @@ fn parseRsdp(ptr: [*]const u8) Rsdp {
     };
 }
 
-
