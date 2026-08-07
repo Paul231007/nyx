@@ -50,4 +50,3 @@ fn pollReady() bool {
     return false;
 }
 
-
