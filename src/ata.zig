@@ -5,3 +5,4 @@ const io = @import("io.zig");
 pub const SECTOR: usize = 512;
 
 const BASE: u16 = 0x1F0;
+
