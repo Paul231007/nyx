@@ -40,3 +40,4 @@ fn libk_parse() bool {
     if (hex != 0xCAFE) return false;
     return libk.streq("ab", "ab");
 }
+
