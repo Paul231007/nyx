@@ -30,3 +30,4 @@ pub const Case = struct { name: []const u8, run: *const fn () bool };
 /// Aggregate result returned by `runAll`.
 pub const Result = struct { passed: u32, failed: u32 };
 
+// ---- test cases ---------------------------------------------------------------
