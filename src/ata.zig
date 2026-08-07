@@ -25,4 +25,3 @@ pub const Info = struct {
     model: [40]u8,
 };
 
-
