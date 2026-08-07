@@ -2,3 +2,6 @@
 
 const io = @import("io.zig");
 
+pub const SECTOR: usize = 512;
+
+
