@@ -38,3 +38,16 @@ fn pollDRQ() bool {
     return false;
 }
 
+/// Poll: wait while BSY set. Returns false on timeout or drive error.
+fn pollReady() bool {
+    var tries: u32 = 0;
+    while (tries < 200_000) : (tries += 1) {
+        const st = io.inb(BASE + REG_CMD);
+        if (st == 0x00 or st == 0xFF) return false;
+        if (st & STATUS_ERR != 0) return false;
+        if (st & STATUS_BSY == 0) return true;
+    }
+    return false;
+}
+
+
