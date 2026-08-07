@@ -20,4 +20,3 @@ const STATUS_BSY: u8 = 0x80;
 const STATUS_DRQ: u8 = 0x08;
 const STATUS_ERR: u8 = 0x01;
 
-
