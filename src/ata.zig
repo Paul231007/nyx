@@ -64,4 +64,3 @@ pub fn identify() ?Info {
     // Send IDENTIFY command
     io.outb(BASE + REG_CMD, 0xEC);
 
-
