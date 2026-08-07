@@ -50,3 +50,18 @@ fn pollReady() bool {
     return false;
 }
 
+/// Send IDENTIFY (0xEC) to master; poll BSY/DRQ; read 256 words.
+/// Sectors from words 60-61; model from words 27-46 (byte-swapped).
+/// Returns null if no drive (status 0 or 0xFF).
+pub fn identify() ?Info {
+    // Select master drive, LBA mode, no drive bit in address
+    io.outb(BASE + REG_DRIVE, 0xA0);
+    // Zero out LBA/count registers
+    io.outb(BASE + REG_COUNT, 0);
+    io.outb(BASE + REG_LBA_LO, 0);
+    io.outb(BASE + REG_LBA_MID, 0);
+    io.outb(BASE + REG_LBA_HI, 0);
+    // Send IDENTIFY command
+    io.outb(BASE + REG_CMD, 0xEC);
+
+
