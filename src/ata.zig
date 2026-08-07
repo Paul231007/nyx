@@ -25,3 +25,17 @@ pub const Info = struct {
     model: [40]u8,
 };
 
+/// Poll: wait while BSY set, then until DRQ set. Returns false if missing or error.
+fn pollDRQ() bool {
+    var tries: u32 = 0;
+    while (tries < 200_000) : (tries += 1) {
+        const st = io.inb(BASE + REG_CMD);
+        if (st == 0x00 or st == 0xFF) return false;
+        if (st & STATUS_ERR != 0) return false;
+        if (st & STATUS_BSY != 0) continue;
+        if (st & STATUS_DRQ != 0) return true;
+    }
+    return false;
+}
+
+
