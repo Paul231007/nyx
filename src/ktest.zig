@@ -41,3 +41,17 @@ fn libk_parse() bool {
     return libk.streq("ab", "ab");
 }
 
+/// 2. pmm_roundtrip — alloc one frame and verify alignment; free restores count.
+fn pmm_roundtrip() bool {
+    const before = pmm.stats().free;
+    const frame = pmm.allocFrame() orelse return false;
+    // Page-aligned sanity check.
+    if (frame & 0xFFF != 0) {
+        pmm.freeFrame(frame);
+        return false;
+    }
+    pmm.freeFrame(frame);
+    return pmm.stats().free == before;
+}
+
+
