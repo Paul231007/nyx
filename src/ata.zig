@@ -64,3 +64,8 @@ pub fn identify() ?Info {
     // Send IDENTIFY command
     io.outb(BASE + REG_CMD, 0xEC);
 
+    // Check immediately if a drive exists
+    const st0 = io.inb(BASE + REG_CMD);
+    if (st0 == 0x00 or st0 == 0xFF) return null;
+
+
