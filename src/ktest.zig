@@ -32,3 +32,11 @@ pub const Result = struct { passed: u32, failed: u32 };
 
 // ---- test cases ---------------------------------------------------------------
 
+/// 1. libk_parse — exercises parseUint, parseHex, and streq.
+fn libk_parse() bool {
+    const dec = libk.parseUint("255", 10) orelse return false;
+    if (dec != 255) return false;
+    const hex = libk.parseHex("0xCAFE") orelse return false;
+    if (hex != 0xCAFE) return false;
+    return libk.streq("ab", "ab");
+}
