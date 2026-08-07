@@ -16,4 +16,3 @@ const REG_LBA_HI: u16  = 5;
 const REG_DRIVE: u16   = 6; // drive/head select
 const REG_CMD: u16     = 7; // command (write) / status (read)
 
-
