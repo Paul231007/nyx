@@ -54,4 +54,3 @@ fn pmm_roundtrip() bool {
     return pmm.stats().free == before;
 }
 
-
