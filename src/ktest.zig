@@ -65,3 +65,4 @@ fn heap_alloc() bool {
     }
     return true;
 }
+
