@@ -54,3 +54,14 @@ fn pmm_roundtrip() bool {
     return pmm.stats().free == before;
 }
 
+/// 3. heap_alloc — write and verify a pattern through the kernel heap allocator.
+fn heap_alloc() bool {
+    const alloc = heap.allocator();
+    const buf = alloc.alloc(u8, 64) catch return false;
+    defer alloc.free(buf);
+    for (buf, 0..) |*byte, idx| byte.* = @truncate(idx ^ 0xA5);
+    for (buf, 0..) |byte, idx| {
+        if (byte != @as(u8, @truncate(idx ^ 0xA5))) return false;
+    }
+    return true;
+}
