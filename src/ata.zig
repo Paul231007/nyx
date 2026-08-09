@@ -90,3 +90,7 @@ pub fn identify() ?Info {
     return info;
 }
 
+/// READ SECTORS (0x20): polling PIO, reads `count` sectors at `lba` into `buf`.
+pub fn readSectors(lba: u32, count: u8, buf: []u8) bool {
+    if (buf.len < @as(usize, count) * SECTOR) return false;
+
