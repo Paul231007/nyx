@@ -101,3 +101,17 @@ pub fn readSectors(lba: u32, count: u8, buf: []u8) bool {
     io.outb(BASE + REG_LBA_HI,  @truncate((lba >> 16) & 0xFF));
     io.outb(BASE + REG_CMD, 0x20); // READ SECTORS
 
+    var sec: usize = 0;
+    while (sec < count) : (sec += 1) {
+        if (!pollDRQ()) return false;
+        const boff = sec * SECTOR;
+        var wi: usize = 0;
+        while (wi < 256) : (wi += 1) {
+            const wval = io.inw(BASE + REG_DATA);
+            buf[boff + wi * 2]     = @truncate(wval & 0xFF);
+            buf[boff + wi * 2 + 1] = @truncate(wval >> 8);
+        }
+    }
+    return true;
+}
+
