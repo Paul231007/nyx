@@ -70,3 +70,8 @@ pub fn identify() ?Info {
 
     if (!pollDRQ()) return null;
 
+    var words: [256]u16 = undefined;
+    for (&words) |*wrd| {
+        wrd.* = io.inw(BASE + REG_DATA);
+    }
+
