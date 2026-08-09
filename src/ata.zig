@@ -79,3 +79,11 @@ pub fn identify() ?Info {
     // 28-bit LBA sector count: word 60 (lo) and word 61 (hi)
     info.sectors = @as(u32, words[60]) | (@as(u32, words[61]) << 16);
 
+    // Model string occupies words 27..46 (20 words = 40 bytes), byte-swapped
+    var moff: usize = 0;
+    for (words[27..47]) |mw| {
+        info.model[moff]     = @truncate(mw >> 8);
+        info.model[moff + 1] = @truncate(mw & 0xFF);
+        moff += 2;
+    }
+
