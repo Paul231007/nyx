@@ -93,3 +93,8 @@ fn ata_sector() bool {
     return true;
 }
 
+// / 6. syscall_uptime ...
+fn syscall_uptime() bool {
+    return syscall.invoke(.uptime, 0, 0, 0) > 0;
+}
+
