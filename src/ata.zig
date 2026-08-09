@@ -87,3 +87,6 @@ pub fn identify() ?Info {
         moff += 2;
     }
 
+    return info;
+}
+
