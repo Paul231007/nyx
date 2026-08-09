@@ -93,7 +93,7 @@ fn ata_sector() bool {
     return true;
 }
 
-// / 6. syscall_uptime ...
+/// 6. syscall_uptime — int 0x80 uptime call must return a positive tick count.
 fn syscall_uptime() bool {
     return syscall.invoke(.uptime, 0, 0, 0) > 0;
 }
