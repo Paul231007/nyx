@@ -75,3 +75,7 @@ pub fn identify() ?Info {
         wrd.* = io.inw(BASE + REG_DATA);
     }
 
+    var info: Info = undefined;
+    // 28-bit LBA sector count: word 60 (lo) and word 61 (hi)
+    info.sectors = @as(u32, words[60]) | (@as(u32, words[61]) << 16);
+
