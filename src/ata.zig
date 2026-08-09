@@ -68,3 +68,5 @@ pub fn identify() ?Info {
     const st0 = io.inb(BASE + REG_CMD);
     if (st0 == 0x00 or st0 == 0xFF) return null;
 
+    if (!pollDRQ()) return null;
+
