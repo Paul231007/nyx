@@ -66,4 +66,17 @@ fn heap_alloc() bool {
     return true;
 }
 
-/// 4. vfs_roundtrip — create a ramfs file, write "ktest", seek 0, read back. fn vfs_roundtrip() bool { _ = ramfs.create("/ktest.tmp", .file) orelse return false; const fd = vfs.open("/ktest.tmp") orelse return false; defr vfs.close(fd); const written = vfs.write(fd, "ktest"); if (written != 5) return false; vfs.seek(fd, 0); var rbuf: [8]u8 = undefined; const nread = vfs.read(fd, &rbuf); if (nread != 5) return false; return std.mem.eql(u8, rbuf[0..5], "ktest"); }
+/// 4. vfs_roundtrip — create a ramfs file, write "ktest", seek 0, read back.
+fn vfs_roundtrip() bool {
+    _ = ramfs.create("/ktest.tmp", .file) orelse return false;
+    const fd = vfs.open("/ktest.tmp") orelse return false;
+    defer vfs.close(fd);
+    const written = vfs.write(fd, "ktest");
+    if (written != 5) return false;
+    vfs.seek(fd, 0);
+    var rbuf: [8]u8 = undefined;
+    const nread = vfs.read(fd, &rbuf);
+    if (nread != 5) return false;
+    return std.mem.eql(u8, rbuf[0..5], "ktest");
+}
+
