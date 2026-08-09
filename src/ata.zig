@@ -115,3 +115,8 @@ pub fn readSectors(lba: u32, count: u8, buf: []u8) bool {
     return true;
 }
 
+/// WRITE SECTORS (0x30): polling PIO, writes `count` sectors at `lba` from `buf`.
+/// Follows with CACHE FLUSH (0xE7).
+pub fn writeSectors(lba: u32, count: u8, buf: []const u8) bool {
+    if (buf.len < @as(usize, count) * SECTOR) return false;
+
