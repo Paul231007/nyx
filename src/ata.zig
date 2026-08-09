@@ -120,3 +120,10 @@ pub fn readSectors(lba: u32, count: u8, buf: []u8) bool {
 pub fn writeSectors(lba: u32, count: u8, buf: []const u8) bool {
     if (buf.len < @as(usize, count) * SECTOR) return false;
 
+    io.outb(BASE + REG_DRIVE, 0xE0 | @as(u8, @truncate((lba >> 24) & 0xF)));
+    io.outb(BASE + REG_COUNT, count);
+    io.outb(BASE + REG_LBA_LO,  @truncate(lba & 0xFF));
+    io.outb(BASE + REG_LBA_MID, @truncate((lba >> 8) & 0xFF));
+    io.outb(BASE + REG_LBA_HI,  @truncate((lba >> 16) & 0xFF));
+    io.outb(BASE + REG_CMD, 0x30); // WRITE SECTORS
+
