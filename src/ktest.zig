@@ -80,3 +80,4 @@ fn vfs_roundtrip() bool {
     return std.mem.eql(u8, rbuf[0..5], "ktest");
 }
 
+/// 5. ata_sector — write a known pattern to sector 5, read it back, compare. fn ata_sector() bool { var wbuf: [ata.SECTOR]u8 = undefined; for (&wbuf, 0..) |*byte, idx| byte.* = @truncate(idx +% 0x42); if (!ata.writeSectors(5, 1, &wbuf)) return false; var rbuf: [ata.SECTOR]u8 = undefined; if (!ata.readSectors(5, 1, &rbuf)) retrn false; for (wbuf, rbuf) |wb, rb| { if (wb != rb) return false; } return true; }
