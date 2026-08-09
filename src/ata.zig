@@ -127,3 +127,21 @@ pub fn writeSectors(lba: u32, count: u8, buf: []const u8) bool {
     io.outb(BASE + REG_LBA_HI,  @truncate((lba >> 16) & 0xFF));
     io.outb(BASE + REG_CMD, 0x30); // WRITE SECTORS
 
+    var sec: usize = 0;
+    while (sec < count) : (sec += 1) {
+        if (!pollDRQ()) return false;
+        const boff = sec * SECTOR;
+        var wi: usize = 0;
+        while (wi < 256) : (wi += 1) {
+            const lo: u16 = buf[boff + wi * 2];
+            const hi: u16 = buf[boff + wi * 2 + 1];
+            io.outw(BASE + REG_DATA, lo | (hi << 8));
+        }
+    }
+    // Wait for BSY to clear after the last transfer before flushing
+    _ = pollReady();
+    // CACHE FLUSH — force the drive to commit write buffers to media
+    io.outb(BASE + REG_CMD, 0xE7);
+    _ = pollReady();
+    return true;
+}
