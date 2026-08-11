@@ -28,3 +28,15 @@ inline fn cfgRead32(bus: u8, slot: u8, func: u8, offset: u8) u32 {
     return io.inl(0xCFC);
 }
 
+/// Brute-force scan buses 0..255 (or a subset), slots 0..31, funcs 0..7.
+/// Fills `out` with discovered devices and returns the count found.
+pub fn enumerate(out: []Device) usize {
+    var count: usize = 0;
+    var bus: u16 = 0;
+    while (bus < 256) : (bus += 1) {
+        var slot: u8 = 0;
+        while (slot < 32) : (slot += 1) {
+            var func: u8 = 0;
+            while (func < 8) : (func += 1) {
+                if (count >= out.len) return count;
+
