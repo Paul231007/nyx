@@ -22,3 +22,9 @@ inline fn cfgAddr(bus: u8, slot: u8, func: u8, offset: u8) u32 {
         (@as(u32, offset) & 0xFC);
 }
 
+/// Read a 32-bit value from PCI configuration space.
+inline fn cfgRead32(bus: u8, slot: u8, func: u8, offset: u8) u32 {
+    io.outl(0xCF8, cfgAddr(bus, slot, func, offset));
+    return io.inl(0xCFC);
+}
+
