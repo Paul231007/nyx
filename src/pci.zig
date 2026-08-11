@@ -22,4 +22,3 @@ inline fn cfgAddr(bus: u8, slot: u8, func: u8, offset: u8) u32 {
         (@as(u32, offset) & 0xFC);
 }
 
-
