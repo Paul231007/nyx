@@ -28,3 +28,4 @@ inline fn cfgRead32(bus: u8, slot: u8, func: u8, offset: u8) u32 {
     return io.inl(0xCFC);
 }
 
+
