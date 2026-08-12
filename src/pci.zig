@@ -49,3 +49,7 @@ pub fn enumerate(out: []Device) usize {
                 }
                 const dev_id: u16 = @truncate((id >> 16) & 0xFFFF);
 
+                const class_dword = cfgRead32(@truncate(bus), slot, func, 0x08);
+                const subclass: u8 = @truncate((class_dword >> 16) & 0xFF);
+                const class: u8 = @truncate((class_dword >> 24) & 0xFF);
+
