@@ -131,3 +131,34 @@ fn ring_fifo() bool {
     return rb.isEmpty();
 }
 
+/// 9. libk_format — exercise formatDec, formatHex, strncmp, indexOf, and the
+/// case-conversion helpers added in M17.
+fn libk_format() bool {
+    var buf: [24]u8 = undefined;
+    // formatDec
+    if (!std.mem.eql(u8, libk.formatDec(&buf, 0), "0")) return false;
+    if (!std.mem.eql(u8, libk.formatDec(&buf, 12345), "12345")) return false;
+    if (!std.mem.eql(u8, libk.formatDec(&buf, 999999999), "999999999")) return false;
+    // formatHex
+    if (!std.mem.eql(u8, libk.formatHex(&buf, 0), "0")) return false;
+    if (!std.mem.eql(u8, libk.formatHex(&buf, 0xdeadbeef), "deadbeef")) return false;
+    if (!std.mem.eql(u8, libk.formatHex(&buf, 0xff), "ff")) return false;
+    // strncmp
+    if (libk.strncmp("abc", "abd", 2) != 0) return false; // first 2 chars match
+    if (libk.strncmp("abc", "abd", 3) >= 0) return false; // 'c' < 'd'
+    if (libk.strncmp("xyz", "xyz", 3) != 0) return false;
+    // indexOf
+    if (libk.indexOf("hello", 'l') != 2) return false;
+    if (libk.indexOf("hello", 'z') != null) return false;
+    // case helpers
+    if (libk.toUpper('a') != 'A') return false;
+    if (libk.toUpper('Z') != 'Z') return false;
+    if (libk.toLower('Z') != 'z') return false;
+    if (libk.toLower('a') != 'a') return false;
+    // startsWith
+    if (!libk.startsWith("hello", "hel")) return false;
+    if (libk.startsWith("hello", "world")) return false;
+    return true;
+}
+
+
