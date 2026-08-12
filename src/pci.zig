@@ -40,3 +40,12 @@ pub fn enumerate(out: []Device) usize {
             while (func < 8) : (func += 1) {
                 if (count >= out.len) return count;
 
+                const id = cfgRead32(@truncate(bus), slot, func, 0x00);
+                const vendor: u16 = @truncate(id & 0xFFFF);
+                if (vendor == 0xFFFF) {
+                    // No device; if func 0 is absent skip remaining funcs.
+                    if (func == 0) break;
+                    continue;
+                }
+                const dev_id: u16 = @truncate((id >> 16) & 0xFFFF);
+
