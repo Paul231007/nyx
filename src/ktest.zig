@@ -98,3 +98,18 @@ fn syscall_uptime() bool {
     return syscall.invoke(.uptime, 0, 0, 0) > 0;
 }
 
+/// 7. slab_roundtrip — allocate a batch of objects, verify the live count,
+/// free them all, and verify the count drops back to zero.
+fn slab_roundtrip() bool {
+    var sl = slab.Slab.init(heap.allocator(), 16, 8, 8);
+    defer sl.deinit();
+    var ptrs: [24][*]u8 = undefined;
+    for (&ptrs) |*pp| {
+        pp.* = sl.alloc() orelse return false;
+    }
+    if (sl.stats().live != 24) return false;
+    for (ptrs) |pp| sl.free(pp);
+    return sl.stats().live == 0;
+}
+
+
