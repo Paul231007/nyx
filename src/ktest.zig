@@ -112,4 +112,3 @@ fn slab_roundtrip() bool {
     return sl.stats().live == 0;
 }
 
-
