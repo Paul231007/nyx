@@ -112,3 +112,23 @@ fn slab_roundtrip() bool {
     return sl.stats().live == 0;
 }
 
+/// 8. ring_fifo — push four bytes, verify full/count, pop them in FIFO order,
+/// verify empty, and confirm overflow is rejected.
+fn ring_fifo() bool {
+    var rb = ring.Ring(4){};
+    if (!rb.push('w')) return false;
+    if (!rb.push('x')) return false;
+    if (!rb.push('y')) return false;
+    if (!rb.push('z')) return false;
+    if (!rb.isFull()) return false;
+    if (rb.len() != 4) return false;
+    if (rb.push('!')) return false; // must reject (full)
+    if (rb.pop() != 'w') return false;
+    if (rb.pop() != 'x') return false;
+    if (rb.pop() != 'y') return false;
+    if (rb.pop() != 'z') return false;
+    if (rb.pop() != null) return false; // must be empty
+    return rb.isEmpty();
+}
+
+
