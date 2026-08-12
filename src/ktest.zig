@@ -161,4 +161,3 @@ fn libk_format() bool {
     return true;
 }
 
-
