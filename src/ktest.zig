@@ -131,4 +131,3 @@ fn ring_fifo() bool {
     return rb.isEmpty();
 }
 
-
