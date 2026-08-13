@@ -192,4 +192,3 @@ fn acpi_rsdp() bool {
     return true; // scan completed; RSDP absence is OK in QEMU
 }
 
-
