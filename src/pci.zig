@@ -53,3 +53,19 @@ pub fn enumerate(out: []Device) usize {
                 const subclass: u8 = @truncate((class_dword >> 16) & 0xFF);
                 const class: u8 = @truncate((class_dword >> 24) & 0xFF);
 
+                out[count] = Device{
+                    .bus = @truncate(bus),
+                    .slot = slot,
+                    .func = func,
+                    .vendor = vendor,
+                    .device = dev_id,
+                    .class = class,
+                    .subclass = subclass,
+                };
+                count += 1;
+            }
+        }
+    }
+    return count;
+}
+
