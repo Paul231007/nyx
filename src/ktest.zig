@@ -181,4 +181,3 @@ fn cpuid_vendor() bool {
     return false; // all-zero is suspicious
 }
 
-
