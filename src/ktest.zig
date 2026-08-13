@@ -192,3 +192,13 @@ fn acpi_rsdp() bool {
     return true; // scan completed; RSDP absence is OK in QEMU
 }
 
+/// 13. timefmt_format — exercises isLeapYear, weekday, daysInMonth, fmtIso, and
+/// the epoch helpers on known fixed dates.
+fn timefmt_format() bool {
+    // Leap year checks.
+    if (!timefmt.isLeapYear(2000)) return false; // divisible by 400
+    if (timefmt.isLeapYear(1900)) return false;  // divisible by 100, not 400
+    if (!timefmt.isLeapYear(2024)) return false; // divisible by 4, not 100
+    if (timefmt.isLeapYear(2023)) return false;  // ordinary year
+
+
