@@ -172,3 +172,13 @@ fn elf_parse() bool {
     return true;
 }
 
+/// 11. cpuid_vendor — vendor string from CPUID leaf 0 must be non-empty.
+fn cpuid_vendor() bool {
+    const v = cpu.vendor();
+    for (v) |ch| {
+        if (ch != 0) return true;
+    }
+    return false; // all-zero is suspicious
+}
+
+
