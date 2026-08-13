@@ -161,3 +161,15 @@ fn libk_format() bool {
     return true;
 }
 
+/// 10. elf_parse — embed the sample ELF32 fixture and verify key header fields.
+fn elf_parse() bool {
+    const image = @embedFile("sample.elf");
+    const hdr = elf.parse(image) catch return false;
+    if (hdr.class != 1) return false;       // ELF32
+    if (hdr.machine != 3) return false;     // EM_386
+    if (hdr.entry != 0x401000) return false;
+    if (hdr.phnum != 1) return false;
+    return true;
+}
+
+
