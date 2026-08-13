@@ -181,3 +181,15 @@ fn cpuid_vendor() bool {
     return false; // all-zero is suspicious
 }
 
+/// 12. acpi_rsdp — call find(); if RSDP is present verify rsdt_addr is non-zero;
+/// if not present (e.g. minimal QEMU config) the test still passes — we just
+/// verify the scan completed without a crash.
+fn acpi_rsdp() bool {
+    const r = acpi.find();
+    if (r.found) {
+        return r.rsdt_addr != 0;
+    }
+    return true; // scan completed; RSDP absence is OK in QEMU
+}
+
+
