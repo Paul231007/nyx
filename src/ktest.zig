@@ -201,4 +201,3 @@ fn timefmt_format() bool {
     if (!timefmt.isLeapYear(2024)) return false; // divisible by 4, not 100
     if (timefmt.isLeapYear(2023)) return false;  // ordinary year
 
-
