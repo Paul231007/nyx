@@ -172,4 +172,3 @@ fn elf_parse() bool {
     return true;
 }
 
-
