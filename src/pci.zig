@@ -69,4 +69,3 @@ pub fn enumerate(out: []Device) usize {
     return count;
 }
 
-
