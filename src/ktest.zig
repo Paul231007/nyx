@@ -201,3 +201,9 @@ fn timefmt_format() bool {
     if (!timefmt.isLeapYear(2024)) return false; // divisible by 4, not 100
     if (timefmt.isLeapYear(2023)) return false;  // ordinary year
 
+    // daysInMonth: February in leap vs non-leap year.
+    if (timefmt.daysInMonth(2024, 2) != 29) return false;
+    if (timefmt.daysInMonth(2023, 2) != 28) return false;
+    if (timefmt.daysInMonth(2026, 1) != 31) return false;
+
+
