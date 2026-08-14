@@ -218,3 +218,4 @@ fn timefmt_format() bool {
     const iso = timefmt.fmtIso(&ibuf, t);
     if (!std.mem.eql(u8, iso, "2026-06-09T12:00:00")) return false;
 
+// dayOfYear: Jan 1 = 1, Feb 1 = 32, Dec 31 non-leap = 365. if (timefmt.dayOfYear(2026, 1, 1) != 1) retur false; if (timefmt.dayOfYear(2026, 2, 1) != 32) return false; if (timefmt.dayOfYear(2023, 12, 31) != 365) return false;
