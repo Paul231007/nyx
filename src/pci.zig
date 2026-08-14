@@ -328,4 +328,3 @@ pub fn vendorNameOf(vendor: u16) []const u8 {
     };
 }
 
-
