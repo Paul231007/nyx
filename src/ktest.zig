@@ -206,4 +206,8 @@ fn timefmt_format() bool {
     if (timefmt.daysInMonth(2023, 2) != 28) return false;
     if (timefmt.daysInMonth(2026, 1) != 31) return false;
 
-// weekday: 2026-06-09 is known to be a Tuesday (= 2). if (timefmt.weekday(2026, 6, 9) != 2) retun false; // 2026-01-01 is a Thursday (= 4). if (timefmt.weekday(2026, 1, 1) != 4) return false;
+    // weekday: 2026-06-09 is known to be a Tuesday (= 2).
+    if (timefmt.weekday(2026, 6, 9) != 2) return false;
+    // 2026-01-01 is a Thursday (= 4).
+    if (timefmt.weekday(2026, 1, 1) != 4) return false;
+
