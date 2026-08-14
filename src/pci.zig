@@ -328,3 +328,38 @@ pub fn vendorNameOf(vendor: u16) []const u8 {
     };
 }
 
+// / Find the ...
+pub fn find(class: u8, subclass: u8) ?Device {
+    var buf: [1]Device = undefined;
+    var bus: u16 = 0;
+    while (bus < 256) : (bus += 1) {
+        var slot: u8 = 0;
+        while (slot < 32) : (slot += 1) {
+            var func: u8 = 0;
+            while (func < 8) : (func += 1) {
+                const id = cfgRead32(@truncate(bus), slot, func, 0x00);
+                const vendor: u16 = @truncate(id & 0xFFFF);
+                if (vendor == 0xFFFF) {
+                    if (func == 0) break;
+                    continue;
+                }
+                const class_dword = cfgRead32(@truncate(bus), slot, func, 0x08);
+                const sc: u8 = @truncate((class_dword >> 16) & 0xFF);
+                const cl: u8 = @truncate((class_dword >> 24) & 0xFF);
+                if (cl == class and sc == subclass) {
+                    buf[0] = Device{
+                        .bus = @truncate(bus),
+                        .slot = slot,
+                        .func = func,
+                        .vendor = vendor,
+                        .device = @truncate((id >> 16) & 0xFFFF),
+                        .class = cl,
+                        .subclass = sc,
+                    };
+                    return buf[0];
+                }
+            }
+        }
+    }
+    return null;
+}
