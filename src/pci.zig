@@ -328,7 +328,7 @@ pub fn vendorNameOf(vendor: u16) []const u8 {
     };
 }
 
-// / Find the ...
+/// Find the first device matching the given class/subclass pair.
 pub fn find(class: u8, subclass: u8) ?Device {
     var buf: [1]Device = undefined;
     var bus: u16 = 0;
