@@ -226,4 +226,3 @@ fn timefmt_format() bool {
     return true;
 }
 
-
