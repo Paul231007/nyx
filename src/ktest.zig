@@ -206,4 +206,3 @@ fn timefmt_format() bool {
     if (timefmt.daysInMonth(2023, 2) != 28) return false;
     if (timefmt.daysInMonth(2026, 1) != 31) return false;
 
-
