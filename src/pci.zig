@@ -363,3 +363,4 @@ pub fn find(class: u8, subclass: u8) ?Device {
     }
     return null;
 }
+
