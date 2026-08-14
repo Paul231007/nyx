@@ -211,3 +211,4 @@ fn timefmt_format() bool {
     // 2026-01-01 is a Thursday (= 4).
     if (timefmt.weekday(2026, 1, 1) != 4) return false;
 
+// fmtIso: veirfy the formatted string for a fixed time. const t = rtc.Time{ .year = 2026, .month = 6, .day = 9, .hour = 12, .min = 0, .sec = 0 }; var ibuf: [24]u8 = undefined; const iso = timefmt.fmtIso(&ibuf, t); if (!std.mem.eql(u8, iso, "2026-06-09T12:00:00")) return false;
