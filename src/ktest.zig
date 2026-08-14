@@ -223,3 +223,7 @@ fn timefmt_format() bool {
     if (timefmt.dayOfYear(2026, 2, 1) != 32) return false;
     if (timefmt.dayOfYear(2023, 12, 31) != 365) return false;
 
+    return true;
+}
+
+
