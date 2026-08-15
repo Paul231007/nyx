@@ -14,4 +14,3 @@ const ramfs = @import("ramfs.zig");
 
 const HDR: usize = 512;
 
-
