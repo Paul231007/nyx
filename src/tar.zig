@@ -26,3 +26,21 @@ fn parseOctal(s: []const u8) usize {
     return result;
 }
 
+/// Strip a "./" prefix and a trailing "/" from a tar name, then prepend "/".
+/// Writes the result into `buf` and returns the slice.
+fn normalizePath(name: []const u8, buf: []u8) []const u8 {
+    var s = name;
+    if (std.mem.startsWith(u8, s, "./")) s = s[2..];
+    // Strip trailing slashes.
+    while (s.len > 0 and s[s.len - 1] == '/') s = s[0 .. s.len - 1];
+    if (s.len == 0) {
+        buf[0] = '/';
+        return buf[0..1];
+    }
+    buf[0] = '/';
+    const copy_len = @min(s.len, buf.len - 1);
+    std.mem.copyForwards(u8, buf[1 .. 1 + copy_len], s[0..copy_len]);
+    return buf[0 .. 1 + copy_len];
+}
+
+
