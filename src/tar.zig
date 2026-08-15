@@ -8,4 +8,3 @@
 //! After each header there are ceil(size/512) data blocks. Two consecutive
 //! all-zero blocks mark the end of the archive.
 
-
