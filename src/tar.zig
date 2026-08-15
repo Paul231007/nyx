@@ -12,3 +12,6 @@ const std = @import("std");
 const vfs = @import("vfs.zig");
 const ramfs = @import("ramfs.zig");
 
+const HDR: usize = 512;
+
+
