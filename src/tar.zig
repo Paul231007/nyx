@@ -14,3 +14,16 @@ const ramfs = @import("ramfs.zig");
 
 const HDR: usize = 512;
 
+/// Parse a NUL/space-terminated octal string.
+fn parseOctal(s: []const u8) usize {
+    var result: usize = 0;
+    for (s) |c| {
+        if (c == 0 or c == ' ') break;
+        if (c >= '0' and c <= '7') {
+            result = result * 8 + (c - '0');
+        } else break;
+    }
+    return result;
+}
+
+
