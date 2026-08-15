@@ -26,4 +26,3 @@ fn parseOctal(s: []const u8) usize {
     return result;
 }
 
-
