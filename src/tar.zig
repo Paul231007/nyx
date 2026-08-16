@@ -43,4 +43,3 @@ fn normalizePath(name: []const u8, buf: []u8) []const u8 {
     return buf[0 .. 1 + copy_len];
 }
 
-
