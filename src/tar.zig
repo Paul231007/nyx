@@ -54,3 +54,16 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
         const hdr = image[offset .. offset + HDR];
         offset += HDR;
 
+        // Detect an all-zero block (end-of-archive sentinel).
+        var is_zero = true;
+        for (hdr) |b| {
+            if (b != 0) { is_zero = false; break; }
+        }
+        if (is_zero) {
+            zero_blocks += 1;
+            if (zero_blocks >= 2) break;
+            continue;
+        }
+        zero_blocks = 0;
+
+
