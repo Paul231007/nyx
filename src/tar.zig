@@ -71,3 +71,6 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
         while (name_len < 100 and hdr[name_len] != 0) : (name_len += 1) {}
         const raw_name = hdr[0..name_len];
 
+        // Size field: bytes 124..135 (12 bytes octal).
+        const file_size = parseOctal(hdr[124..136]);
+
