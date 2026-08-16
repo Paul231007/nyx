@@ -50,3 +50,8 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
     var created: usize = 0;
     var zero_blocks: usize = 0;
 
+    while (offset + HDR <= image.len) {
+        const hdr = image[offset .. offset + HDR];
+        offset += HDR;
+
+
