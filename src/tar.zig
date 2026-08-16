@@ -54,4 +54,3 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
         const hdr = image[offset .. offset + HDR];
         offset += HDR;
 
-
