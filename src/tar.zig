@@ -43,3 +43,11 @@ fn normalizePath(name: []const u8, buf: []u8) []const u8 {
     return buf[0 .. 1 + copy_len];
 }
 
+/// Unpack `image` (a raw ustar byte slice) into the given `into` filesystem,
+/// using ramfs.create to allocate entries. Returns the number of entries created.
+pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
+    var offset: usize = 0;
+    var created: usize = 0;
+    var zero_blocks: usize = 0;
+
+
