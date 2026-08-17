@@ -79,3 +79,5 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
         const is_dir = typeflag == '5';
         const is_file = (typeflag == '0') or (typeflag == 0);
 
+        const data_blocks = (file_size + HDR - 1) / HDR;
+
