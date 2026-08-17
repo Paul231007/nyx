@@ -5,3 +5,7 @@
 //! fixed-size fd table (16 slots); each slot tracks the open Node and the
 //! current read/write offset.
 
+/// Whether a node represents a regular file or a directory.
+pub const Kind = enum { file, dir };
+
+
