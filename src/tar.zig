@@ -74,3 +74,8 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
         // Size field: bytes 124..135 (12 bytes octal).
         const file_size = parseOctal(hdr[124..136]);
 
+        // Typeflag: byte 156.
+        const typeflag = hdr[156];
+        const is_dir = typeflag == '5';
+        const is_file = (typeflag == '0') or (typeflag == 0);
+
