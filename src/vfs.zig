@@ -8,4 +8,3 @@
 /// Whether a node represents a regular file or a directory.
 pub const Kind = enum { file, dir };
 
-
