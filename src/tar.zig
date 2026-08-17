@@ -96,3 +96,17 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
             continue;
         }
 
+        // Create the node.
+        const kind: vfs.Kind = if (is_dir) .dir else .file;
+        if (ramfs.create(path, kind)) |node| {
+            // For regular files, copy the data through the vtable write fn.
+            if (is_file and file_size > 0) {
+                const data_start = offset; // offset already advanced past header
+                const data_end = @min(data_start + file_size, image.len);
+                if (data_start < data_end) {
+                    _ = into.write(node, 0, image[data_start..data_end]);
+                }
+            }
+            created += 1;
+        }
+
