@@ -110,3 +110,6 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
             created += 1;
         }
 
+        offset += data_blocks * HDR;
+    }
+
