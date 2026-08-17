@@ -86,3 +86,7 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
             continue;
         }
 
+        // Build the normalised VFS path.
+        var path_buf: [130]u8 = undefined;
+        const path = normalizePath(raw_name, &path_buf);
+
