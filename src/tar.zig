@@ -81,3 +81,8 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
 
         const data_blocks = (file_size + HDR - 1) / HDR;
 
+        if (!is_dir and !is_file) {
+            offset += data_blocks * HDR;
+            continue;
+        }
+
