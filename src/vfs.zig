@@ -5,4 +5,3 @@
 //! fixed-size fd table (16 slots); each slot tracks the open Node and the
 //! current read/write offset.
 
-
