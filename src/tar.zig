@@ -90,3 +90,9 @@ pub fn unpackInto(image: []const u8, into: *vfs.FileSystem) usize {
         var path_buf: [130]u8 = undefined;
         const path = normalizePath(raw_name, &path_buf);
 
+        // Skip the root "." or "/" entry (already seeded by ramfs.init).
+        if (path.len == 0 or std.mem.eql(u8, path, "/")) {
+            offset += data_blocks * HDR;
+            continue;
+        }
+
