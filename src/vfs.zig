@@ -8,3 +8,14 @@
 /// Whether a node represents a regular file or a directory.
 pub const Kind = enum { file, dir };
 
+/// An abstract file-system node. The `impl` pointer is private to the backing
+/// filesystem and must not be accessed by generic VFS code.
+pub const Node = struct {
+    name: [64]u8 = undefined,
+    name_len: u8 = 0,
+    kind: Kind = .file,
+    size: u32 = 0,
+    impl: ?*anyopaque = null, // backing-fs private pointer
+};
+
+
