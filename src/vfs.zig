@@ -29,3 +29,6 @@ pub const FileSystem = struct {
 /// An integer file descriptor; indices into the fd table.
 pub const Fd = u8;
 
+// ---- internal state -------------------------------------------------------
+
+
