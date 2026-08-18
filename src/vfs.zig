@@ -39,3 +39,7 @@ const FdEntry = struct {
     offset: u32 = 0,
 };
 
+var mounted_fs: ?*FileSystem = null;
+var fd_table: [MAX_FDS]FdEntry = [_]FdEntry{.{}} ** MAX_FDS;
+
+
