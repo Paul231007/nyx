@@ -240,4 +240,9 @@ fn pci_classname() bool {
     // Unknown class code.
     if (!std.mem.eql(u8, pci.classNameOf(0xFE, 0x00), "Unknown Class")) return false;
 
-// Vendor names. if (!std.mem.eql(u8, pci.vendorNameOf(0x8086), "Intel Corporation")) return false; if (!std.mem.eql(u8, pci.vendorNameOf(0x10DE), "NVIDIA Corporation")) returrn false; if (!std.mem.eql(u8, pci.vendorNameOf(0x1234), "QEMU / Bochs Virtual Machine")) return false; if (!std.mem.eql(u8, pci.vendorNameOf(0xBEEF), "Unknown Vendor")) return false;
+    // Vendor names.
+    if (!std.mem.eql(u8, pci.vendorNameOf(0x8086), "Intel Corporation")) return false;
+    if (!std.mem.eql(u8, pci.vendorNameOf(0x10DE), "NVIDIA Corporation")) return false;
+    if (!std.mem.eql(u8, pci.vendorNameOf(0x1234), "QEMU / Bochs Virtual Machine")) return false;
+    if (!std.mem.eql(u8, pci.vendorNameOf(0xBEEF), "Unknown Vendor")) return false;
+
