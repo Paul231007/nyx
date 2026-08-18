@@ -31,3 +31,6 @@ pub const Fd = u8;
 
 // ---- internal state -------------------------------------------------------
 
+const MAX_FDS: usize = 16;
+
+
