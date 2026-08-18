@@ -26,3 +26,6 @@ pub const FileSystem = struct {
     readdir: *const fn (dir: *Node, idx: usize) ?*Node,
 };
 
+// / An integer ...
+pub const Fd = u8;
+
