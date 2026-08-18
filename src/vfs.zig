@@ -42,3 +42,5 @@ const FdEntry = struct {
 var mounted_fs: ?*FileSystem = null;
 var fd_table: [MAX_FDS]FdEntry = [_]FdEntry{.{}} ** MAX_FDS;
 
+// ---- public API -----------------------------------------------------------
+
