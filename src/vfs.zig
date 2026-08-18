@@ -49,3 +49,20 @@ pub fn mount(fs: *FileSystem) void {
     mounted_fs = fs;
 }
 
+/// Open a path through the mounted filesystem and return a new file descriptor,
+/// or null if no filesystem is mounted, the path doesn't exist, or all fd
+/// slots are occupied.
+pub fn open(path: []const u8) ?Fd {
+    const fs = mounted_fs orelse return null;
+    const node = fs.open(path) orelse return null;
+    for (&fd_table, 0..) |*entry, idx| {
+        if (!entry.in_use) {
+            entry.in_use = true;
+            entry.node = node;
+            entry.offset = 0;
+            return @intCast(idx);
+        }
+    }
+    return null; // no free slot
+}
+
