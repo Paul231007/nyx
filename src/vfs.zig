@@ -79,3 +79,18 @@ pub fn read(fd: Fd, buf: []u8) u32 {
     return n;
 }
 
+/// Write `data` to `fd` at the current offset.
+/// Returns the number of bytes written, advances the offset, and updates
+/// `node.size` if the write extends past the previous end of file.
+pub fn write(fd: Fd, data: []const u8) u32 {
+    const fs = mounted_fs orelse return 0;
+    if (fd >= MAX_FDS) return 0;
+    const entry = &fd_table[fd];
+    if (!entry.in_use) return 0;
+    const node = entry.node orelse return 0;
+    const n = fs.write(node, entry.offset, data);
+    entry.offset += n;
+    if (entry.offset > node.size) node.size = entry.offset;
+    return n;
+}
+
