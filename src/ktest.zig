@@ -249,3 +249,16 @@ fn pci_classname() bool {
     return true;
 }
 
+/// 15. kbd_translate — exercise the keyboard scancode-to-ASCII translator,
+/// including shift and CapsLock logic, and the name() table.
+fn kbd_translate() bool {
+    // Unshifted: scancode 0x1E = 'a'.
+    if (keyboard.translate(0x1E, false, false) != 'a') return false;
+    // Shift held: 'a' -> 'A'.
+    if (keyboard.translate(0x1E, true, false) != 'A') return false;
+    // CapsLock on, no shift: 'a' -> 'A'.
+    if (keyboard.translate(0x1E, false, true) != 'A') return false;
+    // CapsLock on + shift: 'a' -> 'a' (double inversion).
+    if (keyboard.translate(0x1E, true, true) != 'a') return false;
+
+
