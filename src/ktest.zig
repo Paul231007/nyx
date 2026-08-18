@@ -226,3 +226,18 @@ fn timefmt_format() bool {
     return true;
 }
 
+/// 14. pci_classname — verify classNameOf and vendorNameOf return expected strings
+/// for a handful of well-known codes.
+fn pci_classname() bool {
+    // Class 0x01, sub 0x01 = IDE storage controller.
+    if (!std.mem.eql(u8, pci.classNameOf(0x01, 0x01), "Storage / IDE")) return false;
+    // Class 0x02, sub 0x00 = Ethernet.
+    if (!std.mem.eql(u8, pci.classNameOf(0x02, 0x00), "Network / Ethernet")) return false;
+    // Class 0x03, sub 0x00 = VGA.
+    if (!std.mem.eql(u8, pci.classNameOf(0x03, 0x00), "Display / VGA Compatible")) return false;
+    // Class 0x06, sub 0x00 = Host bridge.
+    if (!std.mem.eql(u8, pci.classNameOf(0x06, 0x00), "Bridge / Host")) return false;
+    // Unknown class code.
+    if (!std.mem.eql(u8, pci.classNameOf(0xFE, 0x00), "Unknown Class")) return false;
+
+
