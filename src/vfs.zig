@@ -33,3 +33,10 @@ pub const Fd = u8;
 
 const MAX_FDS: usize = 16;
 
+const FdEntry = struct {
+    in_use: bool = false,
+    node: ?*Node = null,
+    offset: u32 = 0,
+};
+
+
