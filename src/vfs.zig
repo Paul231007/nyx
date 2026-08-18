@@ -44,3 +44,8 @@ var fd_table: [MAX_FDS]FdEntry = [_]FdEntry{.{}} ** MAX_FDS;
 
 // ---- public API -----------------------------------------------------------
 
+/// Register a filesystem as the single (flat) mount point.
+pub fn mount(fs: *FileSystem) void {
+    mounted_fs = fs;
+}
+
