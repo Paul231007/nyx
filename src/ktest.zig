@@ -246,3 +246,7 @@ fn pci_classname() bool {
     if (!std.mem.eql(u8, pci.vendorNameOf(0x1234), "QEMU / Bochs Virtual Machine")) return false;
     if (!std.mem.eql(u8, pci.vendorNameOf(0xBEEF), "Unknown Vendor")) return false;
 
+    return true;
+}
+
+
