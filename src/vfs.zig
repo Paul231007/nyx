@@ -26,4 +26,3 @@ pub const FileSystem = struct {
     readdir: *const fn (dir: *Node, idx: usize) ?*Node,
 };
 
-
