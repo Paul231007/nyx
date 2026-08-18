@@ -18,3 +18,12 @@ pub const Node = struct {
     impl: ?*anyopaque = null, // backing-fs private pointer
 };
 
+/// Vtable that every concrete filesystem must fill in.
+pub const FileSystem = struct {
+    open: *const fn (path: []const u8) ?*Node,
+    read: *const fn (node: *Node, off: u32, buf: []u8) u32,
+    write: *const fn (node: *Node, off: u32, data: []const u8) u32,
+    readdir: *const fn (dir: *Node, idx: usize) ?*Node,
+};
+
+
