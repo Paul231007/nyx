@@ -26,6 +26,6 @@ pub const FileSystem = struct {
     readdir: *const fn (dir: *Node, idx: usize) ?*Node,
 };
 
-// / An integer ...
+/// An integer file descriptor; indices into the fd table.
 pub const Fd = u8;
 
