@@ -66,3 +66,16 @@ pub fn open(path: []const u8) ?Fd {
     return null; // no free slot
 }
 
+/// Read up to `buf.len` bytes from `fd` starting at the current offset.
+/// Returns the number of bytes actually read and advances the offset by that amount.
+pub fn read(fd: Fd, buf: []u8) u32 {
+    const fs = mounted_fs orelse return 0;
+    if (fd >= MAX_FDS) return 0;
+    const entry = &fd_table[fd];
+    if (!entry.in_use) return 0;
+    const node = entry.node orelse return 0;
+    const n = fs.read(node, entry.offset, buf);
+    entry.offset += n;
+    return n;
+}
+
