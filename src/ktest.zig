@@ -240,4 +240,3 @@ fn pci_classname() bool {
     // Unknown class code.
     if (!std.mem.eql(u8, pci.classNameOf(0xFE, 0x00), "Unknown Class")) return false;
 
-
