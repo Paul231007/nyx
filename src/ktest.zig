@@ -261,4 +261,3 @@ fn kbd_translate() bool {
     // CapsLock on + shift: 'a' -> 'a' (double inversion).
     if (keyboard.translate(0x1E, true, true) != 'a') return false;
 
-
