@@ -12,3 +12,5 @@ pub const Header = struct {
     shnum:   u16,
 };
 
+pub const ParseError = error{ BadMagic, NotElf32 };
+
