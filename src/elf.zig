@@ -14,4 +14,3 @@ pub const Header = struct {
 
 pub const ParseError = error{ BadMagic, NotElf32 };
 
-
