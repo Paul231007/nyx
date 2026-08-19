@@ -270,4 +270,3 @@ fn kbd_translate() bool {
     // Out-of-range scancode returns 0.
     if (keyboard.translate(0xFF, false, false) != 0) return false;
 
-
