@@ -270,3 +270,11 @@ fn kbd_translate() bool {
     // Out-of-range scancode returns 0.
     if (keyboard.translate(0xFF, false, false) != 0) return false;
 
+    // name() table: F1 = 0x3B.
+    if (!std.mem.eql(u8, keyboard.name(0x3B), "F1")) return false;
+    // Home key = 0x47.
+    if (!std.mem.eql(u8, keyboard.name(0x47), "Home")) return false;
+    // Ordinary printable scancode 'a' (0x1E) returns "".
+    if (!std.mem.eql(u8, keyboard.name(0x1E), "")) return false;
+
+
