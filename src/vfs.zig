@@ -94,3 +94,11 @@ pub fn write(fd: Fd, data: []const u8) u32 {
     return n;
 }
 
+/// Seek `fd` to an absolute byte offset.
+pub fn seek(fd: Fd, off: u32) void {
+    if (fd >= MAX_FDS) return;
+    const entry = &fd_table[fd];
+    if (!entry.in_use) return;
+    entry.offset = off;
+}
+
