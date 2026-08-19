@@ -113,3 +113,10 @@ pub fn readdir(fd: Fd, idx: usize) ?*Node {
     return fs.readdir(node, idx);
 }
 
+/// Release the fd slot so it can be reused.
+pub fn close(fd: Fd) void {
+    if (fd >= MAX_FDS) return;
+    fd_table[fd].in_use = false;
+    fd_table[fd].node = null;
+    fd_table[fd].offset = 0;
+}
