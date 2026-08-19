@@ -102,3 +102,14 @@ pub fn seek(fd: Fd, off: u32) void {
     entry.offset = off;
 }
 
+/// Return the idx-th child node of the directory opened as `fd`, or null when
+/// the index is past the last entry. Used by the shell `ls` command.
+pub fn readdir(fd: Fd, idx: usize) ?*Node {
+    const fs = mounted_fs orelse return null;
+    if (fd >= MAX_FDS) return null;
+    const entry = &fd_table[fd];
+    if (!entry.in_use) return null;
+    const node = entry.node orelse return null;
+    return fs.readdir(node, idx);
+}
+
