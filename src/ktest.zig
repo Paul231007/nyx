@@ -267,3 +267,7 @@ fn kbd_translate() bool {
     // CapsLock has no effect on non-letter keys.
     if (keyboard.translate(0x02, false, true) != '1') return false;
 
+    // Out-of-range scancode returns 0.
+    if (keyboard.translate(0xFF, false, false) != 0) return false;
+
+
