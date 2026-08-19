@@ -261,3 +261,10 @@ fn kbd_translate() bool {
     // CapsLock on + shift: 'a' -> 'a' (double inversion).
     if (keyboard.translate(0x1E, true, true) != 'a') return false;
 
+    // Non-letter key: scancode 0x02 = '1'; shift -> '!'.
+    if (keyboard.translate(0x02, false, false) != '1') return false;
+    if (keyboard.translate(0x02, true,  false) != '!') return false;
+    // CapsLock has no effect on non-letter keys.
+    if (keyboard.translate(0x02, false, true) != '1') return false;
+
+
