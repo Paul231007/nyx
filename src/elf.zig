@@ -12,4 +12,3 @@ pub const Header = struct {
     shnum:   u16,
 };
 
-
