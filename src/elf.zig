@@ -14,3 +14,13 @@ pub const Header = struct {
 
 pub const ParseError = error{ BadMagic, NotElf32 };
 
+/// Parse an ELF image from a byte slice.  Only ELF32 little-endian is accepted.
+/// Fields are read directly from the standard ELF header offsets.
+pub fn parse(image: []const u8) ParseError!Header {
+    if (image.len < 52) return error.BadMagic;
+    // Check magic: 0x7F 'E' 'L' 'F'
+    if (image[0] != 0x7F or image[1] != 'E' or image[2] != 'L' or image[3] != 'F')
+        return error.BadMagic;
+    // EI_CLASS must be 1 (ELF32)
+    if (image[4] != 1) return error.NotElf32;
+
