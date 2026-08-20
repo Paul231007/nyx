@@ -24,3 +24,16 @@ pub fn parse(image: []const u8) ParseError!Header {
     // EI_CLASS must be 1 (ELF32)
     if (image[4] != 1) return error.NotElf32;
 
+    return Header{
+        .class   = image[4],
+        .data    = image[5],
+        .etype   = readU16(image, 16),
+        .machine = readU16(image, 18),
+        .entry   = readU32(image, 24),
+        .phoff   = readU32(image, 28),
+        .phnum   = readU16(image, 44),
+        .shnum   = readU16(image, 48),
+    };
+}
+
+
