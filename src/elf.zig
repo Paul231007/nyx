@@ -58,3 +58,26 @@ pub fn machineName(m: u16) []const u8 {
     };
 }
 
+/// Map an ELF program-header type (p_type) to a human-readable string.
+pub fn phTypeName(pt: u32) []const u8 {
+    return switch (pt) {
+        0          => "PT_NULL",
+        1          => "PT_LOAD",
+        2          => "PT_DYNAMIC",
+        3          => "PT_INTERP",
+        4          => "PT_NOTE",
+        5          => "PT_SHLIB",
+        6          => "PT_PHDR",
+        7          => "PT_TLS",
+        0x60000000 => "PT_LOOS",
+        0x6474E550 => "PT_GNU_EH_FRAME",
+        0x6474E551 => "PT_GNU_STACK",
+        0x6474E552 => "PT_GNU_RELRO",
+        0x6FFFFFFF => "PT_HIOS",
+        0x70000000 => "PT_LOPROC",
+        0x7FFFFFFF => "PT_HIPROC",
+        else       => "PT_UNKNOWN",
+    };
+}
+
+
