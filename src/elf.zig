@@ -102,3 +102,23 @@ pub const ProgramHeader = struct {
     align_: u32,   // p_align
 };
 
+/// Parse program header `idx` from an ELF32 image.
+/// Returns null when `idx` is out of range or the image is too short.
+pub fn programHeader(image: []const u8, hdr: Header, idx: u16) ?ProgramHeader {
+    if (idx >= hdr.phnum) return null;
+    const ph_size: usize = 32; // ELF32 Phdr is exactly 32 bytes
+    const base: usize = hdr.phoff + @as(usize, idx) * ph_size;
+    if (base + ph_size > image.len) return null;
+    return ProgramHeader{
+        .ptype  = readU32(image, base +  0),
+        .offset = readU32(image, base +  4),
+        .vaddr  = readU32(image, base +  8),
+        .paddr  = readU32(image, base + 12),
+        .filesz = readU32(image, base + 16),
+        .memsz  = readU32(image, base + 20),
+        .flags  = readU32(image, base + 24),
+        .align_ = readU32(image, base + 28),
+    };
+}
+
+
