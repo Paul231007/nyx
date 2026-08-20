@@ -24,3 +24,4 @@ pub fn parse(image: []const u8) ParseError!Header {
     // EI_CLASS must be 1 (ELF32)
     if (image[4] != 1) return error.NotElf32;
 
+
