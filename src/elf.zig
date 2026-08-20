@@ -90,3 +90,16 @@ pub fn phFlagsStr(flags: u32) [3]u8 {
     return out;
 }
 
+/// A decoded ELF32 program header.
+pub const ProgramHeader = struct {
+    ptype:  u32,   // p_type
+    offset: u32,   // p_offset
+    vaddr:  u32,   // p_vaddr
+    paddr:  u32,   // p_paddr
+    filesz: u32,   // p_filesz
+    memsz:  u32,   // p_memsz
+    flags:  u32,   // p_flags
+    align_: u32,   // p_align
+};
+
+
