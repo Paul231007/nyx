@@ -36,3 +36,24 @@ pub fn parse(image: []const u8) ParseError!Header {
     };
 }
 
+/// Map a machine value to a human-readable string.
+pub fn machineName(m: u16) []const u8 {
+    return switch (m) {
+        0    => "None",
+        1    => "AT&T WE 32100",
+        2    => "SPARC",
+        3    => "x86 (i386)",
+        4    => "Motorola 68000",
+        5    => "Motorola 88000",
+        7    => "Intel 80860",
+        8    => "MIPS I",
+        0x14 => "PowerPC",
+        0x28 => "ARM",
+        0x2A => "SuperH",
+        0x32 => "IA-64",
+        0x3E => "x86-64 (AMD64)",
+        0xB7 => "AArch64",
+        0xF3 => "RISC-V",
+        else => "Unknown",
+    };
+}
