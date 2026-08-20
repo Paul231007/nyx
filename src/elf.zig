@@ -36,4 +36,3 @@ pub fn parse(image: []const u8) ParseError!Header {
     };
 }
 
-
