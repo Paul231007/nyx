@@ -80,3 +80,14 @@ pub fn phTypeName(pt: u32) []const u8 {
     };
 }
 
+/// Map an ELF program-header flags field to a compact 3-char string.
+/// Bit 2 = R, bit 1 = W, bit 0 = X.
+pub fn phFlagsStr(flags: u32) [3]u8 {
+    var out: [3]u8 = "---".*;
+    if (flags & 4 != 0) out[0] = 'R';
+    if (flags & 2 != 0) out[1] = 'W';
+    if (flags & 1 != 0) out[2] = 'X';
+    return out;
+}
+
+
