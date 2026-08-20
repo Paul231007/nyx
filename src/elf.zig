@@ -121,3 +121,19 @@ pub fn programHeader(image: []const u8, hdr: Header, idx: u16) ?ProgramHeader {
     };
 }
 
+/// Walk all program headers and call `cb` with each decoded entry.
+/// Stops early if `cb` returns false.  Returns the number of headers visited.
+pub fn walkPhdrs(
+    image: []const u8,
+    hdr: Header,
+    cb: *const fn (idx: u16, ph: ProgramHeader) bool,
+) u16 {
+    var i: u16 = 0;
+    while (i < hdr.phnum) : (i += 1) {
+        const ph = programHeader(image, hdr, i) orelse break;
+        if (!cb(i, ph)) break;
+    }
+    return i;
+}
+
+
