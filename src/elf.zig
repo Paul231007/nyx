@@ -136,3 +136,6 @@ pub fn walkPhdrs(
     return i;
 }
 
+// ---- helpers (little-endian) --------------------------------------------------
+
+
