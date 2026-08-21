@@ -6,3 +6,6 @@
 const std = @import("std");
 const vfs = @import("vfs.zig");
 
+const MAX_ENTRIES: usize = 64;
+const MAX_DATA: usize = 4096;
+
