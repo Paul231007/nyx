@@ -142,3 +142,10 @@ inline fn readU16(buf: []const u8, off: usize) u16 {
     return @as(u16, buf[off]) | (@as(u16, buf[off + 1]) << 8);
 }
 
+inline fn readU32(buf: []const u8, off: usize) u32 {
+    return @as(u32, buf[off]) |
+        (@as(u32, buf[off + 1]) << 8) |
+        (@as(u32, buf[off + 2]) << 16) |
+        (@as(u32, buf[off + 3]) << 24);
+}
+
