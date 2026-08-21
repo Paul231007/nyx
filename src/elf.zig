@@ -148,4 +148,3 @@ inline fn readU32(buf: []const u8, off: usize) u32 {
         (@as(u32, buf[off + 2]) << 16) |
         (@as(u32, buf[off + 3]) << 24);
 }
-
