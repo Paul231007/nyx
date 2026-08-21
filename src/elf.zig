@@ -138,3 +138,8 @@ pub fn walkPhdrs(
 
 // ---- helpers (little-endian) --------------------------------------------------
 
+inline fn readU16(buf: []const u8, off: usize) u16 {
+    return @as(u16, buf[off]) | (@as(u16, buf[off + 1]) << 8);
+}
+
+
