@@ -9,3 +9,13 @@ const vfs = @import("vfs.zig");
 const MAX_ENTRIES: usize = 64;
 const MAX_DATA: usize = 4096;
 
+const Entry = struct {
+    used: bool = false,
+    kind: vfs.Kind = .file,
+    path: [128]u8 = undefined,
+    path_len: usize = 0,
+    data: [MAX_DATA]u8 = undefined,
+    data_len: usize = 0,
+    node: vfs.Node = .{},
+};
+
