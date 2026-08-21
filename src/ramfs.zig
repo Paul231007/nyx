@@ -19,4 +19,3 @@ const Entry = struct {
     node: vfs.Node = .{},
 };
 
-
