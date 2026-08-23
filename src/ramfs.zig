@@ -92,3 +92,17 @@ pub fn create(path: []const u8, kind: vfs.Kind) ?*vfs.Node {
     return null; // table full
 }
 
+/// Remove the entry at `path`. Returns true if found and removed.
+pub fn remove(path: []const u8) bool {
+    for (&entries) |*e| {
+        if (!e.used) continue;
+        if (e.path_len != path.len) continue;
+        if (std.mem.eql(u8, e.path[0..e.path_len], path)) {
+            e.used = false;
+            return true;
+        }
+    }
+    return false;
+}
+
+
