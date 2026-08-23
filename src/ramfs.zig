@@ -21,3 +21,11 @@ const Entry = struct {
 
 var entries: [MAX_ENTRIES]Entry = [_]Entry{.{}} ** MAX_ENTRIES;
 
+var fs_instance: vfs.FileSystem = .{
+    .open = ramfsOpen,
+    .read = ramfsRead,
+    .write = ramfsWrite,
+    .readdir = ramfsReaddir,
+};
+
+
