@@ -30,3 +30,27 @@ var fs_instance: vfs.FileSystem = .{
 
 // ---- public API -----------------------------------------------------------
 
+pub fn init(alloc: std.mem.Allocator) void {
+    _ = alloc;
+    // Reset all entries.
+    for (&entries) |*e| {
+        e.used = false;
+        e.kind = .file;
+        e.path_len = 0;
+        e.data_len = 0;
+        e.node = .{};
+    }
+    // Seed root directory at slot 0.
+    const root = &entries[0];
+    root.used = true;
+    root.kind = .dir;
+    root.path[0] = '/';
+    root.path_len = 1;
+    root.node.kind = .dir;
+    root.node.name[0] = '/';
+    root.node.name_len = 1;
+    root.node.size = 0;
+    root.node.impl = root;
+}
+
+
