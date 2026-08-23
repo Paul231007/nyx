@@ -21,4 +21,3 @@ const Entry = struct {
 
 var entries: [MAX_ENTRIES]Entry = [_]Entry{.{}} ** MAX_ENTRIES;
 
-
