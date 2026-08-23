@@ -57,4 +57,3 @@ pub fn fs() *vfs.FileSystem {
     return &fs_instance;
 }
 
-
