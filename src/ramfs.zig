@@ -107,3 +107,9 @@ pub fn remove(path: []const u8) bool {
 
 // ---- vtable implementations -----------------------------------------------
 
+fn entryFromNode(node: *vfs.Node) ?*Entry {
+    const impl = node.impl orelse return null;
+    return @ptrCast(@alignCast(impl));
+}
+
+
