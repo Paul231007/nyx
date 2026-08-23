@@ -19,3 +19,5 @@ const Entry = struct {
     node: vfs.Node = .{},
 };
 
+var entries: [MAX_ENTRIES]Entry = [_]Entry{.{}} ** MAX_ENTRIES;
+
