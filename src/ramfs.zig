@@ -107,4 +107,3 @@ pub fn remove(path: []const u8) bool {
 
 // ---- vtable implementations -----------------------------------------------
 
-
