@@ -53,3 +53,8 @@ pub fn init(alloc: std.mem.Allocator) void {
     root.node.impl = root;
 }
 
+pub fn fs() *vfs.FileSystem {
+    return &fs_instance;
+}
+
+
