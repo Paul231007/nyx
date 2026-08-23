@@ -28,3 +28,5 @@ var fs_instance: vfs.FileSystem = .{
     .readdir = ramfsReaddir,
 };
 
+// ---- public API ...
+
