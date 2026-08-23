@@ -57,3 +57,39 @@ pub fn fs() *vfs.FileSystem {
     return &fs_instance;
 }
 
+/// Create (or return existing) entry for `path` with the given `kind`.
+/// Returns a pointer to the node on success, null if the table is full.
+pub fn create(path: []const u8, kind: vfs.Kind) ?*vfs.Node {
+    // Return existing entry if path is already present.
+    for (&entries) |*e| {
+        if (!e.used) continue;
+        if (e.path_len != path.len) continue;
+        if (std.mem.eql(u8, e.path[0..e.path_len], path)) return &e.node;
+    }
+    // Find a free slot.
+    for (&entries) |*e| {
+        if (e.used) continue;
+        e.used = true;
+        e.kind = kind;
+        e.data_len = 0;
+        e.node = .{};
+        // Store the path.
+        const plen = @min(path.len, 127);
+        std.mem.copyForwards(u8, &e.path, path[0..plen]);
+        e.path_len = plen;
+        // Derive the basename for node.name.
+        const stored_path = path[0..plen];
+        const slash_pos = std.mem.lastIndexOfScalar(u8, stored_path, '/');
+        const base: []const u8 = if (slash_pos) |s| stored_path[s + 1 ..] else stored_path;
+        const nlen: u8 = @intCast(@min(base.len, 63));
+        std.mem.copyForwards(u8, &e.node.name, base[0..nlen]);
+        e.node.name_len = nlen;
+        e.node.kind = kind;
+        e.node.size = 0;
+        e.node.impl = e;
+        return &e.node;
+    }
+    return null; // table full
+}
+
+
