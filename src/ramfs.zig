@@ -92,4 +92,3 @@ pub fn create(path: []const u8, kind: vfs.Kind) ?*vfs.Node {
     return null; // table full
 }
 
-
