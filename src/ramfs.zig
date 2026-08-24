@@ -166,3 +166,20 @@ fn ramfsReaddir(dir: *vfs.Node, idx: usize) ?*vfs.Node {
     return null;
 }
 
+/// Returns true when `path` is a direct (non-nested) child of `dir`.
+fn isDirectChild(dir: []const u8, path: []const u8) bool {
+    if (!std.mem.startsWith(u8, path, dir)) return false;
+    if (std.mem.eql(u8, dir, "/")) {
+        // For root: path must be "/X" where X has no '/'.
+        if (path.len < 2) return false;
+        const after = path[1..];
+        return std.mem.indexOfScalar(u8, after, '/') == null;
+    } else {
+        // For "/foo": path must be "/foo/X" where X has no '/'.
+        if (path.len <= dir.len) return false;
+        if (path[dir.len] != '/') return false;
+        const after = path[dir.len + 1 ..];
+        return std.mem.indexOfScalar(u8, after, '/') == null;
+    }
+}
+
