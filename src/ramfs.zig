@@ -112,3 +112,13 @@ fn entryFromNode(node: *vfs.Node) ?*Entry {
     return @ptrCast(@alignCast(impl));
 }
 
+fn ramfsOpen(path: []const u8) ?*vfs.Node {
+    for (&entries) |*e| {
+        if (!e.used) continue;
+        if (e.path_len != path.len) continue;
+        if (std.mem.eql(u8, e.path[0..e.path_len], path)) return &e.node;
+    }
+    return null;
+}
+
+
