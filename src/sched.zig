@@ -132,3 +132,13 @@ pub fn yield() void {
     switchContext(&prev.esp, n.esp);
 }
 
+/// Returns true if any task other than `current` is still runnable.
+fn anyOtherRunnable() bool {
+    var n = current.?.next.?;
+    while (n != current.?) : (n = n.next.?) {
+        if (!n.done) return true;
+    }
+    return false;
+}
+
+
