@@ -97,3 +97,20 @@ pub fn spawn(f: *const fn () void) *Task {
     };
     next_id += 1;
 
+    // Build the initial stack top-down: [entry][ebp=0][ebx=0][esi=0][edi=0].
+    // esp points at the saved-edi slot so switchContext's pops land cleanly and
+    // its `ret` jumps to the trampoline.
+    var sp: usize = (@intFromPtr(stack.ptr) + stack.len) & ~@as(usize, 0xF);
+    sp -= 4;
+    @as(*u32, @ptrFromInt(sp)).* = @intCast(@intFromPtr(&taskTrampoline)); // entry
+    sp -= 4;
+    @as(*u32, @ptrFromInt(sp)).* = 0; // ebp
+    sp -= 4;
+    @as(*u32, @ptrFromInt(sp)).* = 0; // ebx
+    sp -= 4;
+    @as(*u32, @ptrFromInt(sp)).* = 0; // esi
+    sp -= 4;
+    @as(*u32, @ptrFromInt(sp)).* = 0; // edi
+    t.esp = @intCast(sp);
+
+
