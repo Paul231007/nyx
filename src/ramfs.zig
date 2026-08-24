@@ -166,4 +166,3 @@ fn ramfsReaddir(dir: *vfs.Node, idx: usize) ?*vfs.Node {
     return null;
 }
 
-
