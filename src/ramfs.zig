@@ -112,4 +112,3 @@ fn entryFromNode(node: *vfs.Node) ?*Entry {
     return @ptrCast(@alignCast(impl));
 }
 
-
