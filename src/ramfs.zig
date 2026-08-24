@@ -130,3 +130,24 @@ fn ramfsRead(node: *vfs.Node, off: u32, buf: []u8) u32 {
     return @intCast(n);
 }
 
+fn ramfsWrite(node: *vfs.Node, off: u32, data: []const u8) u32 {
+    const e = entryFromNode(node) orelse return 0;
+    if (e.kind != .file) return 0;
+    const start: usize = @as(usize, off);
+    const end: usize = start + data.len;
+    if (end > MAX_DATA) {
+        // Write as much as fits.
+        const can = if (start < MAX_DATA) MAX_DATA - start else 0;
+        if (can == 0) return 0;
+        std.mem.copyForwards(u8, e.data[start..MAX_DATA], data[0..can]);
+        if (MAX_DATA > e.data_len) e.data_len = MAX_DATA;
+        node.size = @intCast(e.data_len);
+        return @intCast(can);
+    }
+    std.mem.copyForwards(u8, e.data[start..end], data);
+    if (end > e.data_len) e.data_len = end;
+    node.size = @intCast(e.data_len);
+    return @intCast(data.len);
+}
+
+
