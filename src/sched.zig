@@ -83,3 +83,18 @@ pub fn init() void {
     current = b;
 }
 
+pub fn spawn(f: *const fn () void) *Task {
+    const alloc = heap.allocator();
+    const t = alloc.create(Task) catch @panic("sched: task alloc failed");
+    const stack = alloc.alloc(u8, STACK_SIZE) catch @panic("sched: stack alloc failed");
+    t.* = .{
+        .esp = 0,
+        .stack = stack,
+        .id = next_id,
+        .done = false,
+        .next = undefined,
+        .fn_ptr = f,
+    };
+    next_id += 1;
+
+
