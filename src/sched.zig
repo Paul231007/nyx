@@ -121,3 +121,15 @@ pub fn spawn(f: *const fn () void) *Task {
     return t;
 }
 
+/// Round-robin to the next runnable task (skipping `done` ones). If only the
+/// current task is runnable, just return.
+pub fn yield() void {
+    const prev = current.?;
+    var n = prev.next.?;
+    while (n.done and n != prev) : (n = n.next.?) {}
+    if (n == prev) return;
+    current = n;
+    switchContext(&prev.esp, n.esp);
+}
+
+
