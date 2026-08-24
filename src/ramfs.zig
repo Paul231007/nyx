@@ -130,4 +130,3 @@ fn ramfsRead(node: *vfs.Node, off: u32, buf: []u8) u32 {
     return @intCast(n);
 }
 
-
