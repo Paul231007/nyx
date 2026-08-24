@@ -150,4 +150,3 @@ fn ramfsWrite(node: *vfs.Node, off: u32, data: []const u8) u32 {
     return @intCast(data.len);
 }
 
-
