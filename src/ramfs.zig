@@ -150,3 +150,20 @@ fn ramfsWrite(node: *vfs.Node, off: u32, data: []const u8) u32 {
     return @intCast(data.len);
 }
 
+fn ramfsReaddir(dir: *vfs.Node, idx: usize) ?*vfs.Node {
+    const de = entryFromNode(dir) orelse return null;
+    const dir_path = de.path[0..de.path_len];
+    var count: usize = 0;
+    for (&entries) |*e| {
+        if (!e.used) continue;
+        // Skip self.
+        if (e.path_len == dir_path.len and std.mem.eql(u8, e.path[0..e.path_len], dir_path)) continue;
+        if (isDirectChild(dir_path, e.path[0..e.path_len])) {
+            if (count == idx) return &e.node;
+            count += 1;
+        }
+    }
+    return null;
+}
+
+
