@@ -121,3 +121,13 @@ fn ramfsOpen(path: []const u8) ?*vfs.Node {
     return null;
 }
 
+fn ramfsRead(node: *vfs.Node, off: u32, buf: []u8) u32 {
+    const e = entryFromNode(node) orelse return 0;
+    if (off >= e.data_len) return 0;
+    const avail = e.data_len - @as(usize, off);
+    const n = @min(avail, buf.len);
+    std.mem.copyForwards(u8, buf[0..n], e.data[off .. @as(usize, off) + n]);
+    return @intCast(n);
+}
+
+
