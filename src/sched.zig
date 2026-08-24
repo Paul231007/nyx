@@ -113,3 +113,12 @@ pub fn spawn(f: *const fn () void) *Task {
     @as(*u32, @ptrFromInt(sp)).* = 0; // edi
     t.esp = @intCast(sp);
 
+    // Link in just before the bootstrap node, preserving spawn order in the ring.
+    var p = bootstrap;
+    while (p.next.? != bootstrap) : (p = p.next.?) {}
+    p.next = t;
+    t.next = bootstrap;
+    return t;
+}
+
+
