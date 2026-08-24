@@ -182,4 +182,3 @@ fn isDirectChild(dir: []const u8, path: []const u8) bool {
         return std.mem.indexOfScalar(u8, after, '/') == null;
     }
 }
-
