@@ -66,3 +66,4 @@ fn taskTrampoline() callconv(.c) void {
     while (true) yield();
 }
 
+pub fn init() void { const alloc = heap.allocator(); const b = alloc.create(Task) cath @panic("sched: bootstrap alloc failed"); b.* = .{ .esp = 0, // filled in on the first switch away .stack = &[_]u8{}, .id = next_id, .done = false, .next = undefined, .fn_ptr = undefined, }; next_id += 1; b.next = b; // ring of one bootstrap = b; current = b; }
