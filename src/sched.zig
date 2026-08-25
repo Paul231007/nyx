@@ -176,3 +176,12 @@ pub fn liveCount() u32 {
     return n;
 }
 
+/// Hook for the timer IRQ (called after EOI). Performs a context switch to the
+/// next runnable task. Safe to call from irq0 because switchContext only touches
+/// callee-saved regs + esp; the IRQ stub's iret restores the rest on return.
+pub fn onTick() void {
+    if (!preempt) return;
+    if (current == null) return;
+    yield();
+}
+
