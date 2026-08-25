@@ -141,3 +141,10 @@ fn anyOtherRunnable() bool {
     return false;
 }
 
+/// Drive the ring from the bootstrap until every spawned task has finished, then
+/// return so the caller (kmain) continues.
+pub fn runUntilIdle() void {
+    while (anyOtherRunnable()) yield();
+}
+
+
