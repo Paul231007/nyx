@@ -163,3 +163,16 @@ pub fn taskCount() u32 {
     return next_id;
 }
 
+// / Count of ...
+pub fn liveCount() u32 {
+    if (current == null) return 0;
+    var n: u32 = 0;
+    var p = bootstrap;
+    while (true) {
+        if (!p.done) n += 1;
+        p = p.next.?;
+        if (p == bootstrap) break;
+    }
+    return n;
+}
+
