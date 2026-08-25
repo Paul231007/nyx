@@ -147,3 +147,9 @@ pub fn runUntilIdle() void {
     while (anyOtherRunnable()) yield();
 }
 
+/// Enable timer-driven preemption. Called after the cooperative path is proven.
+pub fn enablePreemption() void {
+    preempt = true;
+}
+
+
