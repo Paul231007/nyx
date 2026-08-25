@@ -157,3 +157,10 @@ pub fn disablePreemption() void {
     preempt = false;
 }
 
+/// Total number of tasks ever created (including the bootstrap node). Best-effort
+/// info for the shell's `ps` command.
+pub fn taskCount() u32 {
+    return next_id;
+}
+
+
