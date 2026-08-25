@@ -152,3 +152,9 @@ pub fn enablePreemption() void {
     preempt = true;
 }
 
+/// Disable preemption (e.g. before returning control to plain kmain code).
+pub fn disablePreemption() void {
+    preempt = false;
+}
+
+
