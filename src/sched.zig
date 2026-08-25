@@ -163,7 +163,7 @@ pub fn taskCount() u32 {
     return next_id;
 }
 
-// / Count of ...
+/// Count of tasks currently linked in the ready ring that are not yet done.
 pub fn liveCount() u32 {
     if (current == null) return 0;
     var n: u32 = 0;
