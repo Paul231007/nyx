@@ -282,3 +282,22 @@ fn kbd_translate() bool {
 
 // ---- registration table -------------------------------------------------------
 
+const cases = [_]Case{
+    .{ .name = "libk_parse",     .run = libk_parse     },
+    .{ .name = "pmm_roundtrip",  .run = pmm_roundtrip  },
+    .{ .name = "heap_alloc",     .run = heap_alloc     },
+    .{ .name = "vfs_roundtrip",  .run = vfs_roundtrip  },
+    .{ .name = "ata_sector",     .run = ata_sector     },
+    .{ .name = "syscall_uptime", .run = syscall_uptime },
+    .{ .name = "slab_roundtrip", .run = slab_roundtrip },
+    .{ .name = "ring_fifo",      .run = ring_fifo      },
+    .{ .name = "libk_format",    .run = libk_format    },
+    .{ .name = "elf_parse",      .run = elf_parse      },
+    .{ .name = "cpuid_vendor",   .run = cpuid_vendor   },
+    .{ .name = "acpi_rsdp",      .run = acpi_rsdp      },
+    .{ .name = "timefmt_format", .run = timefmt_format },
+    .{ .name = "pci_classname",  .run = pci_classname  },
+    .{ .name = "kbd_translate",  .run = kbd_translate  },
+};
+
+
