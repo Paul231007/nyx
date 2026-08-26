@@ -277,3 +277,7 @@ fn kbd_translate() bool {
     // Ordinary printable scancode 'a' (0x1E) returns "".
     if (!std.mem.eql(u8, keyboard.name(0x1E), "")) return false;
 
+    return true;
+}
+
+
