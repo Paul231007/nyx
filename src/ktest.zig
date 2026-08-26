@@ -300,4 +300,3 @@ const cases = [_]Case{
     .{ .name = "kbd_translate",  .run = kbd_translate  },
 };
 
-
