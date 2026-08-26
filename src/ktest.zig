@@ -300,3 +300,21 @@ const cases = [_]Case{
     .{ .name = "kbd_translate",  .run = kbd_translate  },
 };
 
+/// Run every registered case in order.  Prints `  [PASS] name` or
+/// `  [FAIL] name` for each, then returns aggregate counts.
+pub fn runAll() Result {
+    var res: Result = .{ .passed = 0, .failed = 0 };
+    var msg_buf: [64]u8 = undefined;
+    for (cases) |c| {
+        const ok = c.run();
+        if (ok) {
+            console.write(std.fmt.bufPrint(&msg_buf, "  [PASS] {s}\n", .{c.name}) catch "");
+            res.passed += 1;
+        } else {
+            console.write(std.fmt.bufPrint(&msg_buf, "  [FAIL] {s}\n", .{c.name}) catch "");
+            res.failed += 1;
+        }
+    }
+    return res;
+}
+
