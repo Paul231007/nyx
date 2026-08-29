@@ -76,3 +76,4 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     }) catch "");
     console.write(std.fmt.bufPrint(&buf, "multiboot info  : 0x{X}\n", .{info}) catch "");
 
+
