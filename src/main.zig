@@ -70,4 +70,3 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("  nyx -- a small x86 kernel\n");
     console.write("================================\n");
 
-
