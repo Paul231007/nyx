@@ -43,4 +43,3 @@ fn stubReaddir(dir: *vfs.Node, idx: usize) ?*vfs.Node {
 }
 var stub_fs: vfs.FileSystem = .{ .open = stubOpen, .read = stubRead, .write = stubWrite, .readdir = stubReaddir };
 
-
