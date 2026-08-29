@@ -70,3 +70,9 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("  nyx -- a small x86 kernel\n");
     console.write("================================\n");
 
+    var buf: [80]u8 = undefined;
+    console.write(std.fmt.bufPrint(&buf, "multiboot magic : 0x{X} ({s})\n", .{
+        magic, if (magic == 0x2BADB002) "OK" else "BAD",
+    }) catch "");
+    console.write(std.fmt.bufPrint(&buf, "multiboot info  : 0x{X}\n", .{info}) catch "");
+
