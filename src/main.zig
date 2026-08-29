@@ -43,3 +43,10 @@ fn stubReaddir(dir: *vfs.Node, idx: usize) ?*vfs.Node {
 }
 var stub_fs: vfs.FileSystem = .{ .open = stubOpen, .read = stubRead, .write = stubWrite, .readdir = stubReaddir };
 
+/// QEMU `isa-debug-exit` device: writing V to port 0xf4 exits QEMU with status
+/// (V<<1)|1. Used so headless self-tests stop the VM promptly.
+const ExitCode = enum(u8) { success = 0x10, failure = 0x11 };
+fn exitQemu(code: ExitCode) void {
+    io.outb(0xf4, @intFromEnum(code));
+}
+
