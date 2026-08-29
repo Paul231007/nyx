@@ -54,3 +54,13 @@ pub fn hang() noreturn {
     while (true) asm volatile ("hlt");
 }
 
+// Freestanding panic handler.
+pub const panic = std.debug.FullPanic(panicFn);
+fn panicFn(msg: []const u8, _: ?usize) noreturn {
+    console.write("\n*** KERNEL PANIC: ");
+    console.write(msg);
+    console.write(" ***\n");
+    exitQemu(.failure);
+    hang();
+}
+
