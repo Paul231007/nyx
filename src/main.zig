@@ -50,4 +50,3 @@ fn exitQemu(code: ExitCode) void {
     io.outb(0xf4, @intFromEnum(code));
 }
 
-
