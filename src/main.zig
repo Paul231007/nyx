@@ -87,3 +87,12 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("[M2] returned from int3 (iret works)\n");
     console.write("nyx: M2 OK\n");
 
+    // M3: hardware interrupts. Remap the PIC before enabling interrupts so a
+    // stray IRQ can't vector into an exception slot. IDT gates 32..47 were
+    // already wired by interrupts.init() above.
+    pic.init();
+    console.write("[M3] PIC remapped\n");
+    timer.init(100); // 100 Hz
+    console.write("[M3] PIT @ 100 Hz\n");
+    asm volatile ("sti"); // enable interrupts
+
