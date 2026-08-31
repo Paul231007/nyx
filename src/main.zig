@@ -117,3 +117,17 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     var pb: [128]u8 = undefined;
     console.write(std.fmt.bufPrint(&pb, "[M5] frames: total={d} used={d} free={d} (~{d} MiB usable)\n", .{ s.total, s.used, s.free, (s.total * 4) / 1024 }) catch "");
 
+    // Round-trip test: alloc 3 frames, check distinct + page-aligned, free them.
+    const free0 = pmm.stats().free;
+    const a1 = pmm.allocFrame().?;
+    const a2 = pmm.allocFrame().?;
+    const a3 = pmm.allocFrame().?;
+    console.write(std.fmt.bufPrint(&pb, "[M5] alloc: 0x{X} 0x{X} 0x{X}\n", .{ a1, a2, a3 }) catch "");
+    const aligned = (a1 & 0xFFF) == 0 and (a2 & 0xFFF) == 0 and (a3 & 0xFFF) == 0;
+    const distinct = a1 != a2 and a2 != a3 and a1 != a3;
+    pmm.freeFrame(a1);
+    pmm.freeFrame(a2);
+    pmm.freeFrame(a3);
+    const restored = pmm.stats().free == free0;
+    if (aligned and distinct and restored) console.write("nyx: M5 OK\n") else console.write("nyx: M5 FAIL\n");
+
