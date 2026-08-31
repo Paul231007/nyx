@@ -96,3 +96,9 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("[M3] PIT @ 100 Hz\n");
     asm volatile ("sti"); // enable interrupts
 
+    // Idle with hlt so each timer IRQ wakes us; bounded by a guard counter.
+    var guard: u64 = 0;
+    while (timer.ticks() < 5 and guard < 100_000_000) : (guard += 1) {
+        asm volatile ("hlt");
+    }
+
