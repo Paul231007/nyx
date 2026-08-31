@@ -79,3 +79,11 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("[M0] boot foundation: VGA + serial online\n");
     console.write("nyx: M0 OK\n");
 
+    gdt.init();
+    console.write("[M2] GDT loaded\n");
+    interrupts.init();
+    console.write("[M2] IDT loaded\n");
+    asm volatile ("int $3"); // breakpoint self-test (recoverable)
+    console.write("[M2] returned from int3 (iret works)\n");
+    console.write("nyx: M2 OK\n");
+
