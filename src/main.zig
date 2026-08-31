@@ -87,3 +87,4 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("[M2] returned from int3 (iret works)\n");
     console.write("nyx: M2 OK\n");
 
+
