@@ -131,4 +131,3 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     const restored = pmm.stats().free == free0;
     if (aligned and distinct and restored) console.write("nyx: M5 OK\n") else console.write("nyx: M5 FAIL\n");
 
-
