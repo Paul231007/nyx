@@ -106,4 +106,3 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write(std.fmt.bufPrint(&b, "[M3] timer ticks = {d}\n", .{timer.ticks()}) catch "");
     if (timer.ticks() > 0) console.write("nyx: M3 OK\n") else console.write("nyx: M3 FAIL (no ticks)\n");
 
-
