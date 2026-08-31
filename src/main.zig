@@ -111,3 +111,4 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("[M4] keyboard IRQ1 enabled; serial input active\n");
     console.write("nyx: M4 OK\n");
 
+
