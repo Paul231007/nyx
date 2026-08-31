@@ -117,3 +117,4 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     var pb: [128]u8 = undefined;
     console.write(std.fmt.bufPrint(&pb, "[M5] frames: total={d} used={d} free={d} (~{d} MiB usable)\n", .{ s.total, s.used, s.free, (s.total * 4) / 1024 }) catch "");
 
+
