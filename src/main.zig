@@ -96,3 +96,4 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("[M3] PIT @ 100 Hz\n");
     asm volatile ("sti"); // enable interrupts
 
+
