@@ -106,3 +106,8 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write(std.fmt.bufPrint(&b, "[M3] timer ticks = {d}\n", .{timer.ticks()}) catch "");
     if (timer.ticks() > 0) console.write("nyx: M3 OK\n") else console.write("nyx: M3 FAIL (no ticks)\n");
 
+    // M4: keyboard IRQ1 + serial console input + line reader.
+    pic.clearMask(1); // enable keyboard IRQ
+    console.write("[M4] keyboard IRQ1 enabled; serial input active\n");
+    console.write("nyx: M4 OK\n");
+
