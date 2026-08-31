@@ -79,3 +79,4 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("[M0] boot foundation: VGA + serial online\n");
     console.write("nyx: M0 OK\n");
 
+
