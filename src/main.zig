@@ -131,3 +131,21 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     const restored = pmm.stats().free == free0;
     if (aligned and distinct and restored) console.write("nyx: M5 OK\n") else console.write("nyx: M5 FAIL\n");
 
+    // M6: paging — build an identity map and enable CR0.PG.
+    paging.init();
+    console.write("[M6] paging enabled (identity map, CR0.PG on)\n");
+    // Prove the mapping works: write a sentinel through a virtual address and read it back.
+    const probe: *volatile u32 = @ptrFromInt(0x800000); // 8 MiB, identity-mapped RAM
+    probe.* = 0xCAFEBABE;
+    const got = probe.*;
+    console.write(std.fmt.bufPrint(&b, "[M6] sentinel @8MiB readback = 0x{X}\n", .{got}) catch "");
+    // Prove map() works: map a fresh pmm frame to a high virtual addr, write+read it.
+    const frame_phys = pmm.allocFrame().?;
+    const VADDR: usize = 0xE0000000; // 3.5 GiB, currently unmapped
+    paging.map(VADDR, frame_phys, 0x3); // present+rw
+    const hp: *volatile u32 = @ptrFromInt(VADDR);
+    hp.* = 0x1234ABCD;
+    const got2 = hp.*;
+    console.write(std.fmt.bufPrint(&b, "[M6] mapped 0x{X}->0x{X}, readback = 0x{X}\n", .{ VADDR, frame_phys, got2 }) catch "");
+    if (got == 0xCAFEBABE and got2 == 0x1234ABCD) console.write("nyx: M6 OK\n") else console.write("nyx: M6 FAIL\n");
+
