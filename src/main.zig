@@ -217,3 +217,16 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (m10ok) console.write("nyx: M10 OK\n") else console.write("nyx: M10 FAIL\n");
     }
 
+    // M11: CMOS RTC + PCI bus enumeration.
+    {
+        const rtc = @import("rtc.zig");
+        const pci = @import("pci.zig");
+        const t = rtc.read();
+        var rb: [96]u8 = undefined;
+        console.write(std.fmt.bufPrint(&rb, "[M11] rtc {d:0>2}:{d:0>2}:{d:0>2}\n", .{ t.hour, t.min, t.sec }) catch "");
+        var devs: [32]pci.Device = undefined;
+        const npci = pci.enumerate(&devs);
+        console.write(std.fmt.bufPrint(&rb, "[M11] pci devices found: {d}\n", .{npci}) catch "");
+        if (npci >= 1 and t.sec < 60) console.write("nyx: M11 OK\n") else console.write("nyx: M11 FAIL\n");
+    }
+
