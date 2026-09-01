@@ -230,3 +230,20 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (npci >= 1 and t.sec < 60) console.write("nyx: M11 OK\n") else console.write("nyx: M11 FAIL\n");
     }
 
+    // M12: ATA PIO disk — identify, write a sentinel sector, read it back.
+    {
+        const ata = @import("ata.zig");
+        if (ata.identify()) |dinfo| {
+            var wb: [ata.SECTOR]u8 = undefined;
+            for (&wb, 0..) |*bb, ii| bb.* = @truncate(ii * 7 + 1);
+            const wrote = ata.writeSectors(2, 1, &wb);
+            var rb2: [ata.SECTOR]u8 = undefined;
+            const rd = ata.readSectors(2, 1, &rb2);
+            var same = wrote and rd;
+            for (wb, rb2) |aa, cc| { if (aa != cc) same = false; }
+            var mb: [64]u8 = undefined;
+            console.write(std.fmt.bufPrint(&mb, "[M12] disk sectors={d}\n", .{dinfo.sectors}) catch "");
+            if (same) console.write("nyx: M12 OK\n") else console.write("nyx: M12 FAIL\n");
+        } else console.write("nyx: M12 FAIL (no disk)\n");
+    }
+
