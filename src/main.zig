@@ -149,3 +149,28 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write(std.fmt.bufPrint(&b, "[M6] mapped 0x{X}->0x{X}, readback = 0x{X}\n", .{ VADDR, frame_phys, got2 }) catch "");
     if (got == 0xCAFEBABE and got2 == 0x1234ABCD) console.write("nyx: M6 OK\n") else console.write("nyx: M6 FAIL\n");
 
+    // M7: kernel heap allocator (free-list, std.mem.Allocator).
+    heap.init();
+    console.write("[M7] heap initialized (4 MiB @ 0xD0000000)\n");
+    const alloc = heap.allocator();
+    // (a) raw alloc/free with pattern check.
+    const p = alloc.alloc(u8, 100) catch unreachable;
+    for (p, 0..) |*x, i| x.* = @truncate(i);
+    var ok = true;
+    for (p, 0..) |x, i| {
+        if (x != @as(u8, @truncate(i))) ok = false;
+    }
+    alloc.free(p);
+    // (b) std.ArrayList round-trip through the kernel allocator.
+    var list = std.ArrayList(u32){};
+    defer list.deinit(alloc);
+    var i: u32 = 0;
+    while (i < 500) : (i += 1) {
+        list.append(alloc, i * 3) catch unreachable;
+    }
+    var sum: u64 = 0;
+    for (list.items) |v| sum += v;
+    var hb: [96]u8 = undefined;
+    console.write(std.fmt.bufPrint(&hb, "[M7] arraylist: len={d} sum={d} (pattern_ok={})\n", .{ list.items.len, sum, ok }) catch "");
+    if (ok and list.items.len == 500 and sum == 374250) console.write("nyx: M7 OK\n") else console.write("nyx: M7 FAIL\n");
+
