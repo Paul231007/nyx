@@ -189,4 +189,3 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     sched.runUntilIdle();
     console.write("\n[M8] all tasks finished, back in bootstrap\n");
 
-
