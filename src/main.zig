@@ -217,4 +217,3 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (m10ok) console.write("nyx: M10 OK\n") else console.write("nyx: M10 FAIL\n");
     }
 
-
