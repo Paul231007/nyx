@@ -149,4 +149,3 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write(std.fmt.bufPrint(&b, "[M6] mapped 0x{X}->0x{X}, readback = 0x{X}\n", .{ VADDR, frame_phys, got2 }) catch "");
     if (got == 0xCAFEBABE and got2 == 0x1234ABCD) console.write("nyx: M6 OK\n") else console.write("nyx: M6 FAIL\n");
 
-
