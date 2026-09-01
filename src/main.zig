@@ -174,3 +174,4 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write(std.fmt.bufPrint(&hb, "[M7] arraylist: len={d} sum={d} (pattern_ok={})\n", .{ list.items.len, sum, ok }) catch "");
     if (ok and list.items.len == 500 and sum == 374250) console.write("nyx: M7 OK\n") else console.write("nyx: M7 FAIL\n");
 
+
