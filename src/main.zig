@@ -189,3 +189,16 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     sched.runUntilIdle();
     console.write("\n[M8] all tasks finished, back in bootstrap\n");
 
+    // Preemptive demo: tasks that NEVER call yield(). The timer IRQ forces the
+    // context switches, proving real preemption. Tasks spin between prints so a
+    // tick lands mid-task.
+    sched.enablePreemption();
+    _ = sched.spawn(ptaskX);
+    _ = sched.spawn(ptaskY);
+    _ = sched.spawn(ptaskZ);
+    console.write("[M8] spawned 3 PREEMPTIVE tasks (no yields); timer drives switches\n");
+    sched.runUntilIdle();
+    sched.disablePreemption();
+    console.write("\n[M8] preemptive tasks finished\n");
+    console.write("nyx: M8 OK\n");
+
