@@ -247,3 +247,16 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         } else console.write("nyx: M12 FAIL (no disk)\n");
     }
 
+    // M13: VFS layer — mount a stub fs, write+read through fds.
+    {
+        vfs.mount(&stub_fs);
+        const fd = vfs.open("/x").?;
+        _ = vfs.write(fd, "hello vfs");
+        vfs.seek(fd, 0);
+        var rb3: [16]u8 = undefined;
+        const nread = vfs.read(fd, &rb3);
+        vfs.close(fd);
+        const ok13 = nread == 9 and std.mem.eql(u8, rb3[0..9], "hello vfs");
+        if (ok13) console.write("nyx: M13 OK\n") else console.write("nyx: M13 FAIL\n");
+    }
+
