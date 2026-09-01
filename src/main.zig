@@ -247,3 +247,4 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         } else console.write("nyx: M12 FAIL (no disk)\n");
     }
 
+
