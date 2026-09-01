@@ -180,3 +180,12 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         blockcache.init(heap.allocator());
     }
 
+    // M8: cooperative round-robin scheduler with kernel threads.
+    sched.init();
+    _ = sched.spawn(taskA);
+    _ = sched.spawn(taskB);
+    _ = sched.spawn(taskC);
+    console.write("[M8] spawned 3 tasks; running scheduler\n");
+    sched.runUntilIdle();
+    console.write("\n[M8] all tasks finished, back in bootstrap\n");
+
