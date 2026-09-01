@@ -202,3 +202,18 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("\n[M8] preemptive tasks finished\n");
     console.write("nyx: M8 OK\n");
 
+    // M10: libk — string + numeric helpers used across the kernel and shell.
+    {
+        const libk = @import("libk.zig");
+        var m10ok = true;
+        if (!libk.streq("abc", "abc") or libk.streq("abc", "abd")) m10ok = false;
+        if (libk.parseUint("255", 10) != 255) m10ok = false;
+        if (libk.parseHex("CAFE") != 0xCAFE) m10ok = false;
+        var dst: [4]u8 = undefined;
+        libk.memset(&dst, 0xAA);
+        if (dst[0] != 0xAA or dst[3] != 0xAA) m10ok = false;
+        libk.memcpy(&dst, "WXYZ");
+        if (dst[2] != 'Y') m10ok = false;
+        if (m10ok) console.write("nyx: M10 OK\n") else console.write("nyx: M10 FAIL\n");
+    }
+
