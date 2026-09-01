@@ -202,4 +202,3 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     console.write("\n[M8] preemptive tasks finished\n");
     console.write("nyx: M8 OK\n");
 
-
