@@ -230,4 +230,3 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (npci >= 1 and t.sec < 60) console.write("nyx: M11 OK\n") else console.write("nyx: M11 FAIL\n");
     }
 
-
