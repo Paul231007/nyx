@@ -393,3 +393,25 @@ fn ptaskZ() void {
     }
 }
 
+fn taskA() void {
+    var i: u32 = 0;
+    while (i < 5) : (i += 1) {
+        console.putc('A');
+        sched.yield();
+    }
+}
+fn taskB() void {
+    var i: u32 = 0;
+    while (i < 5) : (i += 1) {
+        console.putc('B');
+        sched.yield();
+    }
+}
+fn taskC() void {
+    var i: u32 = 0;
+    while (i < 5) : (i += 1) {
+        console.putc('C');
+        sched.yield();
+    }
+}
+
