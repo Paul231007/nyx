@@ -362,3 +362,33 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
     shell.run();
 }
 
+fn busy() void {
+    var s: u32 = 0;
+    var k: u32 = 0;
+    while (k < 4_000_000) : (k += 1) s +%= k;
+    asm volatile (""
+        :
+        : [s] "r" (s),
+        : .{ .memory = true });
+}
+fn ptaskX() void {
+    var i: u32 = 0;
+    while (i < 5) : (i += 1) {
+        console.putc('x');
+        busy();
+    }
+}
+fn ptaskY() void {
+    var i: u32 = 0;
+    while (i < 5) : (i += 1) {
+        console.putc('y');
+        busy();
+    }
+}
+fn ptaskZ() void {
+    var i: u32 = 0;
+    while (i < 5) : (i += 1) {
+        console.putc('z');
+        busy();
+    }
+}
