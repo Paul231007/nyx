@@ -6,3 +6,8 @@ sole exception — its framebuffer is at the fixed physical address `0xB8000`). 
 of the drivers uses DMA or interrupts for data transfer except the keyboard and
 timer, which are purely interrupt-driven.
 
+## serial.zig — COM1 UART
+
+COM1 is used as the headless console: QEMU's `-serial stdio` maps it to the host's
+stdin/stdout, so the kernel is fully driveable by piping bytes from the shell.
+
