@@ -260,3 +260,23 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (ok13) console.write("nyx: M13 OK\n") else console.write("nyx: M13 FAIL\n");
     }
 
+    // M14: RamFS + tar initrd
+    {
+        const ramfs = @import("ramfs.zig");
+        const tar = @import("tar.zig");
+        ramfs.init(heap.allocator());
+        vfs.mount(ramfs.fs());
+        const ncreated = tar.unpackInto(@embedFile("initrd.tar"), ramfs.fs());
+        var mb14: [80]u8 = undefined;
+        console.write(std.fmt.bufPrint(&mb14, "[M14] initrd entries: {d}\n", .{ncreated}) catch "");
+        const fd14 = vfs.open("/hello.txt");
+        var ok14 = false;
+        if (fd14) |f| {
+            var rb14: [32]u8 = undefined;
+            const got14 = vfs.read(f, &rb14);
+            vfs.close(f);
+            ok14 = (ncreated >= 2) and std.mem.eql(u8, rb14[0..got14], "hello nyx\n");
+        }
+        if (ok14) console.write("nyx: M14 OK\n") else console.write("nyx: M14 FAIL\n");
+    }
+
