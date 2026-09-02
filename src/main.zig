@@ -358,3 +358,8 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (rr.found) console.write("nyx: M20 OK\n") else console.write("nyx: M20 FAIL\n");
     }
 
+    // M9: hand control to the interactive shell (never returns).
+    shell.run();
+}
+
+
