@@ -300,3 +300,4 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (res.failed == 0 and res.passed >= 12) console.write("nyx: M16 OK\n") else console.write("nyx: M16 FAIL\n");
     }
 
+
