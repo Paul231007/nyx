@@ -291,3 +291,12 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (up > 0) console.write("nyx: M15 OK\n") else console.write("nyx: M15 FAIL\n");
     }
 
+    // M16: kernel self-test harness.
+    {
+        const ktest = @import("ktest.zig");
+        const res = ktest.runAll();
+        var mb16: [64]u8 = undefined;
+        console.write(std.fmt.bufPrint(&mb16, "[M16] selftest: {d} passed, {d} failed\n", .{ res.passed, res.failed }) catch "");
+        if (res.failed == 0 and res.passed >= 12) console.write("nyx: M16 OK\n") else console.write("nyx: M16 FAIL\n");
+    }
+
