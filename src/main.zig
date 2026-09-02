@@ -327,3 +327,35 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (ok17) console.write("nyx: M17 OK\n") else console.write("nyx: M17 FAIL\n");
     }
 
+    // M18: ELF32 inspector.
+    {
+        const elf = @import("elf.zig");
+        const hdr = elf.parse(@embedFile("sample.elf")) catch null;
+        var ok18 = false;
+        if (hdr) |h| {
+            var mb18: [80]u8 = undefined;
+            console.write(std.fmt.bufPrint(&mb18, "[M18] elf machine={s} entry=0x{X}\n", .{ elf.machineName(h.machine), h.entry }) catch "");
+            ok18 = h.class == 1 and h.machine == 3 and h.entry == 0x401000;
+        }
+        if (ok18) console.write("nyx: M18 OK\n") else console.write("nyx: M18 FAIL\n");
+    }
+    // M19: CPUID.
+    {
+        const cpu = @import("cpu.zig");
+        const ven = cpu.vendor();
+        var mb19: [80]u8 = undefined;
+        console.write(std.fmt.bufPrint(&mb19, "[M19] cpu vendor={s} maxleaf={d}\n", .{ ven[0..], cpu.maxLeaf() }) catch "");
+        var any19 = false;
+        for (ven) |ch| { if (ch != 0) any19 = true; }
+        if (any19) console.write("nyx: M19 OK\n") else console.write("nyx: M19 FAIL\n");
+    }
+    // M20: ACPI RSDP.
+    {
+        const acpi = @import("acpi.zig");
+        const rr = acpi.find();
+        var mb20: [80]u8 = undefined;
+        console.write(std.fmt.bufPrint(&mb20, "[M20] acpi found={} rsdt=0x{X}\n", .{ rr.found, rr.rsdt_addr }) catch "");
+        if (rr.found) console.write("nyx: M20 OK\n") else console.write("nyx: M20 FAIL\n");
+    }
+
+
