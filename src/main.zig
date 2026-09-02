@@ -280,3 +280,14 @@ export fn kmain(magic: u32, info: u32) callconv(.c) void {
         if (ok14) console.write("nyx: M14 OK\n") else console.write("nyx: M14 FAIL\n");
     }
 
+    // M15: int 0x80 syscall dispatch layer.
+    {
+        const syscall = @import("syscall.zig");
+        const marker = "[M15] hello via syscall\n";
+        _ = syscall.invoke(.write, @intFromPtr(marker.ptr), marker.len, 0);
+        const up = syscall.invoke(.uptime, 0, 0, 0);
+        var mb15: [64]u8 = undefined;
+        console.write(std.fmt.bufPrint(&mb15, "[M15] uptime syscall = {d}\n", .{up}) catch "");
+        if (up > 0) console.write("nyx: M15 OK\n") else console.write("nyx: M15 FAIL\n");
+    }
+
