@@ -59,3 +59,10 @@ On each interrupt, one scancode byte is read from data port `0x60`. The handler:
 The shift state is a single `var shift: bool` tracking left or right shift. Caps
 Lock, Num Lock, and function keys are not handled.
 
+## input.zig — Shared ring buffer
+
+`input.zig` provides a single-producer / single-consumer ring buffer that merges
+keyboard and serial input. `input.push(ch)` (called from the keyboard IRQ handler)
+writes one byte; it is safe to call from an interrupt context because the ring
+write is a single indexed store with a modular increment.
+
