@@ -66,3 +66,11 @@ keyboard and serial input. `input.push(ch)` (called from the keyboard IRQ handle
 writes one byte; it is safe to call from an interrupt context because the ring
 write is a single indexed store with a modular increment.
 
+`input.readLine(buf)` is the blocking line reader used by the shell. It polls:
+1. `serial.getcNonblock()` for bytes from COM1.
+2. The ring buffer (keyboard) for pending bytes.
+
+Backspace is echoed and removes the last character from the accumulator. `'\n'` or
+`'\r'` ends the line. The function blocks (busy-polling with `hlt` between
+iterations) until a newline arrives.
+
