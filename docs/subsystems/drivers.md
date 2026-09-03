@@ -48,3 +48,14 @@ managed solely by the software row/col counters.
 The PS/2 controller is connected to IRQ1 (vector 33). `keyboard.handleIrq()` is
 called from the IRQ1 stub in `interrupts.zig`.
 
+On each interrupt, one scancode byte is read from data port `0x60`. The handler:
+1. Skips the extended `0xE0` byte and the byte that follows it.
+2. Detects break codes (bit 7 set): only shift-key releases are acted on.
+3. Translates make codes via a 89-entry `map[]` (unshifted) or `map_shift[]`
+   (shifted) US-QWERTY table. Zero entries in the table are non-printable and
+   are silently dropped.
+4. Pushes the resulting ASCII byte into the shared input ring via `input.push(ch)`.
+
+The shift state is a single `var shift: bool` tracking left or right shift. Caps
+Lock, Num Lock, and function keys are not handled.
+
