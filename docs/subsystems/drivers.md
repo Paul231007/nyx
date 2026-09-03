@@ -43,3 +43,8 @@ last row. `vga.clear()` blanks the entire buffer and resets both cursors to (0, 
 There is no hardware cursor update (no CRTC port writes); the visible cursor is
 managed solely by the software row/col counters.
 
+## keyboard.zig — PS/2 keyboard
+
+The PS/2 controller is connected to IRQ1 (vector 33). `keyboard.handleIrq()` is
+called from the IRQ1 stub in `interrupts.zig`.
+
