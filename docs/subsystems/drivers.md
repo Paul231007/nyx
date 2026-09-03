@@ -74,3 +74,9 @@ Backspace is echoed and removes the last character from the accumulator. `'\n'` 
 `'\r'` ends the line. The function blocks (busy-polling with `hlt` between
 iterations) until a newline arrives.
 
+## timer.zig — PIT channel 0
+
+`timer.init(hz)` programmes the 8253/8254 PIT channel 0 for the requested frequency
+using mode 3 (square wave), lo/hi byte access (command byte `0x36`). The divisor is
+`PIT_FREQ / hz` where `PIT_FREQ = 1193182`. At 100 Hz the divisor is 11931.
+
