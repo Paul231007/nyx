@@ -21,3 +21,9 @@ stdin/stdout, so the kernel is fully driveable by piping bytes from the shell.
 `serial.putc(c)` spin-waits on the transmit-empty bit (LSR bit 5) before writing.
 A `'\n'` is expanded to `'\r\n'` for VT100 terminals.
 
+`serial.getcNonblock()` returns `?u8`: it reads LSR bit 0 (data ready) and, if set,
+reads the RBR. Returns `null` if no byte is waiting. The input subsystem polls this
+in `readLine`.
+
+## vga.zig — VGA text console
+
