@@ -30,4 +30,3 @@ const timefmt = @import("timefmt.zig");
 var line: [256]u8 = undefined;
 var scratch: [160]u8 = undefined;
 
-
