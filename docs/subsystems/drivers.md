@@ -87,3 +87,8 @@ the configured frequency (used by `cmdUptime` to convert ticks to seconds).
 The IRQ0 handler also calls `sched.onTick()`, which calls `sched.yield()` if timer
 preemption is enabled.
 
+## rtc.zig — CMOS real-time clock
+
+The CMOS RTC is accessed via index/data ports `0x70`/`0x71`. `cmosRead(reg)` writes
+the register index to port `0x70` and reads the value from `0x71`.
+
