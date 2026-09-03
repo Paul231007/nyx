@@ -92,3 +92,11 @@ preemption is enabled.
 The CMOS RTC is accessed via index/data ports `0x70`/`0x71`. `cmosRead(reg)` writes
 the register index to port `0x70` and reads the value from `0x71`.
 
+`rtc.read()` returns a `Time` struct with year, month, day, hour, min, sec. It first
+waits for the Update-In-Progress flag (status register A, bit 7) to clear, then
+reads the six time registers. It checks status register B bit 2 to decide whether
+the values are BCD (common QEMU default) or binary; `fromBcd()` converts BCD to
+binary. The year is always adjusted by +2000.
+
+The shell `date` command calls `rtc.read()` on each invocation; there is no caching.
+
