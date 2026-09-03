@@ -27,3 +27,13 @@ in `readLine`.
 
 ## vga.zig — VGA text console
 
+The VGA text buffer is a `[*]volatile u16` at `0xB8000`. Each cell is a 16-bit word:
+the high byte is the attribute (colour) byte and the low byte is the ASCII character.
+nyx uses colour `0x0F` (bright white on black) for all output.
+
+`vga.putc(c)` handles:
+- `'\n'` — advance row, reset column.
+- `'\r'` — reset column only.
+- Backspace (0x08) — decrement column, write a space cell.
+- All other bytes — write the cell and advance the column.
+
