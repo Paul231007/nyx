@@ -80,3 +80,10 @@ iterations) until a newline arrives.
 using mode 3 (square wave), lo/hi byte access (command byte `0x36`). The divisor is
 `PIT_FREQ / hz` where `PIT_FREQ = 1193182`. At 100 Hz the divisor is 11931.
 
+`timer.tick()` is called by the IRQ0 handler and increments a `u64` counter with
+wrapping arithmetic. `timer.ticks()` returns the current count; `timer.hz()` returns
+the configured frequency (used by `cmdUptime` to convert ticks to seconds).
+
+The IRQ0 handler also calls `sched.onTick()`, which calls `sched.yield()` if timer
+preemption is enabled.
+
