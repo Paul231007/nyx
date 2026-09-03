@@ -37,3 +37,9 @@ nyx uses colour `0x0F` (bright white on black) for all output.
 - Backspace (0x08) — decrement column, write a space cell.
 - All other bytes — write the cell and advance the column.
 
+When `row >= HEIGHT` (25), `scroll()` copies rows 1..24 up by one and blanks the
+last row. `vga.clear()` blanks the entire buffer and resets both cursors to (0, 0).
+
+There is no hardware cursor update (no CRTC port writes); the visible cursor is
+managed solely by the software row/col counters.
+
