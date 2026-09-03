@@ -100,3 +100,10 @@ binary. The year is always adjusted by +2000.
 
 The shell `date` command calls `rtc.read()` on each invocation; there is no caching.
 
+## pci.zig — PCI bus enumeration
+
+PCI configuration mechanism #1 uses two 32-bit I/O ports:
+- `0xCF8` — CONFIG_ADDRESS: bus/slot/func/register packed into a dword with
+  bit 31 set as the enable bit.
+- `0xCFC` — CONFIG_DATA: reads or writes the selected dword.
+
