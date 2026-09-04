@@ -35,4 +35,3 @@ var scratch: [160]u8 = undefined;
 const HISTORY_DEPTH = 16;
 const HISTORY_LINE  = 128;
 
-
