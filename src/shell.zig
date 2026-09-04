@@ -40,4 +40,3 @@ var hist_len: [HISTORY_DEPTH]usize = [_]usize{0} ** HISTORY_DEPTH;
 var hist_head: usize = 0;  // index of the NEXT slot to write (ring)
 var hist_count: usize = 0; // total lines ever recorded (saturates at HISTORY_DEPTH)
 
-
