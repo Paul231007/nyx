@@ -58,3 +58,11 @@ fn trim(s: []const u8) []const u8 {
     return std.mem.trim(u8, s, " \t\r\n");
 }
 
+pub fn run() noreturn {
+    console.write("\n");
+    console.write("================================\n");
+    console.write("  nyx shell -- type 'help'\n");
+    console.write("================================\n");
+    console.write("nyx: M9 OK (shell ready)\n");
+
+
