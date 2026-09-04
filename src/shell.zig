@@ -32,4 +32,3 @@ var scratch: [160]u8 = undefined;
 
 // ---- command history ring buffer -----------------------------------------------
 
-
