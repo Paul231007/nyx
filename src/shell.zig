@@ -49,3 +49,8 @@ fn histPush(text: []const u8) void {
     if (hist_count < HISTORY_DEPTH) hist_count += 1;
 }
 
+fn print(comptime fmt: []const u8, args: anytype) void {
+    console.write(std.fmt.bufPrint(&scratch, fmt, args) catch return);
+}
+
+
