@@ -35,3 +35,9 @@ var scratch: [160]u8 = undefined;
 const HISTORY_DEPTH = 16;
 const HISTORY_LINE  = 128;
 
+var hist_buf: [HISTORY_DEPTH][HISTORY_LINE]u8 = undefined;
+var hist_len: [HISTORY_DEPTH]usize = [_]usize{0} ** HISTORY_DEPTH;
+var hist_head: usize = 0;  // index of the NEXT slot to write (ring)
+var hist_count: usize = 0; // total lines ever recorded (saturates at HISTORY_DEPTH)
+
+
