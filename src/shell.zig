@@ -40,3 +40,13 @@ var hist_len: [HISTORY_DEPTH]usize = [_]usize{0} ** HISTORY_DEPTH;
 var hist_head: usize = 0;  // index of the NEXT slot to write (ring)
 var hist_count: usize = 0; // total lines ever recorded (saturates at HISTORY_DEPTH)
 
+/// Record a non-empty command line in the history ring.
+fn histPush(text: []const u8) void {
+    const n = @min(text.len, HISTORY_LINE);
+    @memcpy(hist_buf[hist_head][0..n], text[0..n]);
+    hist_len[hist_head] = n;
+    hist_head = (hist_head + 1) % HISTORY_DEPTH;
+    if (hist_count < HISTORY_DEPTH) hist_count += 1;
+}
+
+
