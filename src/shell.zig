@@ -53,3 +53,9 @@ fn print(comptime fmt: []const u8, args: anytype) void {
     console.write(std.fmt.bufPrint(&scratch, fmt, args) catch return);
 }
 
+/// Trim leading/trailing ASCII whitespace.
+fn trim(s: []const u8) []const u8 {
+    return std.mem.trim(u8, s, " \t\r\n");
+}
+
+
