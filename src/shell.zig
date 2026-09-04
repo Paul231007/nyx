@@ -49,3 +49,4 @@ fn histPush(text: []const u8) void {
     if (hist_count < HISTORY_DEPTH) hist_count += 1;
 }
 
+
