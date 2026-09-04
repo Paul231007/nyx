@@ -32,3 +32,7 @@ var scratch: [160]u8 = undefined;
 
 // ---- command history ring buffer -----------------------------------------------
 
+const HISTORY_DEPTH = 16;
+const HISTORY_LINE  = 128;
+
+
