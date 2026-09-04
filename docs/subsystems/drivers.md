@@ -107,3 +107,12 @@ PCI configuration mechanism #1 uses two 32-bit I/O ports:
   bit 31 set as the enable bit.
 - `0xCFC` — CONFIG_DATA: reads or writes the selected dword.
 
+`pci.enumerate(out)` brute-forces all 256 buses, 32 slots, and 8 functions. For
+each function it reads the vendor/device ID word (offset 0x00); a vendor of `0xFFFF`
+means no device. For present devices it reads the class/subclass dword (offset
+0x08) and records a `Device` struct. If function 0 of a slot is absent, the
+remaining functions of that slot are skipped.
+
+`pci.find(class, subclass)` is a targeted variant that stops at the first match.
+The shell `lspci` command calls `pci.enumerate(&pci_devs)` and prints each result.
+
