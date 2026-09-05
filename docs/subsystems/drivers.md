@@ -121,3 +121,12 @@ The shell `lspci` command calls `pci.enumerate(&pci_devs)` and prints each resul
 The ATA driver targets the primary bus master drive using polling PIO (no DMA, no
 interrupts). The I/O base is `0x1F0`; the registers are:
 
+| Offset | Name        | Use |
+|--------|-------------|-----|
+| +0     | DATA        | 16-bit data port (read/write 256 words per sector) |
+| +1     | FEAT/ERROR  | features (write) / error register (read) |
+| +2     | SECTOR COUNT| number of sectors to transfer |
+| +3..5  | LBA_LO/MID/HI | 28-bit LBA address bytes |
+| +6     | DRIVE/HEAD  | 0xE0 | LBA[27:24] for LBA mode |
+| +7     | CMD/STATUS  | command (write) / status (read) |
+
