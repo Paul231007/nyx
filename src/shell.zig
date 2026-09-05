@@ -74,3 +74,4 @@ pub fn run() noreturn {
         // Record non-empty lines in the history ring.
         histPush(text);
 
+
