@@ -65,3 +65,4 @@ pub fn run() noreturn {
     console.write("================================\n");
     console.write("nyx: M9 OK (shell ready)\n");
 
+
