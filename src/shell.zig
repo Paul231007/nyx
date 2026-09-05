@@ -74,3 +74,12 @@ pub fn run() noreturn {
         // Record non-empty lines in the history ring.
         histPush(text);
 
+        // Split off the first token as the command; the rest is args.
+        var cmd = text;
+        var args: []const u8 = "";
+        if (std.mem.indexOfScalar(u8, text, ' ')) |sp| {
+            cmd = text[0..sp];
+            args = trim(text[sp + 1 ..]);
+        }
+
+
