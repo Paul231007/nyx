@@ -82,3 +82,73 @@ pub fn run() noreturn {
             args = trim(text[sp + 1 ..]);
         }
 
+        if (std.mem.eql(u8, cmd, "help")) {
+            cmdHelp();
+        } else if (std.mem.eql(u8, cmd, "echo")) {
+            console.write(args);
+            console.write("\n");
+        } else if (std.mem.eql(u8, cmd, "mem")) {
+            cmdMem();
+        } else if (std.mem.eql(u8, cmd, "uptime")) {
+            cmdUptime();
+        } else if (std.mem.eql(u8, cmd, "ps")) {
+            cmdPs();
+        } else if (std.mem.eql(u8, cmd, "clear")) {
+            vga.clear();
+            console.write("\x1b[2J\x1b[H"); // ANSI clear for serial terminals
+        } else if (std.mem.eql(u8, cmd, "reboot")) {
+            console.write("rebooting...\n");
+            io.outb(0x64, 0xFE); // pulse the 8042 CPU reset line
+            while (true) asm volatile ("hlt");
+        } else if (std.mem.eql(u8, cmd, "date")) {
+            cmdDate();
+        } else if (std.mem.eql(u8, cmd, "lspci")) {
+            cmdLspci();
+        } else if (std.mem.eql(u8, cmd, "diskinfo")) {
+            cmdDiskinfo();
+        } else if (std.mem.eql(u8, cmd, "ls")) {
+            cmdLs(args);
+        } else if (std.mem.eql(u8, cmd, "cat")) {
+            cmdCat(args);
+        } else if (std.mem.eql(u8, cmd, "write")) {
+            cmdWrite(args);
+        } else if (std.mem.eql(u8, cmd, "mkdir")) {
+            cmdMkdir(args);
+        } else if (std.mem.eql(u8, cmd, "rm")) {
+            cmdRm(args);
+        } else if (std.mem.eql(u8, cmd, "test")) {
+            const res = ktest.runAll();
+            print("tests: {d} passed, {d} failed\n", .{ res.passed, res.failed });
+        } else if (std.mem.eql(u8, cmd, "slabstat")) {
+            cmdSlabstat();
+        } else if (std.mem.eql(u8, cmd, "env")) {
+            cmdEnv();
+        } else if (std.mem.eql(u8, cmd, "readelf")) {
+            cmdReadelf(args);
+        } else if (std.mem.eql(u8, cmd, "cpuid")) {
+            cmdCpuid();
+        } else if (std.mem.eql(u8, cmd, "acpi")) {
+            cmdAcpi();
+        } else if (std.mem.eql(u8, cmd, "hexdump")) {
+            cmdHexdump(args);
+        } else if (std.mem.eql(u8, cmd, "peek")) {
+            cmdPeek(args);
+        } else if (std.mem.eql(u8, cmd, "poke")) {
+            cmdPoke(args);
+        } else if (std.mem.eql(u8, cmd, "touch")) {
+            cmdTouch(args);
+        } else if (std.mem.eql(u8, cmd, "uname")) {
+            cmdUname();
+        } else if (std.mem.eql(u8, cmd, "history")) {
+            cmdHistory();
+        } else if (std.mem.eql(u8, cmd, "meminfo")) {
+            cmdMeminfo();
+        } else if (std.mem.eql(u8, cmd, "phdrs")) {
+            cmdPhdrs(args);
+        } else if (std.mem.eql(u8, cmd, "sysinfo")) {
+            cmdSysinfo();
+        } else {
+            print("unknown command: {s} (try 'help')\n", .{cmd});
+        }
+    }
+}
