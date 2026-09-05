@@ -116,3 +116,5 @@ remaining functions of that slot are skipped.
 `pci.find(class, subclass)` is a targeted variant that stops at the first match.
 The shell `lspci` command calls `pci.enumerate(&pci_devs)` and prints each result.
 
+## ata.zig — ATA PIO disk driver
+
