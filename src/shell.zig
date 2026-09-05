@@ -71,3 +71,7 @@ pub fn run() noreturn {
         const text = trim(line[0..n]);
         if (text.len == 0) continue;
 
+        // Record non-empty lines in the history ring.
+        histPush(text);
+
+
