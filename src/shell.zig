@@ -65,3 +65,10 @@ pub fn run() noreturn {
     console.write("================================\n");
     console.write("nyx: M9 OK (shell ready)\n");
 
+    while (true) {
+        console.write("nyx> ");
+        const n = input.readLine(&line);
+        const text = trim(line[0..n]);
+        if (text.len == 0) continue;
+
+
