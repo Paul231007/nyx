@@ -118,3 +118,6 @@ The shell `lspci` command calls `pci.enumerate(&pci_devs)` and prints each resul
 
 ## ata.zig — ATA PIO disk driver
 
+The ATA driver targets the primary bus master drive using polling PIO (no DMA, no
+interrupts). The I/O base is `0x1F0`; the registers are:
+
