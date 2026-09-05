@@ -130,3 +130,5 @@ interrupts). The I/O base is `0x1F0`; the registers are:
 | +6     | DRIVE/HEAD  | 0xE0 | LBA[27:24] for LBA mode |
 | +7     | CMD/STATUS  | command (write) / status (read) |
 
+### Status polling
+
