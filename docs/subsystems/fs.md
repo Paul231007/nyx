@@ -95,3 +95,11 @@ by `ramfs.init()` with path `"/"` and `kind = .dir`.
 
 ### Creating and removing entries
 
+`ramfs.create(path, kind)` first scans for an existing entry with the same path
+(idempotent). If not found, it finds a free slot, fills in the path, derives the
+basename for `node.name`, sets `node.impl = e` (the entry's own address), and
+returns `&e.node`. Returns `null` when the 64-entry table is full.
+
+`ramfs.remove(path)` scans for a matching entry and marks `e.used = false`. The
+slot is immediately available for reuse. No directory emptiness check is performed.
+
