@@ -136,3 +136,5 @@ interrupts). The I/O base is `0x1F0`; the registers are:
 after 200,000 iterations. If status is 0x00 or 0xFF the bus is floating (no drive).
 `pollReady()` spins until BSY clears (used after WRITE SECTORS before CACHE FLUSH).
 
+### IDENTIFY (0xEC)
+
