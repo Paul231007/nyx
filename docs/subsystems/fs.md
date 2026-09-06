@@ -11,3 +11,8 @@ and the M13/M14 self-tests). Concrete filesystems register by calling `vfs.mount
 with a pointer to a `FileSystem` vtable. Only one filesystem can be mounted at a
 time; re-mounting replaces the previous one.
 
+### Types
+
+```zig
+pub const Kind = enum { file, dir };
+
