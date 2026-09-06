@@ -38,3 +38,7 @@ The `impl` pointer is set by the backing filesystem (e.g. `ramfs.zig` sets it to
 the address of its internal `Entry` struct) and is cast back inside the vtable
 implementation. Generic VFS code never dereferences `impl`.
 
+### fd table
+
+The fd table is a fixed array of 16 `FdEntry` records:
+
