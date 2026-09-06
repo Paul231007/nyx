@@ -42,3 +42,15 @@ implementation. Generic VFS code never dereferences `impl`.
 
 The fd table is a fixed array of 16 `FdEntry` records:
 
+```zig
+const FdEntry = struct {
+    in_use: bool,
+    node: ?*Node,
+    offset: u32,
+};
+```
+
+`vfs.open(path)` calls `fs.open(path)` to get a `*Node`, then allocates the first
+free `FdEntry` and returns its index as an `Fd`. If all 16 slots are occupied,
+`open` returns `null`. `vfs.close(fd)` clears the slot.
+
