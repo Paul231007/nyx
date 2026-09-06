@@ -69,3 +69,10 @@ All I/O is offset-tracked through the fd table entry:
 
 ### Stub filesystem (M13 self-test)
 
+`main.zig` defines a minimal in-memory stub (a single 128-byte `stub_buf` and a
+single `stub_node`) wired to four static functions (`stubOpen`, `stubRead`,
+`stubWrite`, `stubReaddir`). It is mounted via `vfs.mount(&stub_fs)` for the M13
+round-trip test, then replaced by the RamFS in M14.
+
+## ramfs.zig — In-memory filesystem
+
