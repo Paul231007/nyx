@@ -58,3 +58,14 @@ free `FdEntry` and returns its index as an `Fd`. If all 16 slots are occupied,
 
 All I/O is offset-tracked through the fd table entry:
 
+- `vfs.read(fd, buf)` — calls `fs.read(node, entry.offset, buf)`, advances the
+  offset by the bytes returned.
+- `vfs.write(fd, data)` — calls `fs.write(node, entry.offset, data)`, advances
+  the offset, and updates `node.size` if the write extends the file.
+- `vfs.seek(fd, off)` — sets `entry.offset = off` directly (no delegation to the
+  backing fs).
+- `vfs.readdir(fd, idx)` — calls `fs.readdir(node, idx)` to enumerate directory
+  children by index. Returns `null` when `idx` is past the last child.
+
+### Stub filesystem (M13 self-test)
+
