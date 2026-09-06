@@ -143,3 +143,5 @@ assembled from words 60 (low) and 61 (high). The model string occupies words 27â
 (20 words = 40 bytes) in byte-swapped order; the driver un-swaps them into
 `Info.model`.
 
+### READ SECTORS (0x20) and WRITE SECTORS (0x30)
+
