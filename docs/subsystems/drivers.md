@@ -132,3 +132,7 @@ interrupts). The I/O base is `0x1F0`; the registers are:
 
 ### Status polling
 
+`pollDRQ()` spins until BSY (bit 7) is clear and DRQ (bit 3) is set, timing out
+after 200,000 iterations. If status is 0x00 or 0xFF the bus is floating (no drive).
+`pollReady()` spins until BSY clears (used after WRITE SECTORS before CACHE FLUSH).
+
