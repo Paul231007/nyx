@@ -31,3 +31,10 @@ pub const FileSystem = struct {
     readdir: *const fn (dir: *Node, idx: usize) ?*Node,
 };
 
+pub const Fd = u8;   // index into the fd table
+```
+
+The `impl` pointer is set by the backing filesystem (e.g. `ramfs.zig` sets it to
+the address of its internal `Entry` struct) and is cast back inside the vtable
+implementation. Generic VFS code never dereferences `impl`.
+
