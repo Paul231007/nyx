@@ -90,3 +90,8 @@ const Entry = struct {
 };
 ```
 
+Paths are stored with a leading `/`. The root directory is pre-seeded at `entries[0]`
+by `ramfs.init()` with path `"/"` and `kind = .dir`.
+
+### Creating and removing entries
+
