@@ -145,3 +145,8 @@ assembled from words 60 (low) and 61 (high). The model string occupies words 27â
 
 ### READ SECTORS (0x20) and WRITE SECTORS (0x30)
 
+`readSectors(lba, count, buf)` and `writeSectors(lba, count, buf)` set the LBA
+registers, issue the command, and poll-then-transfer one sector at a time. Each
+sector is 256 16-bit words read from or written to the DATA port. `writeSectors`
+issues a CACHE FLUSH (0xE7) after the final sector and waits for BSY to clear.
+
