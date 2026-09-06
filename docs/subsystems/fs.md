@@ -76,3 +76,17 @@ round-trip test, then replaced by the RamFS in M14.
 
 ## ramfs.zig — In-memory filesystem
 
+RamFS backs the VFS with a static array of 64 `Entry` records:
+
+```zig
+const Entry = struct {
+    used: bool,
+    kind: vfs.Kind,
+    path: [128]u8,    // full absolute path, e.g. "/etc/motd"
+    path_len: usize,
+    data: [4096]u8,   // inline file data (4 KiB per file max)
+    data_len: usize,
+    node: vfs.Node,
+};
+```
+
