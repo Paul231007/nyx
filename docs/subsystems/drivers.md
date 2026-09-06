@@ -138,3 +138,8 @@ after 200,000 iterations. If status is 0x00 or 0xFF the bus is floating (no driv
 
 ### IDENTIFY (0xEC)
 
+`ata.identify()` issues 0xEC, polls, and reads 256 16-bit words. Sector count is
+assembled from words 60 (low) and 61 (high). The model string occupies words 27–46
+(20 words = 40 bytes) in byte-swapped order; the driver un-swaps them into
+`Info.model`.
+
