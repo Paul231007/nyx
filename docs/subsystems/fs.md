@@ -54,3 +54,7 @@ const FdEntry = struct {
 free `FdEntry` and returns its index as an `Fd`. If all 16 slots are occupied,
 `open` returns `null`. `vfs.close(fd)` clears the slot.
 
+### I/O operations
+
+All I/O is offset-tracked through the fd table entry:
+
