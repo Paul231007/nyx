@@ -150,3 +150,4 @@ registers, issue the command, and poll-then-transfer one sector at a time. Each
 sector is 256 16-bit words read from or written to the DATA port. `writeSectors`
 issues a CACHE FLUSH (0xE7) after the final sector and waits for BSY to clear.
 
+The sector size constant `ata.SECTOR = 512` is used by the block cache and ktest.
