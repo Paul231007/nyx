@@ -187,3 +187,13 @@ fn cmdHelp() void {
     console.write("  sysinfo           -- quick summary: CPU, memory, PCI count\n");
 }
 
+fn cmdMem() void {
+    const s = pmm.stats();
+    const free_mib = (s.free * 4) / 1024;
+    const total_mib = (s.total * 4) / 1024;
+    print("frames: total={d} used={d} free={d}\n", .{ s.total, s.used, s.free });
+    print("usable: {d} MiB total, {d} MiB free\n", .{ total_mib, free_mib });
+    print("heap:   base=0x{X} size={d} KiB\n", .{ heap.HEAP_BASE, heap.HEAP_SIZE / 1024 });
+}
+
+
