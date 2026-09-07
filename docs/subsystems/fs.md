@@ -103,3 +103,7 @@ returns `&e.node`. Returns `null` when the 64-entry table is full.
 `ramfs.remove(path)` scans for a matching entry and marks `e.used = false`. The
 slot is immediately available for reuse. No directory emptiness check is performed.
 
+### vtable implementations
+
+`ramfsOpen(path)` scans `entries` for a matching path and returns `&e.node`.
+
