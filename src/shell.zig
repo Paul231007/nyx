@@ -196,3 +196,4 @@ fn cmdMem() void {
     print("heap:   base=0x{X} size={d} KiB\n", .{ heap.HEAP_BASE, heap.HEAP_SIZE / 1024 });
 }
 
+
