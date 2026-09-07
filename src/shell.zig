@@ -196,3 +196,11 @@ fn cmdMem() void {
     print("heap:   base=0x{X} size={d} KiB\n", .{ heap.HEAP_BASE, heap.HEAP_SIZE / 1024 });
 }
 
+fn cmdUptime() void {
+    const t = timer.ticks();
+    const h = timer.hz();
+    const secs = if (h != 0) t / h else 0;
+    print("up {d} ticks ({d} s)\n", .{ t, secs });
+}
+
+
