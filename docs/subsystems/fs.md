@@ -107,3 +107,9 @@ slot is immediately available for reuse. No directory emptiness check is perform
 
 `ramfsOpen(path)` scans `entries` for a matching path and returns `&e.node`.
 
+`ramfsRead(node, off, buf)` recovers the `Entry` from `node.impl` and copies bytes
+from `e.data[off..]` into `buf`. Returns 0 if `off >= e.data_len`.
+
+`ramfsWrite(node, off, data)` copies `data` into `e.data[off..]`. Truncates to 4096
+bytes if the write would overflow. Updates `e.data_len` and `node.size`.
+
