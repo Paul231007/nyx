@@ -222,3 +222,20 @@ fn cmdDate() void {
     console.write("\n");
 }
 
+fn cmdLspci() void {
+    var pci_devs: [32]pci.Device = undefined;
+    const npci = pci.enumerate(&pci_devs);
+    var idx: usize = 0;
+    while (idx < npci) : (idx += 1) {
+        const d = pci_devs[idx];
+        const vname = pci.vendorNameOf(d.vendor);
+        const cname = pci.classNameOf(d.class, d.subclass);
+        print("{d:0>2}:{d:0>2}.{d}  {X:0>4}:{X:0>4}  [{s}]\n", .{
+            d.bus, d.slot, d.func, d.vendor, d.device, vname,
+        });
+        print("         {s}\n", .{cname});
+    }
+    if (npci == 0) console.write("no PCI devices found\n");
+}
+
+
