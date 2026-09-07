@@ -203,4 +203,9 @@ fn cmdUptime() void {
     print("up {d} ticks ({d} s)\n", .{ t, secs });
 }
 
-fn cmdPs() void { print("tasks created: {d} (incl. bootstrap)\n", .{sched.taskCount()}); print("live in ring : {d}\n", .{sched.liveCount()}); console.write("running in boootstrap context (shell)\n"); }
+fn cmdPs() void {
+    print("tasks created: {d} (incl. bootstrap)\n", .{sched.taskCount()});
+    print("live in ring : {d}\n", .{sched.liveCount()});
+    console.write("running in bootstrap context (shell)\n");
+}
+
