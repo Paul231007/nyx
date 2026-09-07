@@ -209,3 +209,17 @@ fn cmdPs() void {
     console.write("running in bootstrap context (shell)\n");
 }
 
+fn cmdDate() void {
+    const t = rtc.read();
+    var fbuf: [32]u8 = undefined;
+    console.write(timefmt.fmtFull(&fbuf, t));
+    console.write("\n");
+    var ibuf: [24]u8 = undefined;
+    console.write(timefmt.fmtIso(&ibuf, t));
+    console.write("\n");
+    var wbuf: [12]u8 = undefined;
+    console.write(timefmt.fmtWeekday(&wbuf, t));
+    console.write("\n");
+}
+
+
