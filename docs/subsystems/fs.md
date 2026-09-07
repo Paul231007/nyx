@@ -113,3 +113,11 @@ from `e.data[off..]` into `buf`. Returns 0 if `off >= e.data_len`.
 `ramfsWrite(node, off, data)` copies `data` into `e.data[off..]`. Truncates to 4096
 bytes if the write would overflow. Updates `e.data_len` and `node.size`.
 
+`ramfsReaddir(dir, idx)` implements index-based enumeration: it scans all entries,
+counts those that are direct children of `dir`'s path (via `isDirectChild`), and
+returns the `idx`-th one. `isDirectChild` checks that the candidate path starts with
+the directory path and has no additional `/` separator after the prefix.
+
+The `fs()` function returns a pointer to the module-level `fs_instance` vtable, which
+is what callers pass to `vfs.mount()`.
+
