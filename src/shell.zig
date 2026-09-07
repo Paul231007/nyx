@@ -203,4 +203,3 @@ fn cmdUptime() void {
     print("up {d} ticks ({d} s)\n", .{ t, secs });
 }
 
-
