@@ -252,3 +252,19 @@ fn cmdDiskinfo() void {
     }
 }
 
+fn cmdLs(args: []const u8) void {
+    const path = if (trim(args).len > 0) trim(args) else "/";
+    const fd = vfs.open(path) orelse {
+        print("ls: not found: {s}\n", .{path});
+        return;
+    };
+    var idx: usize = 0;
+    while (vfs.readdir(fd, idx)) |node| : (idx += 1) {
+        const name = node.name[0..node.name_len];
+        const kind_ch: u8 = if (node.kind == .dir) 'd' else '-';
+        print("{c} {s}\n", .{ kind_ch, name });
+    }
+    if (idx == 0) console.write("(empty)\n");
+    vfs.close(fd);
+}
+
