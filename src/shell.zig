@@ -355,3 +355,4 @@ fn cmdSlabstat() void {
     print("slab: after free: live={d}  capacity={d}\n", .{ st2.live, st2.capacity });
 }
 
+
