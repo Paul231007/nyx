@@ -287,3 +287,25 @@ fn cmdCat(args: []const u8) void {
     vfs.close(fd);
 }
 
+fn cmdWrite(args: []const u8) void {
+    const sp = std.mem.indexOfScalar(u8, args, ' ') orelse {
+        console.write("write: usage: write <path> <content>\n");
+        return;
+    };
+    const path = trim(args[0..sp]);
+    const content = trim(args[sp + 1 ..]);
+    if (path.len == 0) {
+        console.write("write: need a path\n");
+        return;
+    }
+    // Create if not already present.
+    _ = ramfs.create(path, .file);
+    const fd = vfs.open(path) orelse {
+        print("write: open failed: {s}\n", .{path});
+        return;
+    };
+    _ = vfs.write(fd, content);
+    vfs.close(fd);
+    print("wrote {d} bytes to {s}\n", .{ content.len, path });
+}
+
