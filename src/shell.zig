@@ -355,3 +355,16 @@ fn cmdSlabstat() void {
     print("slab: after free: live={d}  capacity={d}\n", .{ st2.live, st2.capacity });
 }
 
+/// Print static kernel build and runtime information.
+fn cmdEnv() void {
+    console.write("nyx kernel info:\n");
+    console.write("  arch     : i386 (x86 protected mode, Multiboot 1)\n");
+    console.write("  compiler : Zig 0.15.2 (freestanding-i386)\n");
+    console.write("  heap     : 4 MiB first-fit free-list @ 0xD0000000\n");
+    console.write("  console  : VGA text mode + serial COM1\n");
+    console.write("  fs       : RamFS + tar initrd (M14)\n");
+    console.write("  sched    : co-op + preemptive round-robin (M8)\n");
+    console.write("  syscall  : int 0x80 dispatch (M15)\n");
+    console.write("  slab     : M17 fixed-size slab allocator\n");
+}
+
