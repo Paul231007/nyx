@@ -309,3 +309,16 @@ fn cmdWrite(args: []const u8) void {
     print("wrote {d} bytes to {s}\n", .{ content.len, path });
 }
 
+fn cmdMkdir(args: []const u8) void {
+    const path = trim(args);
+    if (path.len == 0) {
+        console.write("mkdir: need a path\n");
+        return;
+    }
+    if (ramfs.create(path, .dir) != null) {
+        print("mkdir: created {s}\n", .{path});
+    } else {
+        print("mkdir: failed (table full?): {s}\n", .{path});
+    }
+}
+
