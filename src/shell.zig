@@ -238,3 +238,17 @@ fn cmdLspci() void {
     if (npci == 0) console.write("no PCI devices found\n");
 }
 
+fn cmdDiskinfo() void {
+    if (ata.identify()) |info| {
+        print("sectors : {d}\n", .{info.sectors});
+        // Trim trailing spaces from the model string before printing
+        var mlen: usize = info.model.len;
+        while (mlen > 0 and info.model[mlen - 1] == ' ') : (mlen -= 1) {}
+        console.write("model   : ");
+        console.write(info.model[0..mlen]);
+        console.write("\n");
+    } else {
+        console.write("no ATA disk detected\n");
+    }
+}
+
