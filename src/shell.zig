@@ -309,3 +309,4 @@ fn cmdWrite(args: []const u8) void {
     print("wrote {d} bytes to {s}\n", .{ content.len, path });
 }
 
+
