@@ -322,3 +322,16 @@ fn cmdMkdir(args: []const u8) void {
     }
 }
 
+fn cmdRm(args: []const u8) void {
+    const path = trim(args);
+    if (path.len == 0) {
+        console.write("rm: need a path\n");
+        return;
+    }
+    if (ramfs.remove(path)) {
+        print("rm: removed {s}\n", .{path});
+    } else {
+        print("rm: not found: {s}\n", .{path});
+    }
+}
+
