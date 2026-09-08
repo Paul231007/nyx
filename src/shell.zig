@@ -335,3 +335,23 @@ fn cmdRm(args: []const u8) void {
     }
 }
 
+/// Demo the slab allocator: initialise a small slab, allocate a handful of
+/// objects, print live/capacity stats, then free them all.
+fn cmdSlabstat() void {
+    var sl = slab.Slab.init(heap.allocator(), 32, 8, 4);
+    defer sl.deinit();
+    console.write("slab: obj_size=32 obj_align=8 per_chunk=4\n");
+    var ptrs: [6][*]u8 = undefined;
+    for (&ptrs) |*pp| {
+        pp.* = sl.alloc() orelse {
+            console.write("slabstat: alloc failed\n");
+            return;
+        };
+    }
+    const st1 = sl.stats();
+    print("slab: live={d}  capacity={d}  (2 chunks grown)\n", .{ st1.live, st1.capacity });
+    for (ptrs) |pp| sl.free(pp);
+    const st2 = sl.stats();
+    print("slab: after free: live={d}  capacity={d}\n", .{ st2.live, st2.capacity });
+}
+
