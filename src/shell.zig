@@ -287,4 +287,3 @@ fn cmdCat(args: []const u8) void {
     vfs.close(fd);
 }
 
-
