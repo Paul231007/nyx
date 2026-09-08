@@ -268,3 +268,22 @@ fn cmdLs(args: []const u8) void {
     vfs.close(fd);
 }
 
+fn cmdCat(args: []const u8) void {
+    const path = trim(args);
+    if (path.len == 0) {
+        console.write("cat: need a path\n");
+        return;
+    }
+    const fd = vfs.open(path) orelse {
+        print("cat: not found: {s}\n", .{path});
+        return;
+    };
+    var buf: [256]u8 = undefined;
+    var n = vfs.read(fd, &buf);
+    while (n > 0) {
+        console.write(buf[0..n]);
+        n = vfs.read(fd, &buf);
+    }
+    vfs.close(fd);
+}
+
