@@ -411,3 +411,15 @@ fn cmdCpuid() void {
     print("  brand   : {s}\n", .{cpu.brandStub()});
 }
 
+/// Search for the ACPI RSDP and print what was found.
+fn cmdAcpi() void {
+    const r = acpi.find();
+    if (!r.found) {
+        console.write("acpi: RSDP not found\n");
+        return;
+    }
+    print("  oem      : {s}\n", .{r.oem[0..]});
+    print("  revision : {d}\n", .{r.revision});
+    print("  rsdt     : 0x{X}\n", .{r.rsdt_addr});
+}
+
