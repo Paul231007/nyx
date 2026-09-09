@@ -423,3 +423,25 @@ fn cmdAcpi() void {
     print("  rsdt     : 0x{X}\n", .{r.rsdt_addr});
 }
 
+/// Hex+ASCII dump of a memory region.  Usage: hexdump <hex-addr> <hex-len>
+/// Caps the dump at 4 KiB per invocation to avoid flooding the console.
+fn cmdHexdump(args: []const u8) void {
+    const sp = std.mem.indexOfScalar(u8, args, ' ') orelse {
+        console.write("hexdump: usage: hexdump <addr> <len>  (both hex)\n");
+        return;
+    };
+    const addr_str = trim(args[0..sp]);
+    const len_str  = trim(args[sp + 1 ..]);
+    const addr_val = libk.parseHex(addr_str) orelse {
+        print("hexdump: bad address: {s}\n", .{addr_str});
+        return;
+    };
+    const len_val = libk.parseHex(len_str) orelse {
+        print("hexdump: bad length: {s}\n", .{len_str});
+        return;
+    };
+    // Clamp to 4 KiB to keep output sane.
+    const cap: usize = @min(@as(usize, @truncate(len_val)), 4096);
+    libk.HexDump.dump(@as(usize, @truncate(addr_val)), cap, console.write);
+}
+
