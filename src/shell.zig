@@ -461,3 +461,25 @@ fn cmdPeek(args: []const u8) void {
     print("*0x{X} = 0x{X:0>8}\n", .{ addr_val, ptr.* });
 }
 
+/// Write a u32 value to an arbitrary virtual address.
+/// Usage: poke <hex-addr> <hex-val>
+fn cmdPoke(args: []const u8) void {
+    const sp = std.mem.indexOfScalar(u8, args, ' ') orelse {
+        console.write("poke: usage: poke <addr> <value>  (both hex)\n");
+        return;
+    };
+    const addr_str = trim(args[0..sp]);
+    const val_str  = trim(args[sp + 1 ..]);
+    const addr_val = libk.parseHex(addr_str) orelse {
+        print("poke: bad address: {s}\n", .{addr_str});
+        return;
+    };
+    const poke_val = libk.parseHex(val_str) orelse {
+        print("poke: bad value: {s}\n", .{val_str});
+        return;
+    };
+    const ptr: *volatile u32 = @ptrFromInt(@as(usize, @truncate(addr_val)));
+    ptr.* = @truncate(poke_val);
+    print("wrote 0x{X:0>8} -> *0x{X}\n", .{ @as(u32, @truncate(poke_val)), addr_val });
+}
+
