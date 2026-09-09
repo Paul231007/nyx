@@ -423,4 +423,3 @@ fn cmdAcpi() void {
     print("  rsdt     : 0x{X}\n", .{r.rsdt_addr});
 }
 
-
