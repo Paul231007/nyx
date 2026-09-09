@@ -121,3 +121,5 @@ the directory path and has no additional `/` separator after the prefix.
 The `fs()` function returns a pointer to the module-level `fs_instance` vtable, which
 is what callers pass to `vfs.mount()`.
 
+## tar.zig — ustar initrd
+
