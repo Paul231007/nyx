@@ -368,3 +368,36 @@ fn cmdEnv() void {
     console.write("  slab     : M17 fixed-size slab allocator\n");
 }
 
+/// Inspect an ELF32 file from the VFS and print key header fields.
+fn cmdReadelf(args: []const u8) void {
+    const path = trim(args);
+    if (path.len == 0) {
+        console.write("readelf: usage: readelf <path>\n");
+        return;
+    }
+    const fd = vfs.open(path) orelse {
+        print("readelf: not found: {s}\n", .{path});
+        return;
+    };
+    var buf: [512]u8 = undefined;
+    const n = vfs.read(fd, &buf);
+    vfs.close(fd);
+    if (n == 0) {
+        console.write("readelf: file is empty\n");
+        return;
+    }
+    const hdr = elf.parse(buf[0..n]) catch |err| {
+        switch (err) {
+            error.BadMagic  => console.write("readelf: not an ELF file\n"),
+            error.NotElf32  => console.write("readelf: not ELF32\n"),
+        }
+        return;
+    };
+    print("  class   : ELF{d}\n", .{if (hdr.class == 1) @as(u32, 32) else @as(u32, 64)});
+    print("  machine : {s}\n", .{elf.machineName(hdr.machine)});
+    print("  entry   : 0x{X}\n", .{hdr.entry});
+    print("  phoff   : 0x{X}\n", .{hdr.phoff});
+    print("  phnum   : {d}\n", .{hdr.phnum});
+    print("  shnum   : {d}\n", .{hdr.shnum});
+}
+
