@@ -445,3 +445,19 @@ fn cmdHexdump(args: []const u8) void {
     libk.HexDump.dump(@as(usize, @truncate(addr_val)), cap, console.write);
 }
 
+/// Read and print a u32 from an arbitrary virtual address.
+/// Usage: peek <hex-addr>
+fn cmdPeek(args: []const u8) void {
+    const addr_str = trim(args);
+    if (addr_str.len == 0) {
+        console.write("peek: usage: peek <hex-addr>\n");
+        return;
+    }
+    const addr_val = libk.parseHex(addr_str) orelse {
+        print("peek: bad address: {s}\n", .{addr_str});
+        return;
+    };
+    const ptr: *const volatile u32 = @ptrFromInt(@as(usize, @truncate(addr_val)));
+    print("*0x{X} = 0x{X:0>8}\n", .{ addr_val, ptr.* });
+}
+
