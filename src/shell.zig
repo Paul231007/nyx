@@ -401,3 +401,13 @@ fn cmdReadelf(args: []const u8) void {
     print("  shnum   : {d}\n", .{hdr.shnum});
 }
 
+/// Print CPUID vendor string, max leaf, and a few feature flags.
+fn cmdCpuid() void {
+    const v = cpu.vendor();
+    print("  vendor  : {s}\n", .{v[0..]});
+    print("  maxleaf : {d}\n", .{cpu.maxLeaf()});
+    print("  FPU     : {}\n", .{cpu.hasFeature(0)});
+    print("  SSE     : {}\n", .{cpu.hasFeature(25)});
+    print("  brand   : {s}\n", .{cpu.brandStub()});
+}
+
