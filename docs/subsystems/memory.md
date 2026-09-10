@@ -36,3 +36,12 @@ guard (`if (!bitGet(idx)) return`) prevents double-counting.
 clear bits up to `highest_frame`. This is an O(frames) walk and is only called for
 the `mem` shell command and diagnostic prints, never in hot paths.
 
+### Utility
+
+```zig
+pub fn allocFrame() ?usize        // returns physical address or null
+pub fn freeFrame(addr: usize) void
+pub const Stats = struct { total: usize, used: usize, free: usize };
+pub fn stats() Stats
+```
+
