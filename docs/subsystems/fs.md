@@ -146,3 +146,12 @@ two consecutive all-zero 512-byte blocks.
 `normalizePath(name, buf)` strips a `./` prefix and trailing `/` from the tar name
 and prepends `/`, producing a canonical VFS path.
 
+For each entry the parser:
+1. Detects the end-of-archive sentinel (two zero blocks).
+2. Skips entries that are neither files nor directories (typeflags other than 0/'0'
+   or '5').
+3. Skips the root entry (normalised path is `"/"`).
+4. Calls `ramfs.create(path, kind)`.
+5. For regular files, writes the data from the archive slice directly through the
+   vtable `into.write(node, 0, data)`.
+
