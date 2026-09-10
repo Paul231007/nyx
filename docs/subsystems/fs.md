@@ -139,3 +139,5 @@ Each archive member starts with a 512-byte header:
 Data blocks follow the header, padded to a multiple of 512. The archive ends with
 two consecutive all-zero 512-byte blocks.
 
+### Parsing logic
+
