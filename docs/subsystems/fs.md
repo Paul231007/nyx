@@ -128,3 +128,5 @@ is what callers pass to `vfs.mount()`.
 
 ### Header format
 
+Each archive member starts with a 512-byte header:
+
