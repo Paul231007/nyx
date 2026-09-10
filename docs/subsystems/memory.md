@@ -27,3 +27,12 @@ the `stats().free` count is always accurate relative to truly usable frames.
 
 ### Allocation and deallocation
 
+`allocFrame()` scans the bitmap from index 0 up to `highest_frame` for the first
+clear bit, sets it, and returns the physical address (`idx * 4096`). On failure it
+returns `null`. `freeFrame(addr)` clears the bit for `addr / 4096`. A double-free
+guard (`if (!bitGet(idx)) return`) prevents double-counting.
+
+`stats()` returns `{ total, used, free }` where `free` is computed by counting
+clear bits up to `highest_frame`. This is an O(frames) walk and is only called for
+the `mem` shell command and diagnostic prints, never in hot paths.
+
