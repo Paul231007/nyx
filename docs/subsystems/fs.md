@@ -155,3 +155,6 @@ For each entry the parser:
 5. For regular files, writes the data from the archive slice directly through the
    vtable `into.write(node, 0, data)`.
 
+The initrd (`src/initrd.tar`) ships two entries: `/hello.txt` (content `"hello nyx\n"`)
+and `/motd`. The M14 self-test verifies that `ncreated >= 2` and that reading
+`/hello.txt` via the VFS returns the expected string.
