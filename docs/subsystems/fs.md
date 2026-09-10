@@ -143,3 +143,6 @@ two consecutive all-zero 512-byte blocks.
 
 `parseOctal(s)` converts the size field's octal ASCII string to a `usize`.
 
+`normalizePath(name, buf)` strips a `./` prefix and trailing `/` from the tar name
+and prepends `/`, producing a canonical VFS path.
+
