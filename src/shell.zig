@@ -498,3 +498,12 @@ fn cmdTouch(args: []const u8) void {
     }
 }
 
+/// Print kernel identification: name, version, CPU vendor string.
+fn cmdUname() void {
+    const v = cpu.vendor();
+    console.write("nyx 0.21.0 (Zig 0.15.2 / freestanding-i386 / Multiboot 1)\n");
+    print("cpu vendor : {s}\n", .{v[0..]});
+    print("cpu maxleaf: {d}\n", .{cpu.maxLeaf()});
+    console.write("build opts : -O ReleaseSafe -target x86-freestanding-none\n");
+}
+
