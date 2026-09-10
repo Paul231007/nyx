@@ -11,3 +11,14 @@ The PMM tracks every 4 KiB physical frame in a statically-allocated 128 KiB bitm
 bit clear means free. The bitmap covers the full 32-bit address space (1,048,576
 frames × 1 bit = 128 KiB).
 
+### Initialisation (`pmm.init`)
+
+1. All bits are set to 1 (every frame marked used).
+2. The multiboot1 memory map is walked. Each entry with `type == 1` (available RAM)
+   has its frames cleared (marked free) and counted into `total_frames`.
+3. Three ranges are re-reserved so they are never handed out:
+   - The first 1 MiB (BIOS, IVT, VGA buffer at `0xB8000`).
+   - The kernel ELF image, bounded by the linker-exported `kernel_start` and
+     `kernel_end` symbols.
+   - The multiboot info struct and its mmap buffer.
+
