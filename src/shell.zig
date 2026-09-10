@@ -524,3 +524,38 @@ fn cmdHistory() void {
     }
 }
 
+/// Print detailed physical-memory, heap, and slab statistics.
+fn cmdMeminfo() void {
+    const s = pmm.stats();
+    const total_kib = s.total * 4;
+    const free_kib  = s.free  * 4;
+    const used_kib  = s.used  * 4;
+    console.write("-- physical memory (4 KiB pages) --\n");
+    print("  frames : total={d}  used={d}  free={d}\n",
+        .{ s.total, s.used, s.free });
+    print("  KiB    : total={d}  used={d}  free={d}\n",
+        .{ total_kib, used_kib, free_kib });
+    console.write("-- kernel heap (first-fit free-list) --\n");
+    print("  base   : 0x{X}\n", .{heap.HEAP_BASE});
+    print("  size   : {d} KiB\n", .{heap.HEAP_SIZE / 1024});
+    // Demonstrate the slab allocator with a tiny allocation.
+    console.write("-- slab allocator demo (obj_size=64, per_chunk=4) --\n");
+    var sl = slab.Slab.init(heap.allocator(), 64, 8, 4);
+    defer sl.deinit();
+    const a1 = sl.alloc() orelse {
+        console.write("  (slab alloc failed)\n");
+        return;
+    };
+    const a2 = sl.alloc() orelse {
+        sl.free(a1);
+        console.write("  (slab alloc2 failed)\n");
+        return;
+    };
+    const st1 = sl.stats();
+    print("  live={d}  capacity={d}  (after 2 allocs)\n", .{ st1.live, st1.capacity });
+    sl.free(a1);
+    sl.free(a2);
+    const st2 = sl.stats();
+    print("  live={d}  capacity={d}  (after 2 frees)\n", .{ st2.live, st2.capacity });
+}
+
