@@ -507,3 +507,20 @@ fn cmdUname() void {
     console.write("build opts : -O ReleaseSafe -target x86-freestanding-none\n");
 }
 
+/// Print the last ≤16 non-empty command lines that were entered.
+fn cmdHistory() void {
+    if (hist_count == 0) {
+        console.write("(no history yet)\n");
+        return;
+    }
+    // When the ring is not yet full the oldest entry is slot 0.
+    // When the ring has wrapped, the oldest is hist_head (next write target).
+    const oldest: usize = if (hist_count < HISTORY_DEPTH) 0 else hist_head;
+    var hi: usize = 0;
+    while (hi < hist_count) : (hi += 1) {
+        const slot = (oldest + hi) % HISTORY_DEPTH;
+        const text = hist_buf[slot][0..hist_len[slot]];
+        print("  {d:>3}  {s}\n", .{ hi + 1, text });
+    }
+}
+
