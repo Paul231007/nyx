@@ -524,4 +524,3 @@ fn cmdHistory() void {
     }
 }
 
-
