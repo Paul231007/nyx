@@ -136,3 +136,6 @@ Each archive member starts with a 512-byte header:
 | 124 | 12 | file size (octal ASCII, NUL/space terminated) |
 | 156 | 1 | typeflag: `'0'`/`0` = file, `'5'` = directory |
 
+Data blocks follow the header, padded to a multiple of 512. The archive ends with
+two consecutive all-zero 512-byte blocks.
+
