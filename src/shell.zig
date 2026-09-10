@@ -483,3 +483,18 @@ fn cmdPoke(args: []const u8) void {
     print("wrote 0x{X:0>8} -> *0x{X}\n", .{ @as(u32, @truncate(poke_val)), addr_val });
 }
 
+/// Create an empty file node in the RamFS / VFS.  Like POSIX touch.
+/// Usage: touch <path>
+fn cmdTouch(args: []const u8) void {
+    const path = trim(args);
+    if (path.len == 0) {
+        console.write("touch: usage: touch <path>\n");
+        return;
+    }
+    if (ramfs.create(path, .file) != null) {
+        print("touch: created {s}\n", .{path});
+    } else {
+        print("touch: {s}: already exists or table full\n", .{path});
+    }
+}
+
