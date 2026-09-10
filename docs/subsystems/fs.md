@@ -130,3 +130,9 @@ is what callers pass to `vfs.mount()`.
 
 Each archive member starts with a 512-byte header:
 
+| Offset | Size | Field |
+|--------|------|-------|
+| 0 | 100 | name (NUL-terminated) |
+| 124 | 12 | file size (octal ASCII, NUL/space terminated) |
+| 156 | 1 | typeflag: `'0'`/`0` = file, `'5'` = directory |
+
