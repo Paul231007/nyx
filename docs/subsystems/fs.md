@@ -123,3 +123,6 @@ is what callers pass to `vfs.mount()`.
 
 ## tar.zig — ustar initrd
 
+`tar.unpackInto(image, into)` parses a raw ustar archive (as embedded by
+`@embedFile("initrd.tar")`) and creates entries in the target filesystem.
+
