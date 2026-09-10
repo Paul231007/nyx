@@ -22,3 +22,8 @@ frames × 1 bit = 128 KiB).
      `kernel_end` symbols.
    - The multiboot info struct and its mmap buffer.
 
+The `reserveAndCount` helper both sets the bits and decrements `total_frames` so
+the `stats().free` count is always accurate relative to truly usable frames.
+
+### Allocation and deallocation
+
