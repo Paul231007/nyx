@@ -141,3 +141,5 @@ two consecutive all-zero 512-byte blocks.
 
 ### Parsing logic
 
+`parseOctal(s)` converts the size field's octal ASCII string to a `usize`.
+
