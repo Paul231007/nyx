@@ -602,3 +602,20 @@ fn cmdPhdrs(args: []const u8) void {
     }
 }
 
+/// Print a quick system summary: CPU, memory, PCI device count.
+fn cmdSysinfo() void {
+    const v = cpu.vendor();
+    print("cpu   : {s}  leaf={d}  FPU={}\n",
+        .{ v[0..], cpu.maxLeaf(), cpu.hasFeature(0) });
+    const s = pmm.stats();
+    print("mem   : {d} KiB total / {d} KiB free\n",
+        .{ s.total * 4, s.free * 4 });
+    var pci_devs: [64]pci.Device = undefined;
+    const npci = pci.enumerate(&pci_devs);
+    print("pci   : {d} device(s) found\n", .{npci});
+    const t = rtc.read();
+    var ibuf: [24]u8 = undefined;
+    console.write("time  : ");
+    console.write(timefmt.fmtIso(&ibuf, t));
+    console.write("\n");
+}
