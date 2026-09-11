@@ -119,3 +119,5 @@ Split happens when the tail of the chosen block is large enough to hold a new
 `Block` header plus `MIN_PAYLOAD` (16) bytes. This keeps small allocations from
 permanently fragmenting large regions.
 
+### std.mem.Allocator
+
