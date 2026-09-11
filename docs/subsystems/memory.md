@@ -109,3 +109,9 @@ physically-adjacent neighbours by merging the `size` fields and relinking the li
 
 ### Alignment
 
+`heapAlloc(len, alignment)` computes the aligned user pointer by stepping forward
+from `payloadStart(b)` to satisfy the alignment constraint. It stores the owning
+header address in the `usize` slot immediately before the user pointer (the
+"back-pointer trick"). `heapFree(ptr)` recovers the header by reading
+`ptr[-sizeof(usize)]`.
+
