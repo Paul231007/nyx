@@ -87,3 +87,8 @@ future subsystems.
 
 ## heap.zig — Kernel heap
 
+The heap lives in `[HEAP_BASE, HEAP_BASE + HEAP_SIZE)` = `[0xD0000000, 0xD0400000)`
+(4 MiB). It is a first-fit, address-ordered, doubly-linked free list.
+
+### Block layout
+
