@@ -45,3 +45,9 @@ pub const Stats = struct { total: usize, used: usize, free: usize };
 pub fn stats() Stats
 ```
 
+## paging.zig — 32-bit x86 paging
+
+`paging.zig` implements non-PAE 32-bit paging: a 1024-entry page directory, each
+entry pointing to a 1024-entry page table covering 4 MiB. Each page table entry
+covers a 4 KiB physical frame.
+
