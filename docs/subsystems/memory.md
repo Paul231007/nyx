@@ -66,3 +66,12 @@ remain valid because of the identity map.
 pub fn map(virt: usize, phys: usize, flags: u32) void
 ```
 
+`map()` installs a single 4 KiB mapping. It looks up the page directory entry
+for `virt >> 22`; if no page table exists it allocates one from the PMM and
+zeroes it. It then writes the PTE at `(virt >> 12) & 0x3FF` and issues `invlpg`
+to flush the TLB entry.
+
+The heap uses `map()` to wire 1024 PMM frames into the virtual window
+`[0xD0000000, 0xD0400000)`. The M6 self-test uses it to map a single frame at
+`0xE0000000` and verify a sentinel read-back.
+
