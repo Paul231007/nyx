@@ -92,3 +92,15 @@ The heap lives in `[HEAP_BASE, HEAP_BASE + HEAP_SIZE)` = `[0xD0000000, 0xD040000
 
 ### Block layout
 
+Every allocation region is described by a `Block` header immediately preceding the
+payload:
+
+```zig
+const Block = struct {
+    size: usize,   // payload bytes available after this header
+    free: bool,
+    next: ?*Block,
+    prev: ?*Block,
+};
+```
+
