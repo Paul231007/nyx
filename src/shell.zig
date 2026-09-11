@@ -559,3 +559,46 @@ fn cmdMeminfo() void {
     print("  live={d}  capacity={d}  (after 2 frees)\n", .{ st2.live, st2.capacity });
 }
 
+/// Walk and print the ELF32 program headers of a file in the VFS.
+/// Usage: phdrs <path>
+fn cmdPhdrs(args: []const u8) void {
+    const path = trim(args);
+    if (path.len == 0) {
+        console.write("phdrs: usage: phdrs <path>\n");
+        return;
+    }
+    const fd = vfs.open(path) orelse {
+        print("phdrs: not found: {s}\n", .{path});
+        return;
+    };
+    var buf: [512]u8 = undefined;
+    const nb = vfs.read(fd, &buf);
+    vfs.close(fd);
+    if (nb == 0) {
+        console.write("phdrs: file is empty\n");
+        return;
+    }
+    const hdr = elf.parse(buf[0..nb]) catch |err| {
+        switch (err) {
+            error.BadMagic => console.write("phdrs: not an ELF file\n"),
+            error.NotElf32 => console.write("phdrs: not ELF32\n"),
+        }
+        return;
+    };
+    if (hdr.phnum == 0) {
+        console.write("phdrs: no program headers in this ELF\n");
+        return;
+    }
+    print("  {d} program header(s), phoff=0x{X}\n", .{ hdr.phnum, hdr.phoff });
+    console.write("  idx  type             offset    vaddr       filesz    memsz     flg\n");
+    var pi: u16 = 0;
+    while (pi < hdr.phnum) : (pi += 1) {
+        const ph = elf.programHeader(buf[0..nb], hdr, pi) orelse break;
+        const fs = elf.phFlagsStr(ph.flags);
+        print("  {d:>3}  {s:<16} 0x{X:0>6}  0x{X:0>8}  0x{X:0>6}  0x{X:0>6}  {s}\n", .{
+            pi, elf.phTypeName(ph.ptype), ph.offset, ph.vaddr,
+            ph.filesz, ph.memsz, fs[0..],
+        });
+    }
+}
+
