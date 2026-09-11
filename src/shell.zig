@@ -619,3 +619,4 @@ fn cmdSysinfo() void {
     console.write(timefmt.fmtIso(&ibuf, t));
     console.write("\n");
 }
+
