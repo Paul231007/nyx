@@ -104,3 +104,6 @@ const Block = struct {
 };
 ```
 
+Blocks tile the heap window with no gaps. On free, a block is coalesced with its
+physically-adjacent neighbours by merging the `size` fields and relinking the list.
+
