@@ -60,3 +60,9 @@ to `phys_addr | PRESENT | RW`, making virtual == physical for all addresses belo
 assembly. After `init()` returns, paging is active and all existing kernel pointers
 remain valid because of the identity map.
 
+### Arbitrary mappings (`paging.map`)
+
+```zig
+pub fn map(virt: usize, phys: usize, flags: u32) void
+```
+
