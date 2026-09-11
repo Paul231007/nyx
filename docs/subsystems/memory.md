@@ -81,3 +81,9 @@ The heap uses `map()` to wire 1024 PMM frames into the virtual window
 pub fn translate(virt: usize) ?usize
 ```
 
+Walks the directory and table to return the physical frame base for a virtual
+address, or `null` if not mapped. Used by the M6 diagnostic and available to
+future subsystems.
+
+## heap.zig — Kernel heap
+
