@@ -121,3 +121,9 @@ permanently fragmenting large regions.
 
 ### std.mem.Allocator
 
+`heap.allocator()` returns a `std.mem.Allocator` backed by the vtable
+`{ alloc, resize, remap, free }`. `resize` allows shrink-in-place; `remap` returns
+`null` for growth (signalling the caller to alloc + copy + free). This is the
+allocator used by `std.ArrayList` in the M7 self-test and by the scheduler and
+block cache.
+
