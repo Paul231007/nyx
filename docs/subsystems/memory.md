@@ -51,3 +51,12 @@ pub fn stats() Stats
 entry pointing to a 1024-entry page table covering 4 MiB. Each page table entry
 covers a 4 KiB physical frame.
 
+### Identity map (`paging.init`)
+
+`init()` allocates one PMM frame for the page directory and 16 frames for page
+tables (one per 4 MiB, covering the first 64 MiB). Every page table entry is set
+to `phys_addr | PRESENT | RW`, making virtual == physical for all addresses below
+64 MiB. The directory is loaded into CR3 and CR0 bit 31 (`PG`) is set via inline
+assembly. After `init()` returns, paging is active and all existing kernel pointers
+remain valid because of the identity map.
+
