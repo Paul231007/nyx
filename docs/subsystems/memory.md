@@ -115,3 +115,7 @@ header address in the `usize` slot immediately before the user pointer (the
 "back-pointer trick"). `heapFree(ptr)` recovers the header by reading
 `ptr[-sizeof(usize)]`.
 
+Split happens when the tail of the chosen block is large enough to hold a new
+`Block` header plus `MIN_PAYLOAD` (16) bytes. This keeps small allocations from
+permanently fragmenting large regions.
+
