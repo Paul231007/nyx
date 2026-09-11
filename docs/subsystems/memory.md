@@ -75,3 +75,9 @@ The heap uses `map()` to wire 1024 PMM frames into the virtual window
 `[0xD0000000, 0xD0400000)`. The M6 self-test uses it to map a single frame at
 `0xE0000000` and verify a sentinel read-back.
 
+### Page-walk (`paging.translate`)
+
+```zig
+pub fn translate(virt: usize) ?usize
+```
+
