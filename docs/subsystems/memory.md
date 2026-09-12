@@ -127,3 +127,12 @@ permanently fragmenting large regions.
 allocator used by `std.ArrayList` in the M7 self-test and by the scheduler and
 block cache.
 
+```zig
+pub const HEAP_BASE: usize = 0xD0000000;
+pub const HEAP_SIZE: usize = 4 * 1024 * 1024;
+pub fn init() void
+pub fn allocator() std.mem.Allocator
+pub fn kmalloc(n: usize) ?[*]u8    // convenience wrapper
+pub fn kfree(ptr: [*]u8) void
+```
+
