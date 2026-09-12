@@ -151,3 +151,9 @@ pub fn write(lba: u32, data: *const [ata.SECTOR]u8) void
 pub fn flush() void   // no-op; write-through keeps disk in sync
 ```
 
+`read(lba)` returns the cached sector on a hit; on a miss it calls
+`ata.readSectors(lba, 1, sl.data)`, updates the slot, and returns the buffer.
+`write(lba, data)` calls `ata.writeSectors` immediately (write-through), then
+updates the cache slot. Because every write goes straight to disk, there is no
+dirty state to track and `flush()` is a no-op.
+
