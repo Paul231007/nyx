@@ -138,3 +138,7 @@ pub fn kfree(ptr: [*]u8) void
 
 ## blockcache.zig — Write-through block cache
 
+The block cache sits between the rest of the kernel and the ATA driver. It has 16
+direct-mapped slots keyed by `lba % 16`. Each slot holds a heap-allocated 512-byte
+buffer (`*[ata.SECTOR]u8`), a valid flag, and the cached LBA.
+
