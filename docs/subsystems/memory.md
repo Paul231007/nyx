@@ -145,3 +145,9 @@ buffer (`*[ata.SECTOR]u8`), a valid flag, and the cached LBA.
 `blockcache.init(alloc)` must be called after `heap.init()` because it allocates the
 sector buffers from the heap.
 
+```zig
+pub fn read(lba: u32) *[ata.SECTOR]u8
+pub fn write(lba: u32, data: *const [ata.SECTOR]u8) void
+pub fn flush() void   // no-op; write-through keeps disk in sync
+```
+
