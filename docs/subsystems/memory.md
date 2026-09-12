@@ -142,3 +142,6 @@ The block cache sits between the rest of the kernel and the ATA driver. It has 1
 direct-mapped slots keyed by `lba % 16`. Each slot holds a heap-allocated 512-byte
 buffer (`*[ata.SECTOR]u8`), a valid flag, and the cached LBA.
 
+`blockcache.init(alloc)` must be called after `heap.init()` because it allocates the
+sector buffers from the heap.
+
