@@ -45,3 +45,9 @@ separate path from content).
 | `rm <path>` | `cmdRm()` | `ramfs.remove(path)` |
 | `test` | inline | `ktest.runAll()` |
 
+### Filesystem commands
+
+`cmdLs(args)` calls `vfs.open(path)` (defaulting to `"/"`) and iterates
+`vfs.readdir(fd, idx)` from `idx = 0` until it returns `null`. Each node is printed
+with a leading `'d'` or `'-'` flag.
+
