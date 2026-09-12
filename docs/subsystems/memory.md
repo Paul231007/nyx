@@ -136,3 +136,5 @@ pub fn kmalloc(n: usize) ?[*]u8    // convenience wrapper
 pub fn kfree(ptr: [*]u8) void
 ```
 
+## blockcache.zig — Write-through block cache
+
