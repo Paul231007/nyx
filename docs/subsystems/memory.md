@@ -157,3 +157,6 @@ pub fn flush() void   // no-op; write-through keeps disk in sync
 updates the cache slot. Because every write goes straight to disk, there is no
 dirty state to track and `flush()` is a no-op.
 
+The direct-map scheme means two LBAs that are 16 apart will thrash each other's
+slot, but at the current usage level (shell and test workloads) this is not an
+issue.
