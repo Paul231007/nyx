@@ -59,3 +59,8 @@ calls `ramfs.create(path, .file)` to ensure the entry exists (idempotent), then
 opens it via the VFS and writes the content string. The RamFS `write` vtable
 function overwrites from offset 0 (seek behaviour: the newly opened fd has offset 0).
 
+`cmdMkdir` and `cmdRm` delegate directly to `ramfs.create` and `ramfs.remove`
+without going through the VFS (no fd is needed for these metadata operations).
+
+### Reboot
+
