@@ -133,3 +133,6 @@ pub const Case = struct {
    4 KiB-aligned (`frame & 0xFFF == 0`), frees the frame, and verifies that
    `pmm.stats().free` returns to its pre-allocation value.
 
+3. **`heap_alloc`** — Allocates 64 bytes via `heap.allocator().alloc(u8, 64)`,
+   writes a pattern (`idx ^ 0xA5`), verifies each byte, and frees the buffer.
+
