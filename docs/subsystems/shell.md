@@ -168,3 +168,8 @@ The boot check requires `res.failed == 0 and res.passed >= 6` to print `M16 OK`.
 | `parseHex` | `(s: []const u8) ?u64` | Parse hex string with optional `0x` prefix |
 | `HexDump.dump` | `(addr, len, out_fn)` | 16-byte rows of hex + ASCII to a callback |
 
+`parseUint` returns `null` on empty input or any invalid character; `parseHex`
+strips an optional `0x`/`0X` prefix before delegating to `parseUint(..., 16)`.
+`HexDump.dump` is allocation-free: it formats each row into a stack-local 80-byte
+buffer and passes it to the caller-supplied output function.
+
