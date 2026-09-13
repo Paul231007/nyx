@@ -64,3 +64,8 @@ without going through the VFS (no fd is needed for these metadata operations).
 
 ### Reboot
 
+`reboot` writes `0xFE` to the PS/2 controller command port (`0x64`). This pulses the
+CPU reset line, which causes QEMU and real x86 hardware to perform a warm reset.
+
+## syscall.zig — int 0x80 interface (M15)
+
