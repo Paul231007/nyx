@@ -156,3 +156,5 @@ The boot check requires `res.failed == 0 and res.passed >= 6` to print `M16 OK`.
 
 ## libk.zig — Freestanding utility library (M10)
 
+`libk.zig` provides helpers used throughout the kernel:
+
