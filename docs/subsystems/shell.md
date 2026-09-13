@@ -146,3 +146,5 @@ pub const Case = struct {
 6. **`syscall_uptime`** — Calls `syscall.invoke(.uptime, 0, 0, 0)` via `int $0x80`
    and checks the return value is greater than zero.
 
+### Invocation
+
