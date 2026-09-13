@@ -124,3 +124,5 @@ pub const Case = struct {
 `runAll()` iterates the static `cases` array, calls each `run()` function, prints
 `[PASS]` or `[FAIL]` per case, and returns a `Result{ passed, failed }`.
 
+### Registered test cases
+
