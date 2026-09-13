@@ -107,3 +107,8 @@ int $0x80
 → return value in %eax
 ```
 
+`invoke` is callable from ring-0 kernel code (the M15 self-test uses it) and would
+work equally from ring-3 user code once privilege-level switching is added.
+
+## ktest.zig — Kernel self-test harness (M16)
+
