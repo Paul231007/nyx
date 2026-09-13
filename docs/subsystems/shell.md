@@ -51,3 +51,11 @@ separate path from content).
 `vfs.readdir(fd, idx)` from `idx = 0` until it returns `null`. Each node is printed
 with a leading `'d'` or `'-'` flag.
 
+`cmdCat(path)` opens the file and loops calling `vfs.read(fd, &buf)` until it
+returns 0, writing each chunk to the console.
+
+`cmdWrite(args)` splits `args` at the first space to get `path` and `content`. It
+calls `ramfs.create(path, .file)` to ensure the entry exists (idempotent), then
+opens it via the VFS and writes the content string. The RamFS `write` vtable
+function overwrites from offset 0 (seek behaviour: the newly opened fd has offset 0).
+
