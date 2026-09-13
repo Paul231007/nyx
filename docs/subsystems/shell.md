@@ -96,3 +96,14 @@ returns `timer.ticks()` cast to `usize`.
 pub fn invoke(nr: Nr, a: usize, b: usize, c: usize) usize
 ```
 
+Implemented entirely in inline assembly:
+
+```
+mov @intFromEnum(nr), %eax
+mov a, %ebx
+mov b, %ecx
+mov c, %edx
+int $0x80
+→ return value in %eax
+```
+
