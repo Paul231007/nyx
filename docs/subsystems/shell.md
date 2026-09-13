@@ -112,3 +112,12 @@ work equally from ring-3 user code once privilege-level switching is added.
 
 ## ktest.zig — Kernel self-test harness (M16)
 
+`ktest.zig` provides a lightweight test runner. Each test is a named `Case`:
+
+```zig
+pub const Case = struct {
+    name: []const u8,
+    run:  *const fn () bool,
+};
+```
+
