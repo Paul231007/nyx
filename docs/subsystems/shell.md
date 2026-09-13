@@ -90,3 +90,9 @@ pub const Nr = enum(u32) {
 `open`/`close` delegate to the VFS layer. `getpid` is a stub returning 1. `uptime`
 returns `timer.ticks()` cast to `usize`.
 
+### Caller side: `syscall.invoke`
+
+```zig
+pub fn invoke(nr: Nr, a: usize, b: usize, c: usize) usize
+```
+
