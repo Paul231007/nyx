@@ -148,3 +148,7 @@ pub const Case = struct {
 
 ### Invocation
 
+`ktest.runAll()` is called twice:
+- During the M16 boot check in `kmain` (after all subsystems are initialised).
+- From the `test` shell command for interactive re-runs at any time.
+
