@@ -129,3 +129,7 @@ pub const Case = struct {
 1. **`libk_parse`** — Exercises `libk.parseUint("255", 10)`, `libk.parseHex("0xCAFE")`,
    and `libk.streq("ab", "ab")`. All must return expected values.
 
+2. **`pmm_roundtrip`** — Calls `pmm.allocFrame()`, checks the returned address is
+   4 KiB-aligned (`frame & 0xFFF == 0`), frees the frame, and verifies that
+   `pmm.stats().free` returns to its pre-allocation value.
+
