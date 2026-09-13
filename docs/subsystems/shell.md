@@ -139,3 +139,7 @@ pub const Case = struct {
 4. **`vfs_roundtrip`** — Creates `/ktest.tmp` in RamFS, opens it via the VFS,
    writes `"ktest"` (5 bytes), seeks to 0, reads back, and compares the result.
 
+5. **`ata_sector`** — Writes a known pattern to ATA sector 5 via `ata.writeSectors`,
+   reads it back with `ata.readSectors`, and does a byte-by-byte comparison.
+   Requires a disk image; returns `false` if ATA returns an error.
+
