@@ -136,3 +136,6 @@ pub const Case = struct {
 3. **`heap_alloc`** — Allocates 64 bytes via `heap.allocator().alloc(u8, 64)`,
    writes a pattern (`idx ^ 0xA5`), verifies each byte, and frees the buffer.
 
+4. **`vfs_roundtrip`** — Creates `/ktest.tmp` in RamFS, opens it via the VFS,
+   writes `"ktest"` (5 bytes), seeks to 0, reads back, and compares the result.
+
