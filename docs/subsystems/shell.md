@@ -75,3 +75,18 @@ The IDT gate at vector 0x80 is wired to the int-0x80 ISR in `interrupts.zig`.
 The ISR saves the full register set, extracts `eax/ebx/ecx/edx`, and calls
 `syscall.dispatch(nr, a, b, c)`, which is a tagged switch on the `Nr` enum:
 
+```zig
+pub const Nr = enum(u32) {
+    write  = 1,   // a=ptr, b=len → write to console
+    read   = 2,   // a=fd,  b=bufptr, c=len → vfs.read
+    open   = 3,   // a=path_ptr, b=path_len → vfs.open → fd
+    close  = 4,   // a=fd → vfs.close
+    getpid = 5,   // always returns 1 (single-process kernel)
+    uptime = 6,   // returns timer.ticks()
+};
+```
+
+`write` takes a virtual address and length and calls `console.write`. `read` and
+`open`/`close` delegate to the VFS layer. `getpid` is a stub returning 1. `uptime`
+returns `timer.ticks()` cast to `usize`.
+
