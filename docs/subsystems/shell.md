@@ -69,3 +69,9 @@ CPU reset line, which causes QEMU and real x86 hardware to perform a warm reset.
 
 ## syscall.zig — int 0x80 interface (M15)
 
+### Kernel side: `syscall.dispatch`
+
+The IDT gate at vector 0x80 is wired to the int-0x80 ISR in `interrupts.zig`.
+The ISR saves the full register set, extracts `eax/ebx/ecx/edx`, and calls
+`syscall.dispatch(nr, a, b, c)`, which is a tagged switch on the `Nr` enum:
+
