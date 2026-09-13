@@ -173,3 +173,6 @@ strips an optional `0x`/`0X` prefix before delegating to `parseUint(..., 16)`.
 `HexDump.dump` is allocation-free: it formats each row into a stack-local 80-byte
 buffer and passes it to the caller-supplied output function.
 
+All libk functions are safe to call from interrupt context because none allocates
+memory or touches mutable global state (other than the output function callback
+for `HexDump`, which is the caller's responsibility).
