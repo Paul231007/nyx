@@ -158,3 +158,13 @@ The boot check requires `res.failed == 0 and res.passed >= 6` to print `M16 OK`.
 
 `libk.zig` provides helpers used throughout the kernel:
 
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `memcpy` | `(dst: []u8, src: []const u8) void` | Copy min(dst.len, src.len) bytes |
+| `memset` | `(dst: []u8, val: u8) void` | Fill buffer with a byte value |
+| `streq` | `(a, b: []const u8) bool` | True if slices are byte-identical |
+| `strlen` | `(s: [*:0]const u8) usize` | Length of a null-terminated C string |
+| `parseUint` | `(s: []const u8, base: u8) ?u64` | Parse decimal or hex string |
+| `parseHex` | `(s: []const u8) ?u64` | Parse hex string with optional `0x` prefix |
+| `HexDump.dump` | `(addr, len, out_fn)` | 16-byte rows of hex + ASCII to a callback |
+
