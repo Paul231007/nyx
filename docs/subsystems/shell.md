@@ -143,3 +143,6 @@ pub const Case = struct {
    reads it back with `ata.readSectors`, and does a byte-by-byte comparison.
    Requires a disk image; returns `false` if ATA returns an error.
 
+6. **`syscall_uptime`** — Calls `syscall.invoke(.uptime, 0, 0, 0)` via `int $0x80`
+   and checks the return value is greater than zero.
+
