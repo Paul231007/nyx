@@ -152,3 +152,5 @@ pub const Case = struct {
 - During the M16 boot check in `kmain` (after all subsystems are initialised).
 - From the `test` shell command for interactive re-runs at any time.
 
+The boot check requires `res.failed == 0 and res.passed >= 6` to print `M16 OK`.
+
