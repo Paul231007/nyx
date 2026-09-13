@@ -126,3 +126,6 @@ pub const Case = struct {
 
 ### Registered test cases
 
+1. **`libk_parse`** — Exercises `libk.parseUint("255", 10)`, `libk.parseHex("0xCAFE")`,
+   and `libk.streq("ab", "ab")`. All must return expected values.
+
