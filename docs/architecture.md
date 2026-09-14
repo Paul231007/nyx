@@ -62,3 +62,12 @@ calls `sched.onTick()` to force a context switch.
 
 ### M4 — Input
 
+IRQ1 is unmasked with `pic.clearMask(1)`. Each keyboard interrupt calls
+`keyboard.handleIrq()`, which reads a scancode from port `0x60`, translates it
+via the US-QWERTY tables in `keyboard.zig`, and pushes the ASCII byte into the
+shared ring buffer in `input.zig`. The serial driver's `getcNonblock()` is polled
+from the same `input.readLine()` function, so the shell works identically whether
+driven by a physical keyboard or by piping bytes into QEMU's `-serial stdio`.
+
+### M5 — Physical Memory Manager
+
