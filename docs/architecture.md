@@ -225,3 +225,15 @@ int 0x80 (vector 128) → syscall.dispatch()
 
 ## Key design choices
 
+- **No external dependencies.** The kernel is a single `zig build` invocation with
+  no C runtime, no GRUB, no linker script magic beyond the standard x86 1 MiB load
+  address.
+- **Identity mapping keeps it simple.** Virtual == physical for the first 64 MiB.
+  The heap is at a high virtual address (0xD0000000) to avoid conflicts.
+- **Write-through block cache** ensures disk state is always consistent with the
+  cache; no dirty tracking or flush protocol is needed.
+- **VFS vtable** means the shell commands (`ls`, `cat`, `write`) work identically
+  against the stub fs used during M13 testing and the full RamFS mounted in M14.
+- **`std.mem.Allocator` interface** means the kernel heap is a drop-in for
+  `std.ArrayList`, `std.AutoHashMap`, and any other Zig stdlib container, without
+  any code changes to those containers.
