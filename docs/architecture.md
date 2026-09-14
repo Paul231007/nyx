@@ -196,3 +196,8 @@ the `test` shell command for interactive re-runs.
 
 ### M9 — Shell
 
+`shell.run()` is the final call in `kmain` and never returns. It prints the welcome
+banner, then loops: prints `nyx> `, calls `input.readLine()` (which blocks on the
+ring buffer), splits the first token as the command name, and dispatches to the
+appropriate handler function. Unknown commands print a hint.
+
