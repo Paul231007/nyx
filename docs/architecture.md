@@ -81,3 +81,13 @@ scanning the bitmap; `freeFrame()` clears the bit with a double-free guard.
 
 ### M6 — Paging
 
+`paging.init()` allocates a page directory and 16 page tables (one per 4 MiB) from
+the PMM, identity-maps the first 64 MiB with present+RW entries, loads the page
+directory physical address into CR3, and sets bit 31 of CR0. After this call every
+virtual address in [0, 64 MiB) is a 1:1 map to physical memory. The `map(virt,
+phys, flags)` function handles arbitrary single-page mappings (used by the heap to
+map its 4 MiB window at `0xD0000000`). `translate(virt)` walks the tables and is
+used by the M6 self-test.
+
+### M7 — Heap
+
