@@ -125,3 +125,7 @@ byte rows with hex + ASCII columns). No dynamic allocation.
 
 ### M11 — RTC and PCI
 
+`rtc.read()` reads the six CMOS time registers (0x00/0x02/0x04/0x07/0x08/0x09) via
+ports 0x70/0x71, waiting for the Update-In-Progress flag to clear. It converts BCD
+to binary when status register B bit 2 is clear (the common QEMU default).
+
