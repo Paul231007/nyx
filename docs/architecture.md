@@ -136,3 +136,11 @@ the vendor/device word and the class/subclass byte and stores a `Device` record.
 
 ### M12 — ATA and Block Cache
 
+`ata.zig` drives the primary ATA bus (base 0x1F0) in polling PIO mode (no
+interrupts). `identify()` issues command 0xEC, polls BSY/DRQ, reads 256 words, and
+extracts the 28-bit LBA sector count (words 60–61) and the byte-swapped model string
+(words 27–46). `readSectors` (command 0x20) and `writeSectors` (command 0x30) handle
+multi-sector transfers one sector at a time; writes are followed by CACHE FLUSH
+(0xE7). QEMU requires a `-drive if=ide` argument; without it `identify()` returns
+null and M12 reports FAIL.
+
