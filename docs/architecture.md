@@ -123,3 +123,5 @@ A freestanding utility library: `streq`, `strlen`, `memcpy`, `memset`,
 `parseUint` (base 10 or 16), `parseHex` (accepts `0x` prefix), and `HexDump` (16-
 byte rows with hex + ASCII columns). No dynamic allocation.
 
+### M11 — RTC and PCI
+
