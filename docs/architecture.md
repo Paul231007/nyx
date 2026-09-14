@@ -33,3 +33,10 @@ as an integration test.
 
 ### boot.s → kmain
 
+`boot.s` defines the multiboot1 header and the `_start` entry point. It sets the
+stack pointer to the top of a 16 KiB `.bss` array and calls `kmain(magic, info)`
+in C calling convention. No IDT or GDT is loaded at this point; the CPU is still
+running with whatever the bootloader left behind.
+
+### M0 — console
+
