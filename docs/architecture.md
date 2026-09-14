@@ -194,3 +194,5 @@ code as a self-test.
 `ktest.runAll()` runs automatically during boot (M16 check) and is also exposed as
 the `test` shell command for interactive re-runs.
 
+### M9 — Shell
+
