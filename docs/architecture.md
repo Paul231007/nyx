@@ -223,3 +223,5 @@ IRQ 3–15 (34–47)     → PIC EOI, ignored
 int 0x80 (vector 128) → syscall.dispatch()
 ```
 
+## Key design choices
+
