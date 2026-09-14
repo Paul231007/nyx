@@ -134,3 +134,5 @@ configuration mechanism #1 (ports 0xCF8/0xCFC). For each present function it rea
 the vendor/device word and the class/subclass byte and stores a `Device` record.
 `pci.find(class, subclass)` is a targeted variant used elsewhere.
 
+### M12 — ATA and Block Cache
+
