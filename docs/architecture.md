@@ -159,3 +159,10 @@ open `Node` and the current byte offset. `read`/`write` advance the offset and
 
 ### M14 — RamFS and initrd
 
+`ramfs.zig` backs the VFS with a fixed 64-entry array. Each entry holds a 128-byte
+path, a 4 KiB inline data buffer, and a `vfs.Node`. The root (`/`) is pre-seeded
+at slot 0 by `ramfs.init()`. `ramfsReaddir` implements directory listing by scanning
+all entries for paths that are direct children of the requested directory path.
+`ramfs.create()` either returns an existing entry or allocates a new one; `remove()`
+marks the slot unused.
+
