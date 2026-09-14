@@ -119,3 +119,7 @@ flag; `sched.onTick()` (called from the IRQ0 handler) then calls `yield()` direc
 
 ### M10 — libk
 
+A freestanding utility library: `streq`, `strlen`, `memcpy`, `memset`,
+`parseUint` (base 10 or 16), `parseHex` (accepts `0x` prefix), and `HexDump` (16-
+byte rows with hex + ASCII columns). No dynamic allocation.
+
