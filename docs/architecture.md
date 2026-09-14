@@ -103,3 +103,5 @@ standard-library types like `std.ArrayList` work without modification.
 The block cache (`blockcache.init`) is initialised immediately after the heap since
 it allocates its 16 × 512-byte sector buffers from the heap allocator.
 
+### M8 — Scheduler
+
