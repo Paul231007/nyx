@@ -54,3 +54,11 @@ and either `iret` (for recoverable faults like the int 3 self-test) or halt.
 
 ### M3 — PIC and PIT
 
+`pic.init()` remaps the 8259 master/slave PIC so IRQs 0–15 map to IDT vectors 32–47
+(above the CPU exception range). `timer.init(100)` programs PIT channel 0 for
+100 Hz in mode 3 (square wave). After `sti`, the IRQ0 handler fires every 10 ms,
+calls `timer.tick()` to increment the tick counter, and (when preemption is enabled)
+calls `sched.onTick()` to force a context switch.
+
+### M4 — Input
+
