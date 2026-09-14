@@ -71,3 +71,13 @@ driven by a physical keyboard or by piping bytes into QEMU's `-serial stdio`.
 
 ### M5 — Physical Memory Manager
 
+`pmm.init(mb_info)` walks the multiboot1 memory map (flag bit 6 in the info struct).
+It starts by marking every bit in its 128 KiB bitmap as used, then walks the mmap
+entries: for each `type=1` (available RAM) region it clears the corresponding frame
+bits and counts usable frames. It then re-reserves the first 1 MiB, the kernel image
+(bounded by the linker symbols `kernel_start`/`kernel_end`), and the multiboot info
+struct itself. `allocFrame()` returns the physical address of a free 4 KiB frame by
+scanning the bitmap; `freeFrame()` clears the bit with a double-free guard.
+
+### M6 — Paging
+
