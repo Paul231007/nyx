@@ -129,3 +129,8 @@ byte rows with hex + ASCII columns). No dynamic allocation.
 ports 0x70/0x71, waiting for the Update-In-Progress flag to clear. It converts BCD
 to binary when status register B bit 2 is clear (the common QEMU default).
 
+`pci.enumerate(out)` brute-forces all 256 buses × 32 slots × 8 functions using PCI
+configuration mechanism #1 (ports 0xCF8/0xCFC). For each present function it reads
+the vendor/device word and the class/subclass byte and stores a `Device` record.
+`pci.find(class, subclass)` is a targeted variant used elsewhere.
+
