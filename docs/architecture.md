@@ -174,3 +174,10 @@ archive.
 
 ### M15 — Syscalls
 
+The IDT gate at index 0x80 is wired to the int-0x80 ISR in `interrupts.zig`, which
+saves the caller's state and calls `syscall.dispatch(nr, a, b, c)`. Six syscall
+numbers are defined in the `Nr` enum: `write` (1), `read` (2), `open` (3), `close`
+(4), `getpid` (5), `uptime` (6). The `invoke()` function issues `int $0x80` via
+inline assembly (eax=nr, ebx/ecx/edx=args), making it callable from ring-0 kernel
+code as a self-test.
+
