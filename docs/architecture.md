@@ -166,3 +166,9 @@ all entries for paths that are direct children of the requested directory path.
 `ramfs.create()` either returns an existing entry or allocates a new one; `remove()`
 marks the slot unused.
 
+`tar.zig` parses a POSIX ustar archive embedded via `@embedFile("initrd.tar")`.
+`unpackInto()` walks 512-byte headers, parses the octal size field, normalises the
+path (strips `./` prefix, prepends `/`), calls `ramfs.create()` for each entry, and
+writes file data through the vtable. Two consecutive zero blocks signal end-of-
+archive.
+
