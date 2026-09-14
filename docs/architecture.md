@@ -183,3 +183,11 @@ code as a self-test.
 
 ### M16 — Self-test harness
 
+`ktest.runAll()` runs six named cases in order:
+- `libk_parse` — parseUint, parseHex, streq
+- `pmm_roundtrip` — alloc + alignment check + free restores count
+- `heap_alloc` — pattern write/verify through the Allocator interface
+- `vfs_roundtrip` — create /ktest.tmp, write "ktest", seek 0, read back
+- `ata_sector` — write known pattern to sector 5, read back, compare
+- `syscall_uptime` — int 0x80 uptime call returns a positive tick count
+
