@@ -181,3 +181,5 @@ numbers are defined in the `Nr` enum: `write` (1), `read` (2), `open` (3), `clos
 inline assembly (eax=nr, ebx/ecx/edx=args), making it callable from ring-0 kernel
 code as a self-test.
 
+### M16 — Self-test harness
+
