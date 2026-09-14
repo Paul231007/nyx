@@ -40,3 +40,9 @@ running with whatever the bootloader left behind.
 
 ### M0 — console
 
+`kmain` calls `console.init()`, which calls `vga.clear()` and `serial.init()`. From
+this point every `console.write()` call fans out to both the VGA text buffer at
+`0xB8000` and COM1 at 38400 baud. The serial port is the headless test interface.
+
+### M2 — GDT and IDT
+
