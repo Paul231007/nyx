@@ -201,3 +201,5 @@ banner, then loops: prints `nyx> `, calls `input.readLine()` (which blocks on th
 ring buffer), splits the first token as the command name, and dispatches to the
 appropriate handler function. Unknown commands print a hint.
 
+## Memory map
+
