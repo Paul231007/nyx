@@ -150,3 +150,10 @@ the sector. Writes go to disk immediately (write-through), then update the slot.
 
 ### M13 — VFS
 
+`vfs.zig` defines two types: `Node` (an abstract file-system object with a name,
+kind, size, and an opaque `impl` pointer) and `FileSystem` (a vtable of four
+function pointers: `open`, `read`, `write`, `readdir`). A single filesystem is
+mounted at a time via `mount()`. The fd table has 16 slots; each slot tracks the
+open `Node` and the current byte offset. `read`/`write` advance the offset and
+`seek` resets it. `readdir` delegates index-based enumeration to the backing fs.
+
