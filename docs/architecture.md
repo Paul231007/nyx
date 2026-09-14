@@ -29,3 +29,7 @@ as an integration test.
 └──────────────────────────────────────────────────────────────┘
 ```
 
+## Boot sequence
+
+### boot.s → kmain
+
