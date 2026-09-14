@@ -157,3 +157,5 @@ mounted at a time via `mount()`. The fd table has 16 slots; each slot tracks the
 open `Node` and the current byte offset. `read`/`write` advance the offset and
 `seek` resets it. `readdir` delegates index-based enumeration to the backing fs.
 
+### M14 — RamFS and initrd
+
