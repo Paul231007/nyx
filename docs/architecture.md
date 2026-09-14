@@ -105,3 +105,8 @@ it allocates its 16 × 512-byte sector buffers from the heap allocator.
 
 ### M8 — Scheduler
 
+`sched.init()` allocates a bootstrap `Task` node representing `kmain`'s own stack.
+`spawn(f)` allocates a heap `Task` struct and a 16 KiB stack, hand-crafts the
+initial stack so `switchContext`'s first `ret` lands in `taskTrampoline`, and links
+the node into a singly-linked circular ring just before the bootstrap node.
+
