@@ -213,3 +213,5 @@ appropriate handler function. Unknown commands print a hint.
 0xE0000000              Test mapping used by M6 paging probe
 ```
 
+## Interrupt routing
+
