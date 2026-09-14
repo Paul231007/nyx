@@ -148,3 +148,5 @@ null and M12 reports FAIL.
 mapped slots keyed by `lba % 16`. A read hit avoids the disk entirely; a miss loads
 the sector. Writes go to disk immediately (write-through), then update the slot.
 
+### M13 — VFS
+
