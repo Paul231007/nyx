@@ -110,3 +110,10 @@ it allocates its 16 × 512-byte sector buffers from the heap allocator.
 initial stack so `switchContext`'s first `ret` lands in `taskTrampoline`, and links
 the node into a singly-linked circular ring just before the bootstrap node.
 
+`switchContext` (inlined assembly) saves `ebp/ebx/esi/edi` on the old stack, writes
+the stack pointer into `old_esp_ptr`, loads `new_esp` into `esp`, and restores the
+saved registers from the new stack. `yield()` picks the next non-done node in the
+ring and calls `switchContext`. `runUntilIdle()` drives `yield()` until all
+non-bootstrap tasks are done. Timer preemption is enabled by setting the `preempt`
+flag; `sched.onTick()` (called from the IRQ0 handler) then calls `yield()` directly.
+
