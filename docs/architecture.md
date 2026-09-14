@@ -203,3 +203,13 @@ appropriate handler function. Unknown commands print a hint.
 
 ## Memory map
 
+```
+0x00000000 – 0x000FFFFF   First 1 MiB (BIOS, IVT, VGA buffer at 0xB8000)
+0x00100000 – 0x???       Kernel ELF image (loaded at 1 MiB by linker.ld)
+                         PMM bitmap (~128 KiB, in .bss)
+                         Boot stack (16 KiB, in .bss)
+0x00400000 – 0x03FFFFFF  Available RAM, managed by PMM
+0xD0000000 – 0xD03FFFFF  Kernel heap (4 MiB, mapped by paging.init via PMM)
+0xE0000000              Test mapping used by M6 paging probe
+```
+
