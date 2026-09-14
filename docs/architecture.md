@@ -91,3 +91,15 @@ used by the M6 self-test.
 
 ### M7 — Heap
 
+`heap.init()` maps 1024 frames from the PMM into `[0xD0000000, 0xD0400000)` (4 MiB)
+via `paging.map()`. The window is seeded with a single free `Block` header covering
+the whole range. `heapAlloc` is a first-fit allocator that honours arbitrary
+alignment by padding between the header and the user pointer and storing a
+back-pointer in the `usize` slot immediately before the user pointer. `heapFree`
+marks the block free and coalesces with its physically-adjacent neighbours. The
+`allocator()` function wraps the allocator in a `std.mem.Allocator` vtable so Zig
+standard-library types like `std.ArrayList` work without modification.
+
+The block cache (`blockcache.init`) is initialised immediately after the heap since
+it allocates its 16 × 512-byte sector buffers from the heap allocator.
+
