@@ -191,3 +191,6 @@ code as a self-test.
 - `ata_sector` — write known pattern to sector 5, read back, compare
 - `syscall_uptime` — int 0x80 uptime call returns a positive tick count
 
+`ktest.runAll()` runs automatically during boot (M16 check) and is also exposed as
+the `test` shell command for interactive re-runs.
+
