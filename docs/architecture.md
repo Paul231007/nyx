@@ -117,3 +117,5 @@ ring and calls `switchContext`. `runUntilIdle()` drives `yield()` until all
 non-bootstrap tasks are done. Timer preemption is enabled by setting the `preempt`
 flag; `sched.onTick()` (called from the IRQ0 handler) then calls `yield()` directly.
 
+### M10 — libk
+
