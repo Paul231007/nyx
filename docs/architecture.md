@@ -46,3 +46,11 @@ this point every `console.write()` call fans out to both the VGA text buffer at
 
 ### M2 — GDT and IDT
 
+`gdt.init()` installs a flat three-descriptor GDT (null, 32-bit code, 32-bit data)
+and reloads `cs`/`ds`/`ss`/`es`/`fs`/`gs` via a far jump. `interrupts.init()` fills
+all 256 IDT gates: the first 32 as exception stubs, gates 32–47 as hardware IRQ
+stubs, and gate 0x80 as the syscall gate. The exception stubs print a register dump
+and either `iret` (for recoverable faults like the int 3 self-test) or halt.
+
+### M3 — PIC and PIT
+
