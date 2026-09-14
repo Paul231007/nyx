@@ -215,3 +215,11 @@ appropriate handler function. Unknown commands print a hint.
 
 ## Interrupt routing
 
+```
+CPU exception 0–31    → interrupts.zig exception stubs (dump registers, iret/halt)
+IRQ 0  (vector 32)   → timer.tick() [+ sched.onTick() when preemption enabled]
+IRQ 1  (vector 33)   → keyboard.handleIrq() → input.push()
+IRQ 3–15 (34–47)     → PIC EOI, ignored
+int 0x80 (vector 128) → syscall.dispatch()
+```
+
