@@ -144,3 +144,7 @@ multi-sector transfers one sector at a time; writes are followed by CACHE FLUSH
 (0xE7). QEMU requires a `-drive if=ide` argument; without it `identify()` returns
 null and M12 reports FAIL.
 
+`blockcache.zig` sits between the VFS and the ATA driver. It provides 16 direct-
+mapped slots keyed by `lba % 16`. A read hit avoids the disk entirely; a miss loads
+the sector. Writes go to disk immediately (write-through), then update the slot.
+
